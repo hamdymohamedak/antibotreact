@@ -34,6 +34,7 @@
     "responsive design"
   ],
   "author": "hamdymohamedak",
+  "homepage":"https://larose.vercel.app"
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.25.6",
