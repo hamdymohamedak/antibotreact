@@ -7,7 +7,12 @@
     <h1 align="center">LaRose.js</h1>
   </a>
 </p>
-Larose.js is a powerful and flexible React.js component library designed to enhance your development experience. Built with a focus on smooth animations, sleek styling, and high performance, Larose.js offers a wide range of customizable components that are easy to use and integrate into any project. From advanced text animations like WaveText and ShinyText to dynamic routing with RoseRouter, each component is crafted to provide a professional and seamless user interface. Whether you're building small applications or complex web platforms, Larose.js helps you create visually stunning and interactive UIs without the need for external dependencies. Join the Larose.js community and take your React development to the next level!
-This paragraph gives an overview of the library, its purpose, and its key features while inviting developers to use it in their projects. Let me know if you'd like to modify or expand on anything!
-LaRose Bundle 
-[bundlephobia](https://bundlephobia.com/package/larose)
+
+**Larose.js** is a powerful and flexible React.js component library designed to enhance your development experience. Built with a focus on smooth animations, sleek styling, and high performance, Larose.js offers a wide range of customizable components that are easy to use and integrate into any project.
+
+From advanced text animations like `WaveText` and `ShinyText` to dynamic routing with `RoseRouter`, each component is crafted to provide a professional and seamless user interface. Whether you're building small applications or complex web platforms, Larose.js helps you create visually stunning and interactive UIs without the need for external dependencies.
+
+Join the **Larose.js** community and take your React development to the next level!
+
+## LaRose Bundle
+Check the bundle size: [bundlephobia](https://bundlephobia.com/package/larose)
