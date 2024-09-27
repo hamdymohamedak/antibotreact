@@ -1,6 +1,6 @@
 {
   "name": "larose-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Larose ToolKit is a React.js library that you're building, which includes a variety of custom components and Hooks that aim to enhance the development experience. Some components you're working on or have built include",
   "main": "dist/LaRose.js",
   "scripts": {
