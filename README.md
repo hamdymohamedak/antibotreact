@@ -14,5 +14,9 @@ From advanced text animations like `WaveText` and `ShinyText` to dynamic routing
 
 Join the **Larose.js** community and take your React development to the next level!
 
+## LaRose REPO
+Check the bundle size: [Repo](https://github.com/hamdymohamedak/LaRose.js)
+## LaRose Docs
+Check the bundle size: [documentation](https://larose.vercel.app)
 ## LaRose Bundle
-Check the bundle size: [bundlephobia](https://bundlephobia.com/package/larose)
+Check the bundle size: [bundlephobia](https://bundlephobia.com/package/larose-js)
