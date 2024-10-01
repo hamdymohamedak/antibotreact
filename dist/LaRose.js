@@ -569,10 +569,17 @@ function ShinyText(_ref10) {
     _ref10$color = _ref10.color,
     color = _ref10$color === void 0 ? "#fff" : _ref10$color,
     _ref10$backgroundColo = _ref10.backgroundColor,
-    backgroundColor = _ref10$backgroundColo === void 0 ? "#000" : _ref10$backgroundColo;
+    backgroundColor = _ref10$backgroundColo === void 0 ? "#000" : _ref10$backgroundColo,
+    onClick = _ref10.onClick;
+  var onClickFun = function onClickFun() {
+    if (typeof onClick === "function") {
+      onClick();
+    }
+  };
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
     jsx: true
   }, "\n        .shiny-text {\n          position: relative;\n          display: inline-block;\n          color: ".concat(color, ";\n          background-color: ").concat(backgroundColor, ";\n          overflow: hidden;\n          font-weight: bold;\n          background-clip: text;\n          -webkit-background-clip: text;\n          color: transparent;\n        }\n        .shiny-text::before {\n          content: \"\";\n          position: absolute;\n          top: 0;\n          left: -100%;\n          height: 100%;\n          width: 100%;\n          background: linear-gradient(\n            120deg,\n            transparent,\n            rgba(255, 255, 255, 0.7),\n            transparent\n          );\n          transform: skewX(-15deg);\n        }\n        .shiny-text::before {\n          animation: shiny-effect ").concat(speed, "s infinite;\n        }\n        @keyframes shiny-effect {\n          0% {\n            left: -100%;\n          }\n          100% {\n            left: 100%;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: onClickFun,
     style: _objectSpread({}, edit),
     id: RoseId,
     className: "shiny-text ".concat(RoseName)
@@ -594,10 +601,10 @@ function ShinyButton(_ref11) {
     padding = _ref11$padding === void 0 ? "10px 20px" : _ref11$padding,
     _ref11$borderRadius = _ref11.borderRadius,
     borderRadius = _ref11$borderRadius === void 0 ? "5px" : _ref11$borderRadius,
-    ShinyButtonEvent = _ref11.ShinyButtonEvent;
-  var ShinyButtonEventClick = function ShinyButtonEventClick() {
-    if (typeof ShinyButtonEvent === "function") {
-      ShinyButtonEvent();
+    onClick = _ref11.onClick;
+  var onClickFun = function onClickFun() {
+    if (typeof onClick === "function") {
+      onClick();
     }
   };
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
@@ -605,7 +612,7 @@ function ShinyButton(_ref11) {
   }, "\n        .shiny-button {\n          position: relative;\n          display: inline-block;\n          padding: ".concat(padding, ";\n          background-color: ").concat(backgroundColor, ";\n          color: ").concat(color, ";\n          font-weight: bold;\n          text-transform: uppercase;\n          overflow: hidden;\n          border-radius: ").concat(borderRadius, ";\n          cursor: pointer;\n          transition: background-color 0.3s, color 0.3s;\n          ursor: pointer;\n          border: 1px solid #353535;\n          padding: 0.4em 1.2em;\n          border-radius: 50px;\n          transition: 0.3s ease;\n        }\n        .shiny-button::before {\n          content: \"\";\n          position: absolute;\n          top: -100%;\n          left: -100%;\n          height: 100%;\n          width: 100%;\n          background: linear-gradient(\n            120deg,\n            transparent,\n            rgba(255, 255, 255, 0.7),\n            transparent\n          );\n          transform: skewX(-15deg);\n          transition: opacity 0.3s;\n        }\n        .shiny-button:hover::before {\n          animation: shiny-effect ").concat(speed, "s infinite;\n          opacity: 1;\n        }\n        .shiny-button:hover {\n          background-color: ").concat(backgroundColor, ";\n          color: ").concat(color, ";\n        }\n        @keyframes shiny-effect {\n          0% {\n            left: -100%;\n          }\n          100% {\n            left: 100%;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("button", {
     role: "button",
     "aria-label": "button",
-    onClick: ShinyButtonEventClick,
+    onClick: onClickFun,
     style: _objectSpread({}, edit),
     id: RoseId,
     className: "shiny-button ".concat(RoseName)
