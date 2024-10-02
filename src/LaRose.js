@@ -2849,7 +2849,277 @@ export function Section({
     </div>
   );
 }
-<<<<<<< HEAD
-=======
+import React, { useEffect, useState } from "react";
 
->>>>>>> origin/main
+// Sidebar component for displaying values
+const SidebarValues = ({ data, lineColor }) => {
+  return (
+    <div style={{ marginRight: "20px", textAlign: "center" }}>
+      {data.map((item, index) => (
+        <div key={index} style={{ marginBottom: "10px" }}>
+          <span style={{ fontWeight: "bold", color: lineColor }}>
+            {item.label}:
+          </span>{" "}
+          {item.value}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const AreaChart = ({
+  data,
+  edit = {},
+  fill = "blue",
+  lineColor = "skyblue",
+  childStyle = {},
+}) => {
+  const maxValue = Math.max(...data.map((item) => item.value));
+  const chartWidth = 300;
+  const chartHeight = 150;
+
+  const getPathData = () => {
+    const points = data
+      .map(
+        (item, index) =>
+          `${(index / (data.length - 1)) * chartWidth},${
+            chartHeight - (item.value / maxValue) * chartHeight
+          }`
+      )
+      .join(" ");
+
+    return `M 0 ${chartHeight} L ${points} L ${chartWidth} ${chartHeight} Z`;
+  };
+
+  return (
+    <div style={{ display: "flex", ...edit }}>
+      <SidebarValues data={data} lineColor={lineColor} />
+      {/* Chart */}
+      <svg
+        width={chartWidth}
+        height={chartHeight}
+        style={{ border: "1px solid #ccc" }}
+      >
+        <path
+          d={getPathData()}
+          fill={fill}
+          style={{ transition: "fill 0.5s ease", ...childStyle }}
+        />
+        <polyline
+          fill="none"
+          stroke={lineColor}
+          strokeWidth="2"
+          points={data
+            .map(
+              (item, index) =>
+                `${(index / (data.length - 1)) * chartWidth},${
+                  chartHeight - (item.value / maxValue) * chartHeight
+                }`
+            )
+            .join(" ")}
+        />
+      </svg>
+    </div>
+  );
+};
+
+export const LineChart = ({
+  data,
+  edit = {},
+  childStyle = {},
+  linesColor = "skyblue",
+  fill = "blue",
+}) => {
+  const maxValue = Math.max(...data.map((item) => item.value));
+  const chartWidth = 400;
+  const chartHeight = 200;
+
+  const getPoints = () => {
+    return data
+      .map(
+        (item, index) =>
+          `${(index / (data.length - 1)) * chartWidth},${
+            chartHeight - (item.value / maxValue) * chartHeight
+          }`
+      )
+      .join(" ");
+  };
+
+  return (
+    <div style={{ display: "flex", ...edit }}>
+      <SidebarValues data={data} lineColor={linesColor} />
+      <svg
+        width={chartWidth}
+        height={chartHeight}
+        style={{ border: "1px solid #ccc", borderRadius: "4px", ...childStyle }}
+      >
+        {/* Draw grid lines */}
+        {Array.from({ length: 5 }).map((_, index) => (
+          <line
+            key={index}
+            x1="0"
+            y1={(index / 4) * chartHeight}
+            x2={chartWidth}
+            y2={(index / 4) * chartHeight}
+            stroke="#e0e0e0"
+            strokeWidth="1"
+          />
+        ))}
+        {data.map((_, index) => (
+          <line
+            key={`v-${index}`}
+            x1={(index / (data.length - 1)) * chartWidth}
+            y1="0"
+            x2={(index / (data.length - 1)) * chartWidth}
+            y2={chartHeight}
+            stroke="#e0e0e0"
+            strokeWidth="1"
+            strokeDasharray="4"
+          />
+        ))}
+
+        {/* Draw the line chart with transition */}
+        <polyline
+          fill="none"
+          stroke={linesColor}
+          strokeWidth="2"
+          points={getPoints()}
+          style={{ transition: "points 0.5s ease" }}
+        />
+
+        {/* Draw circles */}
+        {data.map((item, index) => (
+          <circle
+            key={index}
+            cx={(index / (data.length - 1)) * chartWidth}
+            cy={chartHeight - (item.value / maxValue) * chartHeight}
+            r="5"
+            fill={fill}
+            style={{ transition: "cy 0.5s ease" }}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+};
+
+export const Chart = ({ data, edit, labelStyle = { background: "blue" } }) => {
+  const [chartData, setChartData] = useState(data);
+  const maxValue = Math.max(...chartData.map((item) => item.value));
+
+  useEffect(() => {
+    setChartData(data);
+  }, [data]);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-end",
+        height: "200px",
+        border: "1px solid #ccc",
+        padding: "10px",
+        ...edit,
+      }}
+    >
+      <SidebarValues data={chartData} lineColor={labelStyle.background} />
+      {chartData.map((item, index) => (
+        <div
+          key={index}
+          style={{
+            width: "40px",
+            height: `${(item.value / maxValue) * 100}%`,
+            margin: "0 5px",
+            background: labelStyle.background,
+            transition: "height 0.5s ease",
+            position: "relative",
+          }}
+          onMouseEnter={(e) => {
+            const tooltip = document.createElement("div");
+            tooltip.innerText = `Value: ${item.value}`;
+            tooltip.style.position = "absolute";
+            tooltip.style.bottom = "100%";
+            tooltip.style.left = "50%";
+            tooltip.style.transform = "translateX(-50%)";
+            tooltip.style.background = "black";
+            tooltip.style.color = "white";
+            tooltip.style.padding = "4px";
+            tooltip.style.borderRadius = "4px";
+            tooltip.style.whiteSpace = "nowrap";
+            tooltip.style.zIndex = "10";
+            e.currentTarget.appendChild(tooltip);
+            e.currentTarget._tooltip = tooltip;
+          }}
+          onMouseLeave={(e) => {
+            const tooltip = e.currentTarget._tooltip;
+            if (tooltip) {
+              tooltip.remove();
+              delete e.currentTarget._tooltip;
+            }
+          }}
+        >
+          <span
+            style={{
+              textAlign: "center",
+              display: "block",
+              fontSize: "12px",
+              color: "white",
+            }}
+          >
+            {item.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const PieChart = ({
+  data,
+  edit = {},
+  childStyle = {},
+  linesColor = "skyblue",
+  fill = "blue",
+}) => {
+  const total = data.reduce((sum, slice) => sum + slice.value, 0);
+  const radius = 70;
+  const centerX = radius + 20;
+  const centerY = radius + 20;
+
+  const renderSlices = () => {
+    let cumulativeValue = 0;
+
+    return data.map((slice, index) => {
+      const angle = (slice.value / total) * 2 * Math.PI;
+      const startX = centerX + radius * Math.cos(cumulativeValue);
+      const startY = centerY + radius * Math.sin(cumulativeValue);
+      cumulativeValue += angle;
+      const endX = centerX + radius * Math.cos(cumulativeValue);
+      const endY = centerY + radius * Math.sin(cumulativeValue);
+      const largeArcFlag = angle > Math.PI ? 1 : 0;
+
+      const pathData = `M ${centerX} ${centerY} L ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
+
+      return (
+        <path
+          key={index}
+          d={pathData}
+          fill={slice.color || fill}
+          stroke={linesColor}
+          strokeWidth="1"
+          style={{ transition: "d 0.5s ease", ...childStyle }}
+        />
+      );
+    });
+  };
+
+  return (
+    <div style={{ display: "flex", ...edit }}>
+      <SidebarValues data={data} lineColor={linesColor} />
+      <svg width="200" height="200" viewBox="0 0 200 200">
+        <g transform="translate(0, 0)">{renderSlices()}</g>
+      </svg>
+    </div>
+  );
+};
+
