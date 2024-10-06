@@ -900,6 +900,7 @@ export function ShinyText({
   speed = 2,
   color = "#fff",
   backgroundColor = "#000",
+  shinyColor = "rgba(255, 255, 255, 0.7)",
   onClick,
 }) {
   let onClickFun = () => {
@@ -907,58 +908,51 @@ export function ShinyText({
       onClick();
     }
   };
+
+  const shinyTextStyle = {
+    position: "relative",
+    display: "inline-block",
+    color: `${color}`,
+    backgroundColor: backgroundColor,
+    fontWeight: "bold",
+    backgroundClip: "text",
+    WebkitBackgroundClip: "text",
+    overflow: "hidden",
+  };
+
+  const shinyEffectStyle = {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: "-100%",
+    height: "100%",
+    width: "100%",
+    background: `linear-gradient(120deg, transparent, ${shinyColor}, transparent)`,
+    transform: "skewX(-15deg)",
+    animation: `shiny-effect ${speed}s infinite`,
+  };
+
   return (
-    <>
-      <style jsx>{`
-        .shiny-text {
-          position: relative;
-          display: inline-block;
-          color: ${color};
-          background-color: ${backgroundColor};
-          overflow: hidden;
-          font-weight: bold;
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-        }
-        .shiny-text::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: -100%;
-          height: 100%;
-          width: 100%;
-          background: linear-gradient(
-            120deg,
-            transparent,
-            rgba(255, 255, 255, 0.7),
-            transparent
-          );
-          transform: skewX(-15deg);
-        }
-        .shiny-text::before {
-          animation: shiny-effect ${speed}s infinite;
-        }
-        @keyframes shiny-effect {
-          0% {
-            left: -100%;
-          }
-          100% {
-            left: 100%;
-          }
-        }
-      `}</style>
+    <div
+      onClick={onClickFun}
+      style={{
+        ...shinyTextStyle,
+        ...edit,
+      }}
+      id={RoseId}
+      className={RoseName}
+    >
+      {children}
       <div
-        onClick={onClickFun}
-        style={{ ...edit }}
-        id={RoseId}
-        className={`shiny-text ${RoseName}`}
-      >
-        {children}
-      </div>
-    </>
+        style={{
+          ...shinyEffectStyle,
+          position: "absolute",
+        }}
+      />
+    </div>
   );
 }
+
 export function ShinyButton({
   children,
   RoseName,
@@ -1052,7 +1046,6 @@ export function WaveText({
   speed = 0.5,
   delay = 0.05,
   amplitude = 10,
-  frequency = 0.5,
 }) {
   const [waveType, setWaveType] = useState(initialWaveType);
   useEffect(() => {
@@ -1381,7 +1374,6 @@ export function Notification({
   editCrossIconWidth = 1.5,
   iconDisplay = "block",
   CrossIconColor = "black",
-  editCrossIconColor = {},
   delay = 5000,
 }) {
   const [valueState, setValueState] = useState(false);
@@ -1510,103 +1502,105 @@ export function Notification({
     </>
   );
 }
+
 export function Spring({
-  rotate = 360,
-  scale = 1,
-  speed = 0.8,
-  x = "0",
-  y = "0",
-  z = "0",
-  children,
-  RoseID,
-  RoseName = "RotatingSpringComponentStyle",
-  edit,
-  drag = false,
-}) {
-  const elementRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [isDragged, setIsDragged] = useState(false);
-  const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    if (elementRef.current) {
-      const rect = elementRef.current.getBoundingClientRect();
-      setPosition({ x: rect.left, y: rect.top });
-    }
-  }, []);
-  const handleMouseDown = (e) => {
-    if (drag) {
-      const rect = e.target.getBoundingClientRect();
-      setStartOffset({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-      setIsDragging(true);
-      setIsDragged(true);
-    }
-  };
-  const handleMouseMove = (e) => {
-    if (isDragging && drag) {
-      setPosition({
-        x: e.clientX - startOffset.x,
-        y: e.clientY - startOffset.y,
-      });
-    }
-  };
-  const handleMouseUp = () => {
-    if (drag) {
-      setIsDragging(false);
-    }
-  };
-  return (
-    <>
-      <style jsx>{`
-        .${RoseName} {
-          min-height: 7rem;
-          width: 7rem;
-          background: #ffffff;
-          border-radius: 26px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
-          transform: rotate(0deg) scale(0);
-          opacity: 0;
-          overflow: hidden;
-          translate: ${x} ${y} ${z};
-          position: relative; /* Default position */
-          cursor: ${drag ? "grab" : "default"};
-        }
-        .${RoseName}:active {
-          cursor: ${drag ? "grabbing" : "default"};
-        }
-        @keyframes LaRoseRotatingAnimated {
-          to {
+    rotate = 360,
+    scale = 1,
+    speed = 0.8,
+    x = "0",
+    y = "0",
+    z = "0",
+    children,
+    RoseID,
+    edit,
+    drag = false,
+  }) {
+    const elementRef = useRef(null);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
+    const [isDragged, setIsDragged] = useState(false);
+    const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
+    useEffect(() => {
+      if (elementRef.current) {
+        const rect = elementRef.current.getBoundingClientRect();
+        setPosition({ x: rect.left, y: rect.top });
+      }
+    }, []);
+    const handleMouseDown = (e) => {
+      if (drag) {
+        const rect = e.target.getBoundingClientRect();
+        setStartOffset({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        });
+        setIsDragging(true);
+        setIsDragged(true);
+      }
+    };
+    const handleMouseMove = (e) => {
+      if (isDragging && drag) {
+        setPosition({
+          x: e.clientX - startOffset.x,
+          y: e.clientY - startOffset.y,
+        });
+      }
+    };
+    const handleMouseUp = () => {
+      if (drag) {
+        setIsDragging(false);
+      }
+    };
+    return (
+      <>
+        <style jsx>{`
+          .RotatingSpringComponentStyle{
+            min-height: 7rem;
+            width: 7rem;
+            background: #ffffff;
+            border-radius: 26px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
+            transform: rotate(0deg) scale(0);
+            opacity: 0;
+            overflow: hidden;
             translate: ${x} ${y} ${z};
-            transform: rotate(${rotate}deg) scale(${scale});
-            opacity: 1;
+            position: relative; /* Default position */
+            cursor: ${drag ? "grab" : "default"};
           }
-        }
-      `}</style>
-      <div
-        ref={elementRef}
-        style={{
-          ...edit,
-          left: isDragged ? `${position.x}px` : "auto",
-          top: isDragged ? `${position.y}px` : "auto",
-          position: isDragged ? "absolute" : "relative",
-        }}
-        className={RoseName}
-        id={RoseID}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      >
-        {children}
-      </div>
-    </>
-  );
-}
+          .RotatingSpringComponentStyle:active {
+            cursor: ${drag ? "grabbing" : "default"};
+          }
+          @keyframes LaRoseRotatingAnimated {
+            to {
+              translate: ${x} ${y} ${z};
+              transform: rotate(${rotate}deg) scale(${scale});
+              opacity: 1;
+            }
+          }
+        `}</style>
+        <div
+          ref={elementRef}
+          style={{
+            ...edit,
+            left: isDragged ? `${position.x}px` : "auto",
+            top: isDragged ? `${position.y}px` : "auto",
+            position: isDragged ? "absolute" : "relative",
+          }}
+          className={`RotatingSpringComponentStyle`}
+          id={RoseID}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+        >
+          {children}
+        </div>
+      </>
+    );
+  }
+
+
 export function Variants({
   rotate = 0,
   scale = 1,
@@ -1616,7 +1610,7 @@ export function Variants({
   z = "0",
   children,
   RoseID,
-  RoseName = "RotatingVariantsComponentStyle",
+  RoseName = "",
   edit,
   childDisplay = "grid",
   drag = false,
@@ -1659,7 +1653,7 @@ export function Variants({
   return (
     <>
       <style jsx>{`
-        .${RoseName} {
+        .RotatingVariantsComponentStyle{
           min-height: 7rem;
           width: 7rem;
           background: #380eff;
@@ -1677,10 +1671,10 @@ export function Variants({
           position: relative; /* Default position */
           cursor: ${drag ? "grab" : "default"};
         }
-        .${RoseName}:active {
+        .RotatingVariantsComponentStyle:active {
           cursor: ${drag ? "grabbing" : "default"};
         }
-        @keyframes ${RoseName}Animated {
+        @keyframes RotatingVariantsComponentStyleAnimated {
           to {
             translate: ${x} ${y} ${z};
             transform: rotate(${rotate}deg) scale(${scale});
@@ -2637,6 +2631,19 @@ export const useRenderTime = () => {
   }, []);
   return renderTime;
 };
+
+export const RootRemover = () => {
+  useEffect(()=>{
+      const rootElement = document.getElementById('root'); 
+      if (rootElement) {
+        rootElement.remove();
+        console.log("Root element removed");
+      } else {
+        console.log("Root element not found");
+      }
+  },[])
+return  null
+};
 export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
   const [ip, setIp] = useState(null);
   const [isBlocked, setIsBlocked] = useState(false);
@@ -2657,6 +2664,7 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
       setIsBlocked(true);
       let randomNum = Math.random();
       window.open(`https://your-access-blocked/${randomNum}`, "_self");
+      <RootRemover/>
     }
   }, [blockUser, ip]);
   if (isBlocked) {
@@ -2849,9 +2857,7 @@ export function Section({
     </div>
   );
 }
-import React, { useEffect, useState } from "react";
 
-// Sidebar component for displaying values
 const SidebarValues = ({ data, lineColor }) => {
   return (
     <div style={{ marginRight: "20px", textAlign: "center" }}>
@@ -2874,6 +2880,8 @@ export const AreaChart = ({
   lineColor = "skyblue",
   childStyle = {},
 }) => {
+  const [prevData, setPrevData] = useState(data);
+
   const maxValue = Math.max(...data.map((item) => item.value));
   const chartWidth = 300;
   const chartHeight = 150;
@@ -2891,6 +2899,22 @@ export const AreaChart = ({
     return `M 0 ${chartHeight} L ${points} L ${chartWidth} ${chartHeight} Z`;
   };
 
+  const getLinePoints = () => {
+    return data
+      .map(
+        (item, index) =>
+          `${(index / (data.length - 1)) * chartWidth},${
+            chartHeight - (item.value / maxValue) * chartHeight
+          }`
+      )
+      .join(" ");
+  };
+
+  useEffect(() => {
+    // Store the previous data to trigger the re-render
+    setPrevData(data);
+  }, [data]);
+
   return (
     <div style={{ display: "flex", ...edit }}>
       <SidebarValues data={data} lineColor={lineColor} />
@@ -2903,107 +2927,246 @@ export const AreaChart = ({
         <path
           d={getPathData()}
           fill={fill}
-          style={{ transition: "fill 0.5s ease", ...childStyle }}
+          style={{ transition: "fill 0.5s ease, d 0.5s ease", ...childStyle }}
         />
         <polyline
           fill="none"
           stroke={lineColor}
           strokeWidth="2"
-          points={data
-            .map(
-              (item, index) =>
-                `${(index / (data.length - 1)) * chartWidth},${
-                  chartHeight - (item.value / maxValue) * chartHeight
-                }`
-            )
-            .join(" ")}
+          points={getLinePoints()}
+          style={{ transition: "stroke 0.5s ease, points 0.5s ease" }}
         />
       </svg>
     </div>
   );
 };
 
-export const LineChart = ({
+export function LineChart({
   data,
-  edit = {},
-  childStyle = {},
-  linesColor = "skyblue",
-  fill = "blue",
-}) => {
-  const maxValue = Math.max(...data.map((item) => item.value));
-  const chartWidth = 400;
-  const chartHeight = 200;
+  labels,
+  title,
+  height = 400,
+  width = 600,
+  borderRadius = "12px",
+  backgroundColor = "#1e1e1e",
+  lineColors = ["#4CAF50"],
+  lightLineColors = ["#A5D6A7"],
+  lineStyles = ["solid"],
+  axisColor = "#cccccc",
+  titleColor = "#ffffff",
+  labelColor = "#D9D9D9",
+  lineWidth = 2,
+  padding = 20,
+  showSidebar = true,
+  showXAxis = true,
+  showYAxis = true,
+  tooltip = false,
+}) {
+  const maxDataValue = Math.max(...data.flat());
+  const scaleFactor = maxDataValue > 0 ? (height - 60) / maxDataValue : 1;
 
-  const getPoints = () => {
-    return data
-      .map(
-        (item, index) =>
-          `${(index / (data.length - 1)) * chartWidth},${
-            chartHeight - (item.value / maxValue) * chartHeight
-          }`
-      )
-      .join(" ");
+  const styles = {
+    chartContainer: {
+      display: "flex",
+      position: "relative",
+      backgroundColor,
+      borderRadius,
+      boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)",
+      maxWidth: "100%",
+      overflow: "hidden",
+    },
+    sidebar: {
+      backgroundColor: "transparent",
+      padding: "0.5rem",
+      width: "2rem",
+      borderRight: "1px solid rgb(204, 204, 204)",
+      overflowY: "auto",
+      display: showSidebar ? "flex" : "none",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      gap: "0.5rem",
+    },
+    chart: {
+      padding: `${padding}px`,
+      flex: "1",
+      minHeight: `${height}px`,
+    },
+    chartTitle: {
+      color: titleColor,
+      fontSize: "18px",
+      textAlign: "center",
+      marginBottom: "10px",
+      fontWeight: "bold",
+    },
+    svg: {
+      width: "100%",
+      height: `${height}px`,
+    },
+    axes: {
+      stroke: axisColor,
+      strokeWidth: 1,
+    },
+    label: {
+      fill: labelColor,
+      fontSize: "10px",
+    },
+    tooltip: {
+      position: "absolute",
+      backgroundColor: "rgba(255, 255, 255, 0.8)",
+      borderRadius: "5px",
+      padding: "5px",
+      display: "none",
+      pointerEvents: "none",
+      zIndex: 100,
+    },
+  };
+
+  const drawLines = () => {
+    return data.map((dataset, datasetIndex) => {
+      const linePoints = dataset
+        .map((point, index) => {
+          const x = (width / (dataset.length - 1)) * index + 30;
+          const y = height - point * scaleFactor - 30;
+          return `${x},${y}`;
+        })
+        .join(" ");
+
+      const lineColor =
+        datasetIndex < lightLineColors.length
+          ? lightLineColors[datasetIndex]
+          : lineColors[datasetIndex % lineColors.length];
+
+      const strokeDasharray = lineStyles[datasetIndex % lineStyles.length];
+
+      return (
+        <polyline
+          key={datasetIndex}
+          points={linePoints}
+          style={{
+            stroke: lineColor,
+            strokeWidth: lineWidth,
+            fill: "none",
+            strokeDasharray:
+              strokeDasharray === "dashed"
+                ? "5,5"
+                : strokeDasharray === "dotted"
+                ? "1,3"
+                : "0",
+          }}
+        />
+      );
+    });
+  };
+
+  const handleMouseMove = (e) => {
+    if (tooltip) {
+      const tooltipElement = document.getElementById("tooltip");
+      tooltipElement.style.display = "block";
+      tooltipElement.style.left = `${e.pageX + 10}px`;
+      tooltipElement.style.top = `${e.pageY + 10}px`;
+
+      const chartRect = e.target.getBoundingClientRect();
+      const xValue =
+        ((e.clientX - chartRect.left - 30) / width) * labels.length;
+      const yValue = height - (e.clientY - chartRect.top) - 30;
+      tooltipElement.innerHTML = `X: ${Math.round(xValue)}, Y: ${Math.round(
+        yValue
+      )}`;
+    }
+  };
+
+  const handleMouseOut = () => {
+    const tooltipElement = document.getElementById("tooltip");
+    if (tooltipElement) {
+      tooltipElement.style.display = "none";
+    }
   };
 
   return (
-    <div style={{ display: "flex", ...edit }}>
-      <SidebarValues data={data} lineColor={linesColor} />
-      <svg
-        width={chartWidth}
-        height={chartHeight}
-        style={{ border: "1px solid #ccc", borderRadius: "4px", ...childStyle }}
-      >
-        {/* Draw grid lines */}
-        {Array.from({ length: 5 }).map((_, index) => (
-          <line
-            key={index}
-            x1="0"
-            y1={(index / 4) * chartHeight}
-            x2={chartWidth}
-            y2={(index / 4) * chartHeight}
-            stroke="#e0e0e0"
-            strokeWidth="1"
-          />
-        ))}
-        {data.map((_, index) => (
-          <line
-            key={`v-${index}`}
-            x1={(index / (data.length - 1)) * chartWidth}
-            y1="0"
-            x2={(index / (data.length - 1)) * chartWidth}
-            y2={chartHeight}
-            stroke="#e0e0e0"
-            strokeWidth="1"
-            strokeDasharray="4"
-          />
-        ))}
-
-        {/* Draw the line chart with transition */}
-        <polyline
-          fill="none"
-          stroke={linesColor}
-          strokeWidth="2"
-          points={getPoints()}
-          style={{ transition: "points 0.5s ease" }}
-        />
-
-        {/* Draw circles */}
-        {data.map((item, index) => (
-          <circle
-            key={index}
-            cx={(index / (data.length - 1)) * chartWidth}
-            cy={chartHeight - (item.value / maxValue) * chartHeight}
-            r="5"
-            fill={fill}
-            style={{ transition: "cy 0.5s ease" }}
-          />
-        ))}
-      </svg>
+    <div style={styles.chartContainer}>
+      <div style={styles.sidebar}>
+        {data.map((dataset, datasetIndex) =>
+          dataset.map((value, index) => (
+            <div
+              key={`${datasetIndex}-${index}`}
+              style={{
+                color: "#D9D9D9",
+                fontSize: "10px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {labels[index]}: {value}
+            </div>
+          ))
+        )}
+      </div>
+      <div style={styles.chart}>
+        <h2 style={styles.chartTitle}>{title || ""}</h2>
+        <svg
+          style={styles.svg}
+          onMouseMove={handleMouseMove}
+          onMouseOut={handleMouseOut}
+        >
+          {showYAxis && (
+            <line
+              x1="30"
+              y1="30"
+              x2="30"
+              y2={height - 30}
+              style={styles.axes}
+            />
+          )}
+          {showXAxis && (
+            <line
+              x1="30"
+              y1={height - 30}
+              x2={width - 30}
+              y2={height - 30}
+              style={styles.axes}
+            />
+          )}
+          {drawLines()}
+          {showXAxis &&
+            labels.map((label, index) => {
+              const x = (width / (data[0].length - 1)) * index + 30;
+              return (
+                <text
+                  key={index}
+                  x={x}
+                  y={height - 10}
+                  style={styles.label}
+                  textAnchor="middle"
+                >
+                  {label}
+                </text>
+              );
+            })}
+        </svg>
+        {tooltip && (
+          <div id="tooltip" style={styles.tooltip}>
+            Tooltip content will be updated dynamically
+          </div>
+        )}
+      </div>
     </div>
   );
-};
+}
 
-export const Chart = ({ data, edit, labelStyle = { background: "blue" } }) => {
+export const Chart = ({
+  data,
+  edit,
+  labelStyle = { background: "blue" },
+  height = 200,
+  width = 600,
+  barWidth = 40,
+  barMargin = 5,
+  tooltip = true,
+  showLabels = true,
+  labelColor = "white",
+  borderColor = "#ccc",
+  backgroundColor = "#f5f5f5",
+}) => {
   const [chartData, setChartData] = useState(data);
   const maxValue = Math.max(...chartData.map((item) => item.value));
 
@@ -3011,63 +3174,71 @@ export const Chart = ({ data, edit, labelStyle = { background: "blue" } }) => {
     setChartData(data);
   }, [data]);
 
+  const styles = {
+    chartContainer: {
+      display: "flex",
+      alignItems: "flex-end",
+      height: `${height}px`,
+      width: `${width}px`,
+      border: `1px solid ${borderColor}`,
+      padding: "10px",
+      background: backgroundColor,
+      ...edit,
+    },
+    bar: {
+      margin: `${barMargin}px`,
+      transition: "height 0.5s ease",
+      position: "relative",
+    },
+    label: {
+      textAlign: "center",
+      display: "block",
+      fontSize: "12px",
+      color: labelColor,
+    },
+    tooltip: {
+      position: "absolute",
+      bottom: "100%",
+      left: "50%",
+      transform: "translateX(-50%)",
+      background: "black",
+      color: "white",
+      padding: "4px",
+      borderRadius: "4px",
+      whiteSpace: "nowrap",
+      zIndex: "10",
+    },
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-end",
-        height: "200px",
-        border: "1px solid #ccc",
-        padding: "10px",
-        ...edit,
-      }}
-    >
-      <SidebarValues data={chartData} lineColor={labelStyle.background} />
+    <div style={styles.chartContainer}>
       {chartData.map((item, index) => (
         <div
           key={index}
           style={{
-            width: "40px",
+            ...styles.bar,
+            width: `${barWidth}px`,
             height: `${(item.value / maxValue) * 100}%`,
-            margin: "0 5px",
             background: labelStyle.background,
-            transition: "height 0.5s ease",
-            position: "relative",
           }}
           onMouseEnter={(e) => {
-            const tooltip = document.createElement("div");
-            tooltip.innerText = `Value: ${item.value}`;
-            tooltip.style.position = "absolute";
-            tooltip.style.bottom = "100%";
-            tooltip.style.left = "50%";
-            tooltip.style.transform = "translateX(-50%)";
-            tooltip.style.background = "black";
-            tooltip.style.color = "white";
-            tooltip.style.padding = "4px";
-            tooltip.style.borderRadius = "4px";
-            tooltip.style.whiteSpace = "nowrap";
-            tooltip.style.zIndex = "10";
-            e.currentTarget.appendChild(tooltip);
-            e.currentTarget._tooltip = tooltip;
+            if (tooltip) {
+              const tooltipElement = document.createElement("div");
+              tooltipElement.innerText = `Value: ${item.value}`;
+              Object.assign(tooltipElement.style, styles.tooltip);
+              e.currentTarget.appendChild(tooltipElement);
+              e.currentTarget._tooltip = tooltipElement;
+            }
           }}
           onMouseLeave={(e) => {
-            const tooltip = e.currentTarget._tooltip;
-            if (tooltip) {
-              tooltip.remove();
+            const tooltipElement = e.currentTarget._tooltip;
+            if (tooltipElement) {
+              tooltipElement.remove();
               delete e.currentTarget._tooltip;
             }
           }}
         >
-          <span
-            style={{
-              textAlign: "center",
-              display: "block",
-              fontSize: "12px",
-              color: "white",
-            }}
-          >
-            {item.label}
-          </span>
+          {showLabels && <span style={styles.label}>{item.label}</span>}
         </div>
       ))}
     </div>
@@ -3080,9 +3251,15 @@ export const PieChart = ({
   childStyle = {},
   linesColor = "skyblue",
   fill = "blue",
+  radius = 70, // Radius of the pie chart
+  strokeWidth = 1, // Width of the stroke for pie slices
+  tooltip = false, // Whether to show tooltips on hover
+  showLabels = true, // Whether to show labels on pie slices
+  labelColor = "white", // Color of the labels
+  animationDuration = 0.5, // Duration of the slice transition animation
+  labelStyle = {}, // Additional styles for the labels
 }) => {
   const total = data.reduce((sum, slice) => sum + slice.value, 0);
-  const radius = 70;
   const centerX = radius + 20;
   const centerY = radius + 20;
 
@@ -3101,14 +3278,55 @@ export const PieChart = ({
       const pathData = `M ${centerX} ${centerY} L ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
 
       return (
-        <path
-          key={index}
-          d={pathData}
-          fill={slice.color || fill}
-          stroke={linesColor}
-          strokeWidth="1"
-          style={{ transition: "d 0.5s ease", ...childStyle }}
-        />
+        <g key={index}>
+          <path
+            d={pathData}
+            fill={slice.color || fill}
+            stroke={linesColor}
+            strokeWidth={strokeWidth}
+            style={{
+              transition: `d ${animationDuration}s ease`,
+              ...childStyle,
+            }}
+            onMouseEnter={(e) => {
+              if (tooltip) {
+                const tooltipElement = document.createElement("div");
+                tooltipElement.innerText = `${slice.label}: ${slice.value}`;
+                tooltipElement.style.position = "absolute";
+                tooltipElement.style.background = "black";
+                tooltipElement.style.color = "white";
+                tooltipElement.style.padding = "4px";
+                tooltipElement.style.borderRadius = "4px";
+                tooltipElement.style.pointerEvents = "none";
+                document.body.appendChild(tooltipElement);
+
+                // Position tooltip based on mouse
+                const { clientX: mouseX, clientY: mouseY } = e;
+                tooltipElement.style.left = `${mouseX}px`;
+                tooltipElement.style.top = `${mouseY - 30}px`; // 30px above the mouse
+                e.currentTarget._tooltip = tooltipElement;
+              }
+            }}
+            onMouseLeave={(e) => {
+              const tooltipElement = e.currentTarget._tooltip;
+              if (tooltipElement) {
+                tooltipElement.remove();
+                delete e.currentTarget._tooltip;
+              }
+            }}
+          />
+          {showLabels && (
+            <text
+              x={centerX + (radius / 2) * Math.cos(cumulativeValue - angle / 2)}
+              y={centerY + (radius / 2) * Math.sin(cumulativeValue - angle / 2)}
+              fill={labelColor}
+              style={{ ...labelStyle }}
+              textAnchor="middle"
+            >
+              {slice.label}
+            </text>
+          )}
+        </g>
       );
     });
   };
@@ -3116,10 +3334,254 @@ export const PieChart = ({
   return (
     <div style={{ display: "flex", ...edit }}>
       <SidebarValues data={data} lineColor={linesColor} />
-      <svg width="200" height="200" viewBox="0 0 200 200">
+      <svg
+        width={2 * (radius + 20)}
+        height={2 * (radius + 20)}
+        viewBox={`0 0 ${2 * (radius + 20)} ${2 * (radius + 20)}`}
+      >
         <g transform="translate(0, 0)">{renderSlices()}</g>
       </svg>
     </div>
   );
 };
 
+export const RobotDetection = ({ onSuspiciousActivity }) => {
+  const [isRobot, setIsRobot] = useState(false);
+  const [mousePositions, setMousePositions] = useState([]);
+  const [clicks, setClicks] = useState(0);
+  const [clickTimeStamps, setClickTimeStamps] = useState([]);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePositions((prev) => [
+        ...prev,
+        { x: e.clientX, y: e.clientY, time: Date.now() },
+      ]);
+    };
+
+    const handleClick = () => {
+      const now = Date.now();
+      setClicks((prev) => prev + 1);
+      setClickTimeStamps((prev) => [...prev, now]);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", handleClick);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  useEffect(() => {
+    const analyzeMouseMovements = () => {
+      if (mousePositions.length < 5) return;
+
+      let erraticMovements = 0;
+
+      for (let i = 1; i < mousePositions.length; i++) {
+        const distance = Math.sqrt(
+          Math.pow(mousePositions[i].x - mousePositions[i - 1].x, 2) +
+            Math.pow(mousePositions[i].y - mousePositions[i - 1].y, 2)
+        );
+
+        if (distance > 100) {
+          erraticMovements++;
+        }
+      }
+
+      if (erraticMovements > mousePositions.length / 2) {
+        setIsRobot(true);
+        onSuspiciousActivity();
+      }
+    };
+
+    const analyzeClicks = () => {
+      const now = Date.now();
+      const recentClicks = clickTimeStamps.filter(
+        (timestamp) => now - timestamp < 2000
+      ); // 2 seconds
+      if (recentClicks.length > 5) {
+        setIsRobot(true);
+        onSuspiciousActivity();
+      }
+    };
+
+    analyzeMouseMovements();
+    analyzeClicks();
+  }, [mousePositions, clickTimeStamps, onSuspiciousActivity]);
+
+  return;
+};
+
+export const SoundInteraction = ({ audioPath, children }) => {
+  const playAudio = () => {
+    new Audio(audioPath).play();
+  };
+
+  return <div onClick={playAudio}>{children}</div>;
+};
+
+
+export function Title({children = "larose"}) {
+    useEffect(()=>{
+        document.title = children
+    },[])
+  return 
+}
+
+
+export const MetaDescription = ({children}) => {
+  useEffect(() => {
+    const metaDescription = document.querySelector('meta[name="description"]');
+    console.log(metaDescription)
+    if (metaDescription) {
+      metaDescription.setAttribute('content', `${children}`);
+    } else {
+      const newMetaDescription = document.createElement('meta');
+      newMetaDescription.name = 'description';
+      newMetaDescription.content = `${children}`;
+      document.head.appendChild(newMetaDescription);
+    }
+  }, []);
+
+  return
+};
+
+
+
+
+export const Popup = ({ title, onClose, timeout, edit = {} }) => {
+  
+  useEffect(() => {
+    if (timeout) {
+      const timer = setTimeout(() => {
+        onClose(); 
+      }, timeout);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [timeout, onClose]);
+
+  return (
+    <div style={overlayStyle}>
+      <div style={{ ...popupStyle, ...edit }}>
+        <h2>{title}</h2>
+        {edit.content && <div>{edit.content}</div>} {/* Custom content */}
+        <button style={btn} onClick={onClose}>
+          {edit.buttonLabel || "Close"} {/* Custom button label */}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const overlayStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 1000,
+};
+
+const popupStyle = {
+  background: '#fff',
+  padding: '20px',
+  borderRadius: '5px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+};
+
+const btn = {
+  width: "4rem",
+  height: "2rem",
+  borderRadius: "10px",
+  border: "none",
+  background: "blue",
+  fontWeight: "bold",
+  color: "white",
+  boxShadow: "1px 1px 31px -6px blue",
+  cursor: "pointer",
+};
+export  function MenuPop({ items, children, edit = {} }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setIsOpen((prev) => !prev); 
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      {children ? (
+        <div onClick={handleClick} style={{ cursor: 'pointer' }}>
+          {children}
+        </div>
+      ) : (
+        <button onClick={handleClick} style={buttonStyle}>
+          Open Popover
+        </button>
+      )}
+      <div
+        style={{
+          ...popoverStyle,
+          top: anchorEl ? anchorEl.getBoundingClientRect().bottom : 0,
+          left: anchorEl ? anchorEl.getBoundingClientRect().left : 0,
+          opacity: isOpen ? 1 : 0,
+          transform: isOpen ? 'translateY(0)' : 'translateY(-10px)',
+          visibility: isOpen ? 'visible' : 'hidden', 
+        }}
+      >
+        <div style={{ ...contentStyle, ...edit }}> 
+          {items.map((item, index) => (
+            <div key={index} style={itemStyle} onClick={handleClose}>
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+const buttonStyle = {
+  padding: '10px 20px',
+  backgroundColor: 'blue',
+  color: 'white',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer',
+};
+
+const popoverStyle = {
+  position: 'absolute',
+  backgroundColor: '#fff',
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+  zIndex: 1000,
+  transition: 'opacity 0.3s ease, transform 0.3s ease', 
+  pointerEvents: 'none', 
+};
+
+const contentStyle = {
+  padding: '10px',
+};
+
+const itemStyle = {
+  padding: '8px 12px',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: '#f0f0f0',
+  },
+};

@@ -6,16 +6,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Ak_Alert = Ak_Alert;
 exports.AnimatedText = AnimatedText;
-exports.BlockUser = void 0;
+exports.BlockUser = exports.AreaChart = void 0;
 exports.Button = Button;
+exports.Chart = void 0;
 exports.CounterDown = CounterDown;
 exports.CounterUp = CounterUp;
 exports.Image = void 0;
 exports.LaRoseText = LaRoseText;
+exports.LineChart = LineChart;
 exports.Loader = Loader;
+exports.MenuPop = MenuPop;
+exports.MetaDescription = void 0;
 exports.ModernBtn = ModernBtn;
 exports.Notification = Notification;
+exports.Popup = exports.PieChart = void 0;
 exports.RandomAnimate = RandomAnimate;
+exports.RootRemover = exports.RobotDetection = void 0;
 exports.RoseBox = RoseBox;
 exports.Route = exports.RoseRouter = exports.RoseParent = void 0;
 exports.Section = Section;
@@ -24,11 +30,12 @@ exports.ShinyButton = ShinyButton;
 exports.ShinyText = ShinyText;
 exports.SideBox = SideBox;
 exports.SideText = SideText;
-exports.SnakeMouse = exports.SmoothParent = void 0;
+exports.SoundInteraction = exports.SnakeMouse = exports.SmoothParent = void 0;
 exports.SplitText = SplitText;
 exports.Spring = Spring;
 exports.SwitchCase = SwitchCase;
 exports.Table = void 0;
+exports.Title = Title;
 exports.Variants = Variants;
 exports.ViewportContainer = void 0;
 exports.WaveText = WaveText;
@@ -50,6 +57,10 @@ var _react = _interopRequireWildcard(require("react"));
 var _excluded = ["children", "RoseName", "RoseID", "edit", "ariaLabelledby"];
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var s = Object.getOwnPropertySymbols(e); for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
 function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (e.includes(n)) continue; t[n] = r[n]; } return t; }
@@ -570,20 +581,45 @@ function ShinyText(_ref10) {
     color = _ref10$color === void 0 ? "#fff" : _ref10$color,
     _ref10$backgroundColo = _ref10.backgroundColor,
     backgroundColor = _ref10$backgroundColo === void 0 ? "#000" : _ref10$backgroundColo,
+    _ref10$shinyColor = _ref10.shinyColor,
+    shinyColor = _ref10$shinyColor === void 0 ? "rgba(255, 255, 255, 0.7)" : _ref10$shinyColor,
     onClick = _ref10.onClick;
   var onClickFun = function onClickFun() {
     if (typeof onClick === "function") {
       onClick();
     }
   };
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
-    jsx: true
-  }, "\n        .shiny-text {\n          position: relative;\n          display: inline-block;\n          color: ".concat(color, ";\n          background-color: ").concat(backgroundColor, ";\n          overflow: hidden;\n          font-weight: bold;\n          background-clip: text;\n          -webkit-background-clip: text;\n          color: transparent;\n        }\n        .shiny-text::before {\n          content: \"\";\n          position: absolute;\n          top: 0;\n          left: -100%;\n          height: 100%;\n          width: 100%;\n          background: linear-gradient(\n            120deg,\n            transparent,\n            rgba(255, 255, 255, 0.7),\n            transparent\n          );\n          transform: skewX(-15deg);\n        }\n        .shiny-text::before {\n          animation: shiny-effect ").concat(speed, "s infinite;\n        }\n        @keyframes shiny-effect {\n          0% {\n            left: -100%;\n          }\n          100% {\n            left: 100%;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
+  var shinyTextStyle = {
+    position: "relative",
+    display: "inline-block",
+    color: "".concat(color),
+    backgroundColor: backgroundColor,
+    fontWeight: "bold",
+    backgroundClip: "text",
+    WebkitBackgroundClip: "text",
+    overflow: "hidden"
+  };
+  var shinyEffectStyle = {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: "-100%",
+    height: "100%",
+    width: "100%",
+    background: "linear-gradient(120deg, transparent, ".concat(shinyColor, ", transparent)"),
+    transform: "skewX(-15deg)",
+    animation: "shiny-effect ".concat(speed, "s infinite")
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
     onClick: onClickFun,
-    style: _objectSpread({}, edit),
+    style: _objectSpread(_objectSpread({}, shinyTextStyle), edit),
     id: RoseId,
-    className: "shiny-text ".concat(RoseName)
-  }, children));
+    className: RoseName
+  }, children, /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, shinyEffectStyle), {}, {
+      position: "absolute"
+    })
+  }));
 }
 function ShinyButton(_ref11) {
   var children = _ref11.children,
@@ -631,9 +667,7 @@ function WaveText(_ref12) {
     _ref12$delay = _ref12.delay,
     delay = _ref12$delay === void 0 ? 0.05 : _ref12$delay,
     _ref12$amplitude = _ref12.amplitude,
-    amplitude = _ref12$amplitude === void 0 ? 10 : _ref12$amplitude,
-    _ref12$frequency = _ref12.frequency,
-    frequency = _ref12$frequency === void 0 ? 0.5 : _ref12$frequency;
+    amplitude = _ref12$amplitude === void 0 ? 10 : _ref12$amplitude;
   var _useState13 = (0, _react.useState)(initialWaveType),
     _useState14 = _slicedToArray(_useState13, 2),
     waveType = _useState14[0],
@@ -890,8 +924,6 @@ function Notification(_ref18) {
     iconDisplay = _ref18$iconDisplay === void 0 ? "block" : _ref18$iconDisplay,
     _ref18$CrossIconColor = _ref18.CrossIconColor,
     CrossIconColor = _ref18$CrossIconColor === void 0 ? "black" : _ref18$CrossIconColor,
-    _ref18$editCrossIconC = _ref18.editCrossIconColor,
-    editCrossIconColor = _ref18$editCrossIconC === void 0 ? {} : _ref18$editCrossIconC,
     _ref18$delay = _ref18.delay,
     delay = _ref18$delay === void 0 ? 5000 : _ref18$delay;
   var _useState19 = (0, _react.useState)(false),
@@ -964,8 +996,6 @@ function Spring(_ref19) {
     z = _ref19$z === void 0 ? "0" : _ref19$z,
     children = _ref19.children,
     RoseID = _ref19.RoseID,
-    _ref19$RoseName = _ref19.RoseName,
-    RoseName = _ref19$RoseName === void 0 ? "RotatingSpringComponentStyle" : _ref19$RoseName,
     edit = _ref19.edit,
     _ref19$drag = _ref19.drag,
     drag = _ref19$drag === void 0 ? false : _ref19$drag;
@@ -1027,14 +1057,14 @@ function Spring(_ref19) {
   };
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
     jsx: true
-  }, "\n        .".concat(RoseName, " {\n          min-height: 7rem;\n          width: 7rem;\n          background: #ffffff;\n          border-radius: 26px;\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          animation: LaRoseRotatingAnimated ").concat(speed, "s ease-in-out forwards;\n          transform: rotate(0deg) scale(0);\n          opacity: 0;\n          overflow: hidden;\n          translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n          position: relative; /* Default position */\n          cursor: ").concat(drag ? "grab" : "default", ";\n        }\n        .").concat(RoseName, ":active {\n          cursor: ").concat(drag ? "grabbing" : "default", ";\n        }\n        @keyframes LaRoseRotatingAnimated {\n          to {\n            translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n            transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n            opacity: 1;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
+  }, "\n          .RotatingSpringComponentStyle{\n            min-height: 7rem;\n            width: 7rem;\n            background: #ffffff;\n            border-radius: 26px;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            animation: LaRoseRotatingAnimated ".concat(speed, "s ease-in-out forwards;\n            transform: rotate(0deg) scale(0);\n            opacity: 0;\n            overflow: hidden;\n            translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n            position: relative; /* Default position */\n            cursor: ").concat(drag ? "grab" : "default", ";\n          }\n          .RotatingSpringComponentStyle:active {\n            cursor: ").concat(drag ? "grabbing" : "default", ";\n          }\n          @keyframes LaRoseRotatingAnimated {\n            to {\n              translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n              transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n              opacity: 1;\n            }\n          }\n        ")), /*#__PURE__*/_react["default"].createElement("div", {
     ref: elementRef,
     style: _objectSpread(_objectSpread({}, edit), {}, {
       left: isDragged ? "".concat(position.x, "px") : "auto",
       top: isDragged ? "".concat(position.y, "px") : "auto",
       position: isDragged ? "absolute" : "relative"
     }),
-    className: RoseName,
+    className: "RotatingSpringComponentStyle",
     id: RoseID,
     onMouseDown: handleMouseDown,
     onMouseMove: handleMouseMove,
@@ -1057,7 +1087,7 @@ function Variants(_ref20) {
     children = _ref20.children,
     RoseID = _ref20.RoseID,
     _ref20$RoseName = _ref20.RoseName,
-    RoseName = _ref20$RoseName === void 0 ? "RotatingVariantsComponentStyle" : _ref20$RoseName,
+    RoseName = _ref20$RoseName === void 0 ? "" : _ref20$RoseName,
     edit = _ref20.edit,
     _ref20$childDisplay = _ref20.childDisplay,
     childDisplay = _ref20$childDisplay === void 0 ? "grid" : _ref20$childDisplay,
@@ -1121,7 +1151,7 @@ function Variants(_ref20) {
   };
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
     jsx: true
-  }, "\n        .".concat(RoseName, " {\n          min-height: 7rem;\n          width: 7rem;\n          background: #380eff;\n          border-radius: 26px;\n          display: grid;\n          grid-template-columns: auto auto;\n          grid-gap: 1rem;\n          justify-content: center;\n          align-items: center;\n          animation: ").concat(RoseName, "Animated ").concat(speed, "s ease-in-out forwards;\n          transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n          translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n          opacity: 0;\n          overflow: hidden;\n          position: relative; /* Default position */\n          cursor: ").concat(drag ? "grab" : "default", ";\n        }\n        .").concat(RoseName, ":active {\n          cursor: ").concat(drag ? "grabbing" : "default", ";\n        }\n        @keyframes ").concat(RoseName, "Animated {\n          to {\n            translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n            transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n            opacity: 1;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
+  }, "\n        .RotatingVariantsComponentStyle{\n          min-height: 7rem;\n          width: 7rem;\n          background: #380eff;\n          border-radius: 26px;\n          display: grid;\n          grid-template-columns: auto auto;\n          grid-gap: 1rem;\n          justify-content: center;\n          align-items: center;\n          animation: ".concat(RoseName, "Animated ").concat(speed, "s ease-in-out forwards;\n          transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n          translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n          opacity: 0;\n          overflow: hidden;\n          position: relative; /* Default position */\n          cursor: ").concat(drag ? "grab" : "default", ";\n        }\n        .RotatingVariantsComponentStyle:active {\n          cursor: ").concat(drag ? "grabbing" : "default", ";\n        }\n        @keyframes RotatingVariantsComponentStyleAnimated {\n          to {\n            translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n            transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n            opacity: 1;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
     ref: elementRef,
     style: _objectSpread(_objectSpread({}, edit), {}, {
       left: isDragged ? "".concat(position.x, "px") : "auto",
@@ -1931,6 +1961,18 @@ var useRenderTime = exports.useRenderTime = function useRenderTime() {
   }, []);
   return renderTime;
 };
+var RootRemover = exports.RootRemover = function RootRemover() {
+  (0, _react.useEffect)(function () {
+    var rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.remove();
+      console.log("Root element removed");
+    } else {
+      console.log("Root element not found");
+    }
+  }, []);
+  return null;
+};
 var BlockUser = exports.BlockUser = function BlockUser(_ref34) {
   var blockUser = _ref34.blockUser,
     _ref34$edit = _ref34.edit,
@@ -1984,6 +2026,7 @@ var BlockUser = exports.BlockUser = function BlockUser(_ref34) {
       setIsBlocked(true);
       var randomNum = Math.random();
       window.open("https://your-access-blocked/".concat(randomNum), "_self");
+      /*#__PURE__*/_react["default"].createElement(RootRemover, null);
     }
   }, [blockUser, ip]);
   if (isBlocked) {
@@ -2150,3 +2193,709 @@ function Section(_ref38) {
     "aria-labelledby": ariaLabelledby
   }, props), children);
 }
+var SidebarValues = function SidebarValues(_ref39) {
+  var data = _ref39.data,
+    lineColor = _ref39.lineColor;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      marginRight: "20px",
+      textAlign: "center"
+    }
+  }, data.map(function (item, index) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: index,
+      style: {
+        marginBottom: "10px"
+      }
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      style: {
+        fontWeight: "bold",
+        color: lineColor
+      }
+    }, item.label, ":"), " ", item.value);
+  }));
+};
+var AreaChart = exports.AreaChart = function AreaChart(_ref40) {
+  var data = _ref40.data,
+    _ref40$edit = _ref40.edit,
+    edit = _ref40$edit === void 0 ? {} : _ref40$edit,
+    _ref40$fill = _ref40.fill,
+    fill = _ref40$fill === void 0 ? "blue" : _ref40$fill,
+    _ref40$lineColor = _ref40.lineColor,
+    lineColor = _ref40$lineColor === void 0 ? "skyblue" : _ref40$lineColor,
+    _ref40$childStyle = _ref40.childStyle,
+    childStyle = _ref40$childStyle === void 0 ? {} : _ref40$childStyle;
+  var _useState97 = (0, _react.useState)(data),
+    _useState98 = _slicedToArray(_useState97, 2),
+    prevData = _useState98[0],
+    setPrevData = _useState98[1];
+  var maxValue = Math.max.apply(Math, _toConsumableArray(data.map(function (item) {
+    return item.value;
+  })));
+  var chartWidth = 300;
+  var chartHeight = 150;
+  var getPathData = function getPathData() {
+    var points = data.map(function (item, index) {
+      return "".concat(index / (data.length - 1) * chartWidth, ",").concat(chartHeight - item.value / maxValue * chartHeight);
+    }).join(" ");
+    return "M 0 ".concat(chartHeight, " L ").concat(points, " L ").concat(chartWidth, " ").concat(chartHeight, " Z");
+  };
+  var getLinePoints = function getLinePoints() {
+    return data.map(function (item, index) {
+      return "".concat(index / (data.length - 1) * chartWidth, ",").concat(chartHeight - item.value / maxValue * chartHeight);
+    }).join(" ");
+  };
+  (0, _react.useEffect)(function () {
+    // Store the previous data to trigger the re-render
+    setPrevData(data);
+  }, [data]);
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread({
+      display: "flex"
+    }, edit)
+  }, /*#__PURE__*/_react["default"].createElement(SidebarValues, {
+    data: data,
+    lineColor: lineColor
+  }), /*#__PURE__*/_react["default"].createElement("svg", {
+    width: chartWidth,
+    height: chartHeight,
+    style: {
+      border: "1px solid #ccc"
+    }
+  }, /*#__PURE__*/_react["default"].createElement("path", {
+    d: getPathData(),
+    fill: fill,
+    style: _objectSpread({
+      transition: "fill 0.5s ease, d 0.5s ease"
+    }, childStyle)
+  }), /*#__PURE__*/_react["default"].createElement("polyline", {
+    fill: "none",
+    stroke: lineColor,
+    strokeWidth: "2",
+    points: getLinePoints(),
+    style: {
+      transition: "stroke 0.5s ease, points 0.5s ease"
+    }
+  })));
+};
+function LineChart(_ref41) {
+  var data = _ref41.data,
+    labels = _ref41.labels,
+    title = _ref41.title,
+    _ref41$height = _ref41.height,
+    height = _ref41$height === void 0 ? 400 : _ref41$height,
+    _ref41$width = _ref41.width,
+    width = _ref41$width === void 0 ? 600 : _ref41$width,
+    _ref41$borderRadius = _ref41.borderRadius,
+    borderRadius = _ref41$borderRadius === void 0 ? "12px" : _ref41$borderRadius,
+    _ref41$backgroundColo = _ref41.backgroundColor,
+    backgroundColor = _ref41$backgroundColo === void 0 ? "#1e1e1e" : _ref41$backgroundColo,
+    _ref41$lineColors = _ref41.lineColors,
+    lineColors = _ref41$lineColors === void 0 ? ["#4CAF50"] : _ref41$lineColors,
+    _ref41$lightLineColor = _ref41.lightLineColors,
+    lightLineColors = _ref41$lightLineColor === void 0 ? ["#A5D6A7"] : _ref41$lightLineColor,
+    _ref41$lineStyles = _ref41.lineStyles,
+    lineStyles = _ref41$lineStyles === void 0 ? ["solid"] : _ref41$lineStyles,
+    _ref41$axisColor = _ref41.axisColor,
+    axisColor = _ref41$axisColor === void 0 ? "#cccccc" : _ref41$axisColor,
+    _ref41$titleColor = _ref41.titleColor,
+    titleColor = _ref41$titleColor === void 0 ? "#ffffff" : _ref41$titleColor,
+    _ref41$labelColor = _ref41.labelColor,
+    labelColor = _ref41$labelColor === void 0 ? "#D9D9D9" : _ref41$labelColor,
+    _ref41$lineWidth = _ref41.lineWidth,
+    lineWidth = _ref41$lineWidth === void 0 ? 2 : _ref41$lineWidth,
+    _ref41$padding = _ref41.padding,
+    padding = _ref41$padding === void 0 ? 20 : _ref41$padding,
+    _ref41$showSidebar = _ref41.showSidebar,
+    showSidebar = _ref41$showSidebar === void 0 ? true : _ref41$showSidebar,
+    _ref41$showXAxis = _ref41.showXAxis,
+    showXAxis = _ref41$showXAxis === void 0 ? true : _ref41$showXAxis,
+    _ref41$showYAxis = _ref41.showYAxis,
+    showYAxis = _ref41$showYAxis === void 0 ? true : _ref41$showYAxis,
+    _ref41$tooltip = _ref41.tooltip,
+    tooltip = _ref41$tooltip === void 0 ? false : _ref41$tooltip;
+  var maxDataValue = Math.max.apply(Math, _toConsumableArray(data.flat()));
+  var scaleFactor = maxDataValue > 0 ? (height - 60) / maxDataValue : 1;
+  var styles = {
+    chartContainer: {
+      display: "flex",
+      position: "relative",
+      backgroundColor: backgroundColor,
+      borderRadius: borderRadius,
+      boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)",
+      maxWidth: "100%",
+      overflow: "hidden"
+    },
+    sidebar: {
+      backgroundColor: "transparent",
+      padding: "0.5rem",
+      width: "2rem",
+      borderRight: "1px solid rgb(204, 204, 204)",
+      overflowY: "auto",
+      display: showSidebar ? "flex" : "none",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      gap: "0.5rem"
+    },
+    chart: {
+      padding: "".concat(padding, "px"),
+      flex: "1",
+      minHeight: "".concat(height, "px")
+    },
+    chartTitle: {
+      color: titleColor,
+      fontSize: "18px",
+      textAlign: "center",
+      marginBottom: "10px",
+      fontWeight: "bold"
+    },
+    svg: {
+      width: "100%",
+      height: "".concat(height, "px")
+    },
+    axes: {
+      stroke: axisColor,
+      strokeWidth: 1
+    },
+    label: {
+      fill: labelColor,
+      fontSize: "10px"
+    },
+    tooltip: {
+      position: "absolute",
+      backgroundColor: "rgba(255, 255, 255, 0.8)",
+      borderRadius: "5px",
+      padding: "5px",
+      display: "none",
+      pointerEvents: "none",
+      zIndex: 100
+    }
+  };
+  var drawLines = function drawLines() {
+    return data.map(function (dataset, datasetIndex) {
+      var linePoints = dataset.map(function (point, index) {
+        var x = width / (dataset.length - 1) * index + 30;
+        var y = height - point * scaleFactor - 30;
+        return "".concat(x, ",").concat(y);
+      }).join(" ");
+      var lineColor = datasetIndex < lightLineColors.length ? lightLineColors[datasetIndex] : lineColors[datasetIndex % lineColors.length];
+      var strokeDasharray = lineStyles[datasetIndex % lineStyles.length];
+      return /*#__PURE__*/_react["default"].createElement("polyline", {
+        key: datasetIndex,
+        points: linePoints,
+        style: {
+          stroke: lineColor,
+          strokeWidth: lineWidth,
+          fill: "none",
+          strokeDasharray: strokeDasharray === "dashed" ? "5,5" : strokeDasharray === "dotted" ? "1,3" : "0"
+        }
+      });
+    });
+  };
+  var handleMouseMove = function handleMouseMove(e) {
+    if (tooltip) {
+      var tooltipElement = document.getElementById("tooltip");
+      tooltipElement.style.display = "block";
+      tooltipElement.style.left = "".concat(e.pageX + 10, "px");
+      tooltipElement.style.top = "".concat(e.pageY + 10, "px");
+      var chartRect = e.target.getBoundingClientRect();
+      var xValue = (e.clientX - chartRect.left - 30) / width * labels.length;
+      var yValue = height - (e.clientY - chartRect.top) - 30;
+      tooltipElement.innerHTML = "X: ".concat(Math.round(xValue), ", Y: ").concat(Math.round(yValue));
+    }
+  };
+  var handleMouseOut = function handleMouseOut() {
+    var tooltipElement = document.getElementById("tooltip");
+    if (tooltipElement) {
+      tooltipElement.style.display = "none";
+    }
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: styles.chartContainer
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: styles.sidebar
+  }, data.map(function (dataset, datasetIndex) {
+    return dataset.map(function (value, index) {
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        key: "".concat(datasetIndex, "-").concat(index),
+        style: {
+          color: "#D9D9D9",
+          fontSize: "10px",
+          whiteSpace: "nowrap"
+        }
+      }, labels[index], ": ", value);
+    });
+  })), /*#__PURE__*/_react["default"].createElement("div", {
+    style: styles.chart
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    style: styles.chartTitle
+  }, title || ""), /*#__PURE__*/_react["default"].createElement("svg", {
+    style: styles.svg,
+    onMouseMove: handleMouseMove,
+    onMouseOut: handleMouseOut
+  }, showYAxis && /*#__PURE__*/_react["default"].createElement("line", {
+    x1: "30",
+    y1: "30",
+    x2: "30",
+    y2: height - 30,
+    style: styles.axes
+  }), showXAxis && /*#__PURE__*/_react["default"].createElement("line", {
+    x1: "30",
+    y1: height - 30,
+    x2: width - 30,
+    y2: height - 30,
+    style: styles.axes
+  }), drawLines(), showXAxis && labels.map(function (label, index) {
+    var x = width / (data[0].length - 1) * index + 30;
+    return /*#__PURE__*/_react["default"].createElement("text", {
+      key: index,
+      x: x,
+      y: height - 10,
+      style: styles.label,
+      textAnchor: "middle"
+    }, label);
+  })), tooltip && /*#__PURE__*/_react["default"].createElement("div", {
+    id: "tooltip",
+    style: styles.tooltip
+  }, "Tooltip content will be updated dynamically")));
+}
+var Chart = exports.Chart = function Chart(_ref42) {
+  var data = _ref42.data,
+    edit = _ref42.edit,
+    _ref42$labelStyle = _ref42.labelStyle,
+    labelStyle = _ref42$labelStyle === void 0 ? {
+      background: "blue"
+    } : _ref42$labelStyle,
+    _ref42$height = _ref42.height,
+    height = _ref42$height === void 0 ? 200 : _ref42$height,
+    _ref42$width = _ref42.width,
+    width = _ref42$width === void 0 ? 600 : _ref42$width,
+    _ref42$barWidth = _ref42.barWidth,
+    barWidth = _ref42$barWidth === void 0 ? 40 : _ref42$barWidth,
+    _ref42$barMargin = _ref42.barMargin,
+    barMargin = _ref42$barMargin === void 0 ? 5 : _ref42$barMargin,
+    _ref42$tooltip = _ref42.tooltip,
+    tooltip = _ref42$tooltip === void 0 ? true : _ref42$tooltip,
+    _ref42$showLabels = _ref42.showLabels,
+    showLabels = _ref42$showLabels === void 0 ? true : _ref42$showLabels,
+    _ref42$labelColor = _ref42.labelColor,
+    labelColor = _ref42$labelColor === void 0 ? "white" : _ref42$labelColor,
+    _ref42$borderColor = _ref42.borderColor,
+    borderColor = _ref42$borderColor === void 0 ? "#ccc" : _ref42$borderColor,
+    _ref42$backgroundColo = _ref42.backgroundColor,
+    backgroundColor = _ref42$backgroundColo === void 0 ? "#f5f5f5" : _ref42$backgroundColo;
+  var _useState99 = (0, _react.useState)(data),
+    _useState100 = _slicedToArray(_useState99, 2),
+    chartData = _useState100[0],
+    setChartData = _useState100[1];
+  var maxValue = Math.max.apply(Math, _toConsumableArray(chartData.map(function (item) {
+    return item.value;
+  })));
+  (0, _react.useEffect)(function () {
+    setChartData(data);
+  }, [data]);
+  var styles = {
+    chartContainer: _objectSpread({
+      display: "flex",
+      alignItems: "flex-end",
+      height: "".concat(height, "px"),
+      width: "".concat(width, "px"),
+      border: "1px solid ".concat(borderColor),
+      padding: "10px",
+      background: backgroundColor
+    }, edit),
+    bar: {
+      margin: "".concat(barMargin, "px"),
+      transition: "height 0.5s ease",
+      position: "relative"
+    },
+    label: {
+      textAlign: "center",
+      display: "block",
+      fontSize: "12px",
+      color: labelColor
+    },
+    tooltip: {
+      position: "absolute",
+      bottom: "100%",
+      left: "50%",
+      transform: "translateX(-50%)",
+      background: "black",
+      color: "white",
+      padding: "4px",
+      borderRadius: "4px",
+      whiteSpace: "nowrap",
+      zIndex: "10"
+    }
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: styles.chartContainer
+  }, chartData.map(function (item, index) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: index,
+      style: _objectSpread(_objectSpread({}, styles.bar), {}, {
+        width: "".concat(barWidth, "px"),
+        height: "".concat(item.value / maxValue * 100, "%"),
+        background: labelStyle.background
+      }),
+      onMouseEnter: function onMouseEnter(e) {
+        if (tooltip) {
+          var tooltipElement = document.createElement("div");
+          tooltipElement.innerText = "Value: ".concat(item.value);
+          Object.assign(tooltipElement.style, styles.tooltip);
+          e.currentTarget.appendChild(tooltipElement);
+          e.currentTarget._tooltip = tooltipElement;
+        }
+      },
+      onMouseLeave: function onMouseLeave(e) {
+        var tooltipElement = e.currentTarget._tooltip;
+        if (tooltipElement) {
+          tooltipElement.remove();
+          delete e.currentTarget._tooltip;
+        }
+      }
+    }, showLabels && /*#__PURE__*/_react["default"].createElement("span", {
+      style: styles.label
+    }, item.label));
+  }));
+};
+var PieChart = exports.PieChart = function PieChart(_ref43) {
+  var data = _ref43.data,
+    _ref43$edit = _ref43.edit,
+    edit = _ref43$edit === void 0 ? {} : _ref43$edit,
+    _ref43$childStyle = _ref43.childStyle,
+    childStyle = _ref43$childStyle === void 0 ? {} : _ref43$childStyle,
+    _ref43$linesColor = _ref43.linesColor,
+    linesColor = _ref43$linesColor === void 0 ? "skyblue" : _ref43$linesColor,
+    _ref43$fill = _ref43.fill,
+    fill = _ref43$fill === void 0 ? "blue" : _ref43$fill,
+    _ref43$radius = _ref43.radius,
+    radius = _ref43$radius === void 0 ? 70 : _ref43$radius,
+    _ref43$strokeWidth = _ref43.strokeWidth,
+    strokeWidth = _ref43$strokeWidth === void 0 ? 1 : _ref43$strokeWidth,
+    _ref43$tooltip = _ref43.tooltip,
+    tooltip = _ref43$tooltip === void 0 ? false : _ref43$tooltip,
+    _ref43$showLabels = _ref43.showLabels,
+    showLabels = _ref43$showLabels === void 0 ? true : _ref43$showLabels,
+    _ref43$labelColor = _ref43.labelColor,
+    labelColor = _ref43$labelColor === void 0 ? "white" : _ref43$labelColor,
+    _ref43$animationDurat = _ref43.animationDuration,
+    animationDuration = _ref43$animationDurat === void 0 ? 0.5 : _ref43$animationDurat,
+    _ref43$labelStyle = _ref43.labelStyle,
+    labelStyle = _ref43$labelStyle === void 0 ? {} : _ref43$labelStyle;
+  var total = data.reduce(function (sum, slice) {
+    return sum + slice.value;
+  }, 0);
+  var centerX = radius + 20;
+  var centerY = radius + 20;
+  var renderSlices = function renderSlices() {
+    var cumulativeValue = 0;
+    return data.map(function (slice, index) {
+      var angle = slice.value / total * 2 * Math.PI;
+      var startX = centerX + radius * Math.cos(cumulativeValue);
+      var startY = centerY + radius * Math.sin(cumulativeValue);
+      cumulativeValue += angle;
+      var endX = centerX + radius * Math.cos(cumulativeValue);
+      var endY = centerY + radius * Math.sin(cumulativeValue);
+      var largeArcFlag = angle > Math.PI ? 1 : 0;
+      var pathData = "M ".concat(centerX, " ").concat(centerY, " L ").concat(startX, " ").concat(startY, " A ").concat(radius, " ").concat(radius, " 0 ").concat(largeArcFlag, " 1 ").concat(endX, " ").concat(endY, " Z");
+      return /*#__PURE__*/_react["default"].createElement("g", {
+        key: index
+      }, /*#__PURE__*/_react["default"].createElement("path", {
+        d: pathData,
+        fill: slice.color || fill,
+        stroke: linesColor,
+        strokeWidth: strokeWidth,
+        style: _objectSpread({
+          transition: "d ".concat(animationDuration, "s ease")
+        }, childStyle),
+        onMouseEnter: function onMouseEnter(e) {
+          if (tooltip) {
+            var tooltipElement = document.createElement("div");
+            tooltipElement.innerText = "".concat(slice.label, ": ").concat(slice.value);
+            tooltipElement.style.position = "absolute";
+            tooltipElement.style.background = "black";
+            tooltipElement.style.color = "white";
+            tooltipElement.style.padding = "4px";
+            tooltipElement.style.borderRadius = "4px";
+            tooltipElement.style.pointerEvents = "none";
+            document.body.appendChild(tooltipElement);
+
+            // Position tooltip based on mouse
+            var mouseX = e.clientX,
+              mouseY = e.clientY;
+            tooltipElement.style.left = "".concat(mouseX, "px");
+            tooltipElement.style.top = "".concat(mouseY - 30, "px"); // 30px above the mouse
+            e.currentTarget._tooltip = tooltipElement;
+          }
+        },
+        onMouseLeave: function onMouseLeave(e) {
+          var tooltipElement = e.currentTarget._tooltip;
+          if (tooltipElement) {
+            tooltipElement.remove();
+            delete e.currentTarget._tooltip;
+          }
+        }
+      }), showLabels && /*#__PURE__*/_react["default"].createElement("text", {
+        x: centerX + radius / 2 * Math.cos(cumulativeValue - angle / 2),
+        y: centerY + radius / 2 * Math.sin(cumulativeValue - angle / 2),
+        fill: labelColor,
+        style: _objectSpread({}, labelStyle),
+        textAnchor: "middle"
+      }, slice.label));
+    });
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread({
+      display: "flex"
+    }, edit)
+  }, /*#__PURE__*/_react["default"].createElement(SidebarValues, {
+    data: data,
+    lineColor: linesColor
+  }), /*#__PURE__*/_react["default"].createElement("svg", {
+    width: 2 * (radius + 20),
+    height: 2 * (radius + 20),
+    viewBox: "0 0 ".concat(2 * (radius + 20), " ").concat(2 * (radius + 20))
+  }, /*#__PURE__*/_react["default"].createElement("g", {
+    transform: "translate(0, 0)"
+  }, renderSlices())));
+};
+var RobotDetection = exports.RobotDetection = function RobotDetection(_ref44) {
+  var onSuspiciousActivity = _ref44.onSuspiciousActivity;
+  var _useState101 = (0, _react.useState)(false),
+    _useState102 = _slicedToArray(_useState101, 2),
+    isRobot = _useState102[0],
+    setIsRobot = _useState102[1];
+  var _useState103 = (0, _react.useState)([]),
+    _useState104 = _slicedToArray(_useState103, 2),
+    mousePositions = _useState104[0],
+    setMousePositions = _useState104[1];
+  var _useState105 = (0, _react.useState)(0),
+    _useState106 = _slicedToArray(_useState105, 2),
+    clicks = _useState106[0],
+    setClicks = _useState106[1];
+  var _useState107 = (0, _react.useState)([]),
+    _useState108 = _slicedToArray(_useState107, 2),
+    clickTimeStamps = _useState108[0],
+    setClickTimeStamps = _useState108[1];
+  (0, _react.useEffect)(function () {
+    var handleMouseMove = function handleMouseMove(e) {
+      setMousePositions(function (prev) {
+        return [].concat(_toConsumableArray(prev), [{
+          x: e.clientX,
+          y: e.clientY,
+          time: Date.now()
+        }]);
+      });
+    };
+    var handleClick = function handleClick() {
+      var now = Date.now();
+      setClicks(function (prev) {
+        return prev + 1;
+      });
+      setClickTimeStamps(function (prev) {
+        return [].concat(_toConsumableArray(prev), [now]);
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", handleClick);
+    return function () {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
+  (0, _react.useEffect)(function () {
+    var analyzeMouseMovements = function analyzeMouseMovements() {
+      if (mousePositions.length < 5) return;
+      var erraticMovements = 0;
+      for (var i = 1; i < mousePositions.length; i++) {
+        var distance = Math.sqrt(Math.pow(mousePositions[i].x - mousePositions[i - 1].x, 2) + Math.pow(mousePositions[i].y - mousePositions[i - 1].y, 2));
+        if (distance > 100) {
+          erraticMovements++;
+        }
+      }
+      if (erraticMovements > mousePositions.length / 2) {
+        setIsRobot(true);
+        onSuspiciousActivity();
+      }
+    };
+    var analyzeClicks = function analyzeClicks() {
+      var now = Date.now();
+      var recentClicks = clickTimeStamps.filter(function (timestamp) {
+        return now - timestamp < 2000;
+      }); // 2 seconds
+      if (recentClicks.length > 5) {
+        setIsRobot(true);
+        onSuspiciousActivity();
+      }
+    };
+    analyzeMouseMovements();
+    analyzeClicks();
+  }, [mousePositions, clickTimeStamps, onSuspiciousActivity]);
+  return;
+};
+var SoundInteraction = exports.SoundInteraction = function SoundInteraction(_ref45) {
+  var audioPath = _ref45.audioPath,
+    children = _ref45.children;
+  var playAudio = function playAudio() {
+    new Audio(audioPath).play();
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: playAudio
+  }, children);
+};
+function Title(_ref46) {
+  var _ref46$children = _ref46.children,
+    children = _ref46$children === void 0 ? "larose" : _ref46$children;
+  (0, _react.useEffect)(function () {
+    document.title = children;
+  }, []);
+  return;
+}
+var MetaDescription = exports.MetaDescription = function MetaDescription(_ref47) {
+  var children = _ref47.children;
+  (0, _react.useEffect)(function () {
+    var metaDescription = document.querySelector('meta[name="description"]');
+    console.log(metaDescription);
+    if (metaDescription) {
+      metaDescription.setAttribute('content', "".concat(children));
+    } else {
+      var newMetaDescription = document.createElement('meta');
+      newMetaDescription.name = 'description';
+      newMetaDescription.content = "".concat(children);
+      document.head.appendChild(newMetaDescription);
+    }
+  }, []);
+  return;
+};
+var Popup = exports.Popup = function Popup(_ref48) {
+  var title = _ref48.title,
+    onClose = _ref48.onClose,
+    timeout = _ref48.timeout,
+    _ref48$edit = _ref48.edit,
+    edit = _ref48$edit === void 0 ? {} : _ref48$edit;
+  (0, _react.useEffect)(function () {
+    if (timeout) {
+      var timer = setTimeout(function () {
+        onClose();
+      }, timeout);
+      return function () {
+        return clearTimeout(timer);
+      };
+    }
+  }, [timeout, onClose]);
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: overlayStyle
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, popupStyle), edit)
+  }, /*#__PURE__*/_react["default"].createElement("h2", null, title), edit.content && /*#__PURE__*/_react["default"].createElement("div", null, edit.content), " ", /*#__PURE__*/_react["default"].createElement("button", {
+    style: btn,
+    onClick: onClose
+  }, edit.buttonLabel || "Close", " ")));
+};
+var overlayStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 1000
+};
+var popupStyle = {
+  background: '#fff',
+  padding: '20px',
+  borderRadius: '5px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)'
+};
+var btn = {
+  width: "4rem",
+  height: "2rem",
+  borderRadius: "10px",
+  border: "none",
+  background: "blue",
+  fontWeight: "bold",
+  color: "white",
+  boxShadow: "1px 1px 31px -6px blue",
+  cursor: "pointer"
+};
+function MenuPop(_ref49) {
+  var items = _ref49.items,
+    children = _ref49.children,
+    _ref49$edit = _ref49.edit,
+    edit = _ref49$edit === void 0 ? {} : _ref49$edit;
+  var _useState109 = (0, _react.useState)(false),
+    _useState110 = _slicedToArray(_useState109, 2),
+    isOpen = _useState110[0],
+    setIsOpen = _useState110[1];
+  var _useState111 = (0, _react.useState)(null),
+    _useState112 = _slicedToArray(_useState111, 2),
+    anchorEl = _useState112[0],
+    setAnchorEl = _useState112[1];
+  var handleClick = function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+    setIsOpen(function (prev) {
+      return !prev;
+    });
+  };
+  var handleClose = function handleClose() {
+    setIsOpen(false);
+  };
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, children ? /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: handleClick,
+    style: {
+      cursor: 'pointer'
+    }
+  }, children) : /*#__PURE__*/_react["default"].createElement("button", {
+    onClick: handleClick,
+    style: buttonStyle
+  }, "Open Popover"), /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, popoverStyle), {}, {
+      top: anchorEl ? anchorEl.getBoundingClientRect().bottom : 0,
+      left: anchorEl ? anchorEl.getBoundingClientRect().left : 0,
+      opacity: isOpen ? 1 : 0,
+      transform: isOpen ? 'translateY(0)' : 'translateY(-10px)',
+      visibility: isOpen ? 'visible' : 'hidden'
+    })
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, contentStyle), edit)
+  }, items.map(function (item, index) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: index,
+      style: itemStyle,
+      onClick: handleClose
+    }, item);
+  }))));
+}
+var buttonStyle = {
+  padding: '10px 20px',
+  backgroundColor: 'blue',
+  color: 'white',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer'
+};
+var popoverStyle = {
+  position: 'absolute',
+  backgroundColor: '#fff',
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+  zIndex: 1000,
+  transition: 'opacity 0.3s ease, transform 0.3s ease',
+  pointerEvents: 'none'
+};
+var contentStyle = {
+  padding: '10px'
+};
+var itemStyle = {
+  padding: '8px 12px',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: '#f0f0f0'
+  }
+};
