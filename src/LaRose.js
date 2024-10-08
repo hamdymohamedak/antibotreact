@@ -1504,105 +1504,7 @@ export function Notification({
 }
 
 export function Spring({
-    rotate = 360,
-    scale = 1,
-    speed = 0.8,
-    x = "0",
-    y = "0",
-    z = "0",
-    children,
-    RoseID,
-    edit,
-    drag = false,
-  }) {
-    const elementRef = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [isDragged, setIsDragged] = useState(false);
-    const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-    useEffect(() => {
-      if (elementRef.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        setPosition({ x: rect.left, y: rect.top });
-      }
-    }, []);
-    const handleMouseDown = (e) => {
-      if (drag) {
-        const rect = e.target.getBoundingClientRect();
-        setStartOffset({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-        setIsDragging(true);
-        setIsDragged(true);
-      }
-    };
-    const handleMouseMove = (e) => {
-      if (isDragging && drag) {
-        setPosition({
-          x: e.clientX - startOffset.x,
-          y: e.clientY - startOffset.y,
-        });
-      }
-    };
-    const handleMouseUp = () => {
-      if (drag) {
-        setIsDragging(false);
-      }
-    };
-    return (
-      <>
-        <style jsx>{`
-          .RotatingSpringComponentStyle{
-            min-height: 7rem;
-            width: 7rem;
-            background: #ffffff;
-            border-radius: 26px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
-            transform: rotate(0deg) scale(0);
-            opacity: 0;
-            overflow: hidden;
-            translate: ${x} ${y} ${z};
-            position: relative; /* Default position */
-            cursor: ${drag ? "grab" : "default"};
-          }
-          .RotatingSpringComponentStyle:active {
-            cursor: ${drag ? "grabbing" : "default"};
-          }
-          @keyframes LaRoseRotatingAnimated {
-            to {
-              translate: ${x} ${y} ${z};
-              transform: rotate(${rotate}deg) scale(${scale});
-              opacity: 1;
-            }
-          }
-        `}</style>
-        <div
-          ref={elementRef}
-          style={{
-            ...edit,
-            left: isDragged ? `${position.x}px` : "auto",
-            top: isDragged ? `${position.y}px` : "auto",
-            position: isDragged ? "absolute" : "relative",
-          }}
-          className={`RotatingSpringComponentStyle`}
-          id={RoseID}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-        >
-          {children}
-        </div>
-      </>
-    );
-  }
-
-
-export function Variants({
-  rotate = 0,
+  rotate = 360,
   scale = 1,
   speed = 0.8,
   x = "0",
@@ -1610,9 +1512,7 @@ export function Variants({
   z = "0",
   children,
   RoseID,
-  RoseName = "",
   edit,
-  childDisplay = "grid",
   drag = false,
 }) {
   const elementRef = useRef(null);
@@ -1653,28 +1553,26 @@ export function Variants({
   return (
     <>
       <style jsx>{`
-        .RotatingVariantsComponentStyle{
+        .RotatingSpringComponentStyle {
           min-height: 7rem;
           width: 7rem;
-          background: #380eff;
+          background: #ffffff;
           border-radius: 26px;
-          display: grid;
-          grid-template-columns: auto auto;
-          grid-gap: 1rem;
+          display: flex;
           justify-content: center;
           align-items: center;
-          animation: ${RoseName}Animated ${speed}s ease-in-out forwards;
-          transform: rotate(${rotate}deg) scale(${scale});
-          translate: ${x} ${y} ${z};
+          animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
+          transform: rotate(0deg) scale(0);
           opacity: 0;
           overflow: hidden;
+          translate: ${x} ${y} ${z};
           position: relative; /* Default position */
           cursor: ${drag ? "grab" : "default"};
         }
-        .RotatingVariantsComponentStyle:active {
+        .RotatingSpringComponentStyle:active {
           cursor: ${drag ? "grabbing" : "default"};
         }
-        @keyframes RotatingVariantsComponentStyleAnimated {
+        @keyframes LaRoseRotatingAnimated {
           to {
             translate: ${x} ${y} ${z};
             transform: rotate(${rotate}deg) scale(${scale});
@@ -1690,62 +1588,18 @@ export function Variants({
           top: isDragged ? `${position.y}px` : "auto",
           position: isDragged ? "absolute" : "relative",
         }}
-        className={RoseName}
+        className={`RotatingSpringComponentStyle`}
         id={RoseID}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
         {children}
-        <SideText direction="left">
-          {" "}
-          <div
-            style={{
-              height: "2rem",
-              width: "2rem",
-              background: "#EEE",
-              borderRadius: "50%",
-              display: childDisplay,
-            }}
-          ></div>
-        </SideText>
-        <SideText direction="right">
-          <div
-            style={{
-              height: "2rem",
-              width: "2rem",
-              background: "#EEE",
-              borderRadius: "50%",
-              display: childDisplay,
-            }}
-          ></div>
-        </SideText>
-        <SideText direction="left">
-          <div
-            style={{
-              height: "2rem",
-              width: "2rem",
-              background: "#EEE",
-              borderRadius: "50%",
-              display: childDisplay,
-            }}
-          ></div>
-        </SideText>
-        <SideText direction="right">
-          <div
-            style={{
-              height: "2rem",
-              width: "2rem",
-              background: "#EEE",
-              borderRadius: "50%",
-              display: childDisplay,
-            }}
-          ></div>
-        </SideText>
       </div>
     </>
   );
 }
+
 export function RandomAnimate({
   children,
   RoseID,
@@ -2633,16 +2487,16 @@ export const useRenderTime = () => {
 };
 
 export const RootRemover = () => {
-  useEffect(()=>{
-      const rootElement = document.getElementById('root'); 
-      if (rootElement) {
-        rootElement.remove();
-        console.log("Root element removed");
-      } else {
-        console.log("Root element not found");
-      }
-  },[])
-return  null
+  useEffect(() => {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      rootElement.remove();
+      console.log("Root element removed");
+    } else {
+      console.log("Root element not found");
+    }
+  }, []);
+  return null;
 };
 export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
   const [ip, setIp] = useState(null);
@@ -2664,7 +2518,7 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
       setIsBlocked(true);
       let randomNum = Math.random();
       window.open(`https://your-access-blocked/${randomNum}`, "_self");
-      <RootRemover/>
+      <RootRemover />;
     }
   }, [blockUser, ip]);
   if (isBlocked) {
@@ -2732,7 +2586,7 @@ export const Image = ({
 
   useEffect(() => {
     const loadImage = async (imageSrc) => {
-      const img = new window.Image(); // Accessing the global Image constructor correctly
+      const img = new window.Image();
       img.src = imageSrc;
 
       img.onload = () => {
@@ -2744,7 +2598,6 @@ export const Image = ({
       };
     };
 
-    // Load from requireSrc prop if available, otherwise use src
     const imageSource = requireSrc || src;
 
     if (imageSource) {
@@ -2761,7 +2614,6 @@ export const Image = ({
 
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-    // Set a new image type (webp) and quality
     const webpDataUrl = canvas.toDataURL("image/webp", quality);
     setWebpSrc(webpDataUrl);
 
@@ -2911,7 +2763,6 @@ export const AreaChart = ({
   };
 
   useEffect(() => {
-    // Store the previous data to trigger the re-render
     setPrevData(data);
   }, [data]);
 
@@ -2940,219 +2791,6 @@ export const AreaChart = ({
     </div>
   );
 };
-
-export function LineChart({
-  data,
-  labels,
-  title,
-  height = 400,
-  width = 600,
-  borderRadius = "12px",
-  backgroundColor = "#1e1e1e",
-  lineColors = ["#4CAF50"],
-  lightLineColors = ["#A5D6A7"],
-  lineStyles = ["solid"],
-  axisColor = "#cccccc",
-  titleColor = "#ffffff",
-  labelColor = "#D9D9D9",
-  lineWidth = 2,
-  padding = 20,
-  showSidebar = true,
-  showXAxis = true,
-  showYAxis = true,
-  tooltip = false,
-}) {
-  const maxDataValue = Math.max(...data.flat());
-  const scaleFactor = maxDataValue > 0 ? (height - 60) / maxDataValue : 1;
-
-  const styles = {
-    chartContainer: {
-      display: "flex",
-      position: "relative",
-      backgroundColor,
-      borderRadius,
-      boxShadow: "0 4px 15px rgba(0, 0, 0, 0.5)",
-      maxWidth: "100%",
-      overflow: "hidden",
-    },
-    sidebar: {
-      backgroundColor: "transparent",
-      padding: "0.5rem",
-      width: "2rem",
-      borderRight: "1px solid rgb(204, 204, 204)",
-      overflowY: "auto",
-      display: showSidebar ? "flex" : "none",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-      gap: "0.5rem",
-    },
-    chart: {
-      padding: `${padding}px`,
-      flex: "1",
-      minHeight: `${height}px`,
-    },
-    chartTitle: {
-      color: titleColor,
-      fontSize: "18px",
-      textAlign: "center",
-      marginBottom: "10px",
-      fontWeight: "bold",
-    },
-    svg: {
-      width: "100%",
-      height: `${height}px`,
-    },
-    axes: {
-      stroke: axisColor,
-      strokeWidth: 1,
-    },
-    label: {
-      fill: labelColor,
-      fontSize: "10px",
-    },
-    tooltip: {
-      position: "absolute",
-      backgroundColor: "rgba(255, 255, 255, 0.8)",
-      borderRadius: "5px",
-      padding: "5px",
-      display: "none",
-      pointerEvents: "none",
-      zIndex: 100,
-    },
-  };
-
-  const drawLines = () => {
-    return data.map((dataset, datasetIndex) => {
-      const linePoints = dataset
-        .map((point, index) => {
-          const x = (width / (dataset.length - 1)) * index + 30;
-          const y = height - point * scaleFactor - 30;
-          return `${x},${y}`;
-        })
-        .join(" ");
-
-      const lineColor =
-        datasetIndex < lightLineColors.length
-          ? lightLineColors[datasetIndex]
-          : lineColors[datasetIndex % lineColors.length];
-
-      const strokeDasharray = lineStyles[datasetIndex % lineStyles.length];
-
-      return (
-        <polyline
-          key={datasetIndex}
-          points={linePoints}
-          style={{
-            stroke: lineColor,
-            strokeWidth: lineWidth,
-            fill: "none",
-            strokeDasharray:
-              strokeDasharray === "dashed"
-                ? "5,5"
-                : strokeDasharray === "dotted"
-                ? "1,3"
-                : "0",
-          }}
-        />
-      );
-    });
-  };
-
-  const handleMouseMove = (e) => {
-    if (tooltip) {
-      const tooltipElement = document.getElementById("tooltip");
-      tooltipElement.style.display = "block";
-      tooltipElement.style.left = `${e.pageX + 10}px`;
-      tooltipElement.style.top = `${e.pageY + 10}px`;
-
-      const chartRect = e.target.getBoundingClientRect();
-      const xValue =
-        ((e.clientX - chartRect.left - 30) / width) * labels.length;
-      const yValue = height - (e.clientY - chartRect.top) - 30;
-      tooltipElement.innerHTML = `X: ${Math.round(xValue)}, Y: ${Math.round(
-        yValue
-      )}`;
-    }
-  };
-
-  const handleMouseOut = () => {
-    const tooltipElement = document.getElementById("tooltip");
-    if (tooltipElement) {
-      tooltipElement.style.display = "none";
-    }
-  };
-
-  return (
-    <div style={styles.chartContainer}>
-      <div style={styles.sidebar}>
-        {data.map((dataset, datasetIndex) =>
-          dataset.map((value, index) => (
-            <div
-              key={`${datasetIndex}-${index}`}
-              style={{
-                color: "#D9D9D9",
-                fontSize: "10px",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {labels[index]}: {value}
-            </div>
-          ))
-        )}
-      </div>
-      <div style={styles.chart}>
-        <h2 style={styles.chartTitle}>{title || ""}</h2>
-        <svg
-          style={styles.svg}
-          onMouseMove={handleMouseMove}
-          onMouseOut={handleMouseOut}
-        >
-          {showYAxis && (
-            <line
-              x1="30"
-              y1="30"
-              x2="30"
-              y2={height - 30}
-              style={styles.axes}
-            />
-          )}
-          {showXAxis && (
-            <line
-              x1="30"
-              y1={height - 30}
-              x2={width - 30}
-              y2={height - 30}
-              style={styles.axes}
-            />
-          )}
-          {drawLines()}
-          {showXAxis &&
-            labels.map((label, index) => {
-              const x = (width / (data[0].length - 1)) * index + 30;
-              return (
-                <text
-                  key={index}
-                  x={x}
-                  y={height - 10}
-                  style={styles.label}
-                  textAnchor="middle"
-                >
-                  {label}
-                </text>
-              );
-            })}
-        </svg>
-        {tooltip && (
-          <div id="tooltip" style={styles.tooltip}>
-            Tooltip content will be updated dynamically
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export const Chart = ({
   data,
   edit,
@@ -3251,13 +2889,13 @@ export const PieChart = ({
   childStyle = {},
   linesColor = "skyblue",
   fill = "blue",
-  radius = 70, // Radius of the pie chart
-  strokeWidth = 1, // Width of the stroke for pie slices
-  tooltip = false, // Whether to show tooltips on hover
-  showLabels = true, // Whether to show labels on pie slices
-  labelColor = "white", // Color of the labels
-  animationDuration = 0.5, // Duration of the slice transition animation
-  labelStyle = {}, // Additional styles for the labels
+  radius = 70,
+  strokeWidth = 1,
+  tooltip = false,
+  showLabels = true,
+  labelColor = "white",
+  animationDuration = 0.5,
+  labelStyle = {},
 }) => {
   const total = data.reduce((sum, slice) => sum + slice.value, 0);
   const centerX = radius + 20;
@@ -3300,10 +2938,9 @@ export const PieChart = ({
                 tooltipElement.style.pointerEvents = "none";
                 document.body.appendChild(tooltipElement);
 
-                // Position tooltip based on mouse
                 const { clientX: mouseX, clientY: mouseY } = e;
                 tooltipElement.style.left = `${mouseX}px`;
-                tooltipElement.style.top = `${mouseY - 30}px`; // 30px above the mouse
+                tooltipElement.style.top = `${mouseY - 30}px`;
                 e.currentTarget._tooltip = tooltipElement;
               }
             }}
@@ -3344,6 +2981,131 @@ export const PieChart = ({
     </div>
   );
 };
+
+export const LineChart = ({
+  xAxis,
+  series,
+  height,
+  width = '100%',
+  margin,
+  colors, // New prop for custom series colors
+}) => {
+  const canvasRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const drawChart = (canvas, ctx) => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const xData = xAxis.data || [];
+    const seriesData = series.map((serie) => serie.data);
+
+    const maxY = Math.max(
+      ...seriesData.flat().filter((value) => value !== null),
+      0
+    );
+    const minY = Math.min(
+      ...seriesData.flat().filter((value) => value !== null)
+    );
+
+    const padding = 20;
+    const chartWidth = canvas.width - padding * 2;
+    const chartHeight = height - padding * 2;
+
+    // Draw X and Y axis
+    ctx.beginPath();
+    ctx.moveTo(padding, height - padding);
+    ctx.lineTo(padding, padding);
+    ctx.lineTo(canvas.width - padding, height - padding);
+    ctx.strokeStyle = "#ccc";
+    ctx.stroke();
+
+    // Draw each series with respective colors
+    seriesData.forEach((data, seriesIndex) => {
+      ctx.beginPath();
+      data.forEach((value, index) => {
+        if (value !== null) {
+          const x = padding + (chartWidth / (xData.length - 1)) * index;
+          const y =
+            height - padding - ((value - minY) / (maxY - minY)) * chartHeight;
+
+          if (index === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+      });
+
+      // Use the provided color or a default color if none is specified
+      ctx.strokeStyle = colors?.[seriesIndex] || "#1976d2"; 
+      ctx.lineWidth = 2; 
+      ctx.stroke();
+
+      // Draw points
+      ctx.fillStyle = ctx.strokeStyle;
+      data.forEach((value, index) => {
+        if (value !== null) {
+          const x = padding + (chartWidth / (xData.length - 1)) * index;
+          const y =
+            height - padding - ((value - minY) / (maxY - minY)) * chartHeight;
+          ctx.beginPath();
+          ctx.arc(x, y, 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+    });
+
+    // Draw X-axis labels
+    ctx.fillStyle = "#000";
+    ctx.font = "12px Arial";
+    xData.forEach((label, index) => {
+      const x = padding + (chartWidth / (xData.length - 1)) * index;
+      ctx.fillText(label.toString(), x - 10, height - padding + 15);
+    });
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    drawChart(canvas, ctx);
+
+    const resizeCanvas = () => {
+      const container = containerRef.current;
+      canvas.width = container.clientWidth;
+      canvas.height = height;
+      drawChart(canvas, ctx);
+    };
+
+    window.addEventListener("resize", resizeCanvas);
+
+    resizeCanvas();
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, [xAxis, series, height, colors]); // Added colors to dependencies
+
+  return (
+    <div
+      ref={containerRef}
+      style={{ position: 'relative', width: width, aspectRatio: '16 / 9' }}
+    >
+      <canvas
+        ref={canvasRef}
+        style={{ marginTop: margin.top, marginBottom: margin.bottom }}
+      />
+    </div>
+  );
+};
+
+
+
+
+
+
+
+
 
 export const RobotDetection = ({ onSuspiciousActivity }) => {
   const [isRobot, setIsRobot] = useState(false);
@@ -3401,7 +3163,7 @@ export const RobotDetection = ({ onSuspiciousActivity }) => {
       const now = Date.now();
       const recentClicks = clickTimeStamps.filter(
         (timestamp) => now - timestamp < 2000
-      ); // 2 seconds
+      );
       if (recentClicks.length > 5) {
         setIsRobot(true);
         onSuspiciousActivity();
@@ -3423,43 +3185,37 @@ export const SoundInteraction = ({ audioPath, children }) => {
   return <div onClick={playAudio}>{children}</div>;
 };
 
-
-export function Title({children = "larose"}) {
-    useEffect(()=>{
-        document.title = children
-    },[])
-  return 
+export function Title({ children = "larose" }) {
+  useEffect(() => {
+    document.title = children;
+  }, []);
+  return;
 }
 
-
-export const MetaDescription = ({children}) => {
+export const MetaDescription = ({ children }) => {
   useEffect(() => {
     const metaDescription = document.querySelector('meta[name="description"]');
-    console.log(metaDescription)
+    console.log(metaDescription);
     if (metaDescription) {
-      metaDescription.setAttribute('content', `${children}`);
+      metaDescription.setAttribute("content", `${children}`);
     } else {
-      const newMetaDescription = document.createElement('meta');
-      newMetaDescription.name = 'description';
+      const newMetaDescription = document.createElement("meta");
+      newMetaDescription.name = "description";
       newMetaDescription.content = `${children}`;
       document.head.appendChild(newMetaDescription);
     }
   }, []);
 
-  return
+  return;
 };
 
-
-
-
 export const Popup = ({ title, onClose, timeout, edit = {} }) => {
-  
   useEffect(() => {
     if (timeout) {
       const timer = setTimeout(() => {
-        onClose(); 
+        onClose();
       }, timeout);
-      
+
       return () => clearTimeout(timer);
     }
   }, [timeout, onClose]);
@@ -3478,23 +3234,23 @@ export const Popup = ({ title, onClose, timeout, edit = {} }) => {
 };
 
 const overlayStyle = {
-  position: 'fixed',
+  position: "fixed",
   top: 0,
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   zIndex: 1000,
 };
 
 const popupStyle = {
-  background: '#fff',
-  padding: '20px',
-  borderRadius: '5px',
-  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+  background: "#fff",
+  padding: "20px",
+  borderRadius: "5px",
+  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
 };
 
 const btn = {
@@ -3508,23 +3264,73 @@ const btn = {
   boxShadow: "1px 1px 31px -6px blue",
   cursor: "pointer",
 };
-export  function MenuPop({ items, children, edit = {} }) {
+
+const buttonStyle = {
+  padding: "8px 16px",
+  backgroundColor: "#007bff",
+  color: "white",
+  border: "none",
+  borderRadius: "4px",
+  cursor: "pointer",
+};
+
+const popoverStyle = {
+  position: "absolute",
+  backgroundColor: "white",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  borderRadius: "4px",
+  zIndex: 10,
+  transition: "all 0.2s ease",
+};
+
+const contentStyle = {
+  padding: "8px",
+};
+
+const itemStyle = {
+  padding: "8px 12px",
+  cursor: "pointer",
+  borderBottom: "1px solid #ddd",
+};
+
+export function MenuPop({
+  items,
+  children,
+  edit = {},
+  closeOnClickOutside = false,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const popoverRef = useRef(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    setIsOpen((prev) => !prev); 
+    setIsOpen((prev) => !prev);
   };
 
   const handleClose = () => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    if (closeOnClickOutside && isOpen) {
+      const handleOutsideClick = (event) => {
+        if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+          handleClose();
+        }
+      };
+
+      document.addEventListener("mousedown", handleOutsideClick);
+      return () => {
+        document.removeEventListener("mousedown", handleOutsideClick);
+      };
+    }
+  }, [isOpen, closeOnClickOutside]);
+
   return (
     <>
       {children ? (
-        <div onClick={handleClick} style={{ cursor: 'pointer' }}>
+        <div onClick={handleClick} style={{ cursor: "pointer" }}>
           {children}
         </div>
       ) : (
@@ -3533,19 +3339,29 @@ export  function MenuPop({ items, children, edit = {} }) {
         </button>
       )}
       <div
+        ref={popoverRef}
         style={{
           ...popoverStyle,
           top: anchorEl ? anchorEl.getBoundingClientRect().bottom : 0,
           left: anchorEl ? anchorEl.getBoundingClientRect().left : 0,
           opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(0)' : 'translateY(-10px)',
-          visibility: isOpen ? 'visible' : 'hidden', 
+          transform: isOpen ? "translateY(0)" : "translateY(-10px)",
+          visibility: isOpen ? "visible" : "hidden",
+          pointerEvents: isOpen ? "auto" : "none",
         }}
       >
-        <div style={{ ...contentStyle, ...edit }}> 
+        <div style={{ ...contentStyle, ...edit }}>
           {items.map((item, index) => (
-            <div key={index} style={itemStyle} onClick={handleClose}>
-              {item}
+            <div
+              key={index}
+              style={itemStyle}
+              onClick={() => {
+                if (item.onClick) item.onClick();
+                handleClose();
+              }}
+            >
+              {/* Allow for a fully customizable React element to be passed as item.content */}
+              {item.content}
             </div>
           ))}
         </div>
@@ -3553,35 +3369,3 @@ export  function MenuPop({ items, children, edit = {} }) {
     </>
   );
 }
-
-const buttonStyle = {
-  padding: '10px 20px',
-  backgroundColor: 'blue',
-  color: 'white',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-};
-
-const popoverStyle = {
-  position: 'absolute',
-  backgroundColor: '#fff',
-  border: '1px solid #ccc',
-  borderRadius: '5px',
-  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-  zIndex: 1000,
-  transition: 'opacity 0.3s ease, transform 0.3s ease', 
-  pointerEvents: 'none', 
-};
-
-const contentStyle = {
-  padding: '10px',
-};
-
-const itemStyle = {
-  padding: '8px 12px',
-  cursor: 'pointer',
-  '&:hover': {
-    backgroundColor: '#f0f0f0',
-  },
-};
