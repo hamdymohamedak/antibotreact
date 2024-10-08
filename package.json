@@ -1,6 +1,6 @@
 {
   "name": "larose-js",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "description": "Larose ToolKit is a React.js library that you're building, which includes a variety of custom components and Hooks that aim to enhance the development experience. Some components you're working on or have built include",
   "main": "dist/LaRose.js",
   "scripts": {
@@ -31,14 +31,18 @@
     "JSX",
     "Hooks",
     "UI effects",
-    "responsive design"
+    "responsive design",
+    "ui",
+    "user interface",
+    "front-end",
+    "ToolKit"
   ],
   "author": "hamdymohamedak",
   "homepage": "https://larose.vercel.app",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.25.6",
-    "@babel/core": "^7.25.2",
+    "@babel/cli": "^7.25.7",
+    "@babel/core": "^7.25.7",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "babel-loader": "^9.2.1",

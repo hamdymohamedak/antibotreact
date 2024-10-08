@@ -6,16 +6,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Ak_Alert = Ak_Alert;
 exports.AnimatedText = AnimatedText;
-exports.BlockUser = void 0;
+exports.BlockUser = exports.AreaChart = void 0;
 exports.Button = Button;
+exports.Chart = void 0;
 exports.CounterDown = CounterDown;
 exports.CounterUp = CounterUp;
 exports.Image = void 0;
 exports.LaRoseText = LaRoseText;
+exports.LineChart = void 0;
 exports.Loader = Loader;
+exports.MenuPop = MenuPop;
+exports.MetaDescription = void 0;
 exports.ModernBtn = ModernBtn;
 exports.Notification = Notification;
+exports.Popup = exports.PieChart = void 0;
 exports.RandomAnimate = RandomAnimate;
+exports.RootRemover = exports.RobotDetection = void 0;
 exports.RoseBox = RoseBox;
 exports.Route = exports.RoseRouter = exports.RoseParent = void 0;
 exports.Section = Section;
@@ -24,12 +30,12 @@ exports.ShinyButton = ShinyButton;
 exports.ShinyText = ShinyText;
 exports.SideBox = SideBox;
 exports.SideText = SideText;
-exports.SnakeMouse = exports.SmoothParent = void 0;
+exports.SoundInteraction = exports.SnakeMouse = exports.SmoothParent = void 0;
 exports.SplitText = SplitText;
 exports.Spring = Spring;
 exports.SwitchCase = SwitchCase;
 exports.Table = void 0;
-exports.Variants = Variants;
+exports.Title = Title;
 exports.ViewportContainer = void 0;
 exports.WaveText = WaveText;
 exports["default"] = TestManegar;
@@ -50,6 +56,10 @@ var _react = _interopRequireWildcard(require("react"));
 var _excluded = ["children", "RoseName", "RoseID", "edit", "ariaLabelledby"];
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var s = Object.getOwnPropertySymbols(e); for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
 function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (e.includes(n)) continue; t[n] = r[n]; } return t; }
@@ -570,20 +580,45 @@ function ShinyText(_ref10) {
     color = _ref10$color === void 0 ? "#fff" : _ref10$color,
     _ref10$backgroundColo = _ref10.backgroundColor,
     backgroundColor = _ref10$backgroundColo === void 0 ? "#000" : _ref10$backgroundColo,
+    _ref10$shinyColor = _ref10.shinyColor,
+    shinyColor = _ref10$shinyColor === void 0 ? "rgba(255, 255, 255, 0.7)" : _ref10$shinyColor,
     onClick = _ref10.onClick;
   var onClickFun = function onClickFun() {
     if (typeof onClick === "function") {
       onClick();
     }
   };
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
-    jsx: true
-  }, "\n        .shiny-text {\n          position: relative;\n          display: inline-block;\n          color: ".concat(color, ";\n          background-color: ").concat(backgroundColor, ";\n          overflow: hidden;\n          font-weight: bold;\n          background-clip: text;\n          -webkit-background-clip: text;\n          color: transparent;\n        }\n        .shiny-text::before {\n          content: \"\";\n          position: absolute;\n          top: 0;\n          left: -100%;\n          height: 100%;\n          width: 100%;\n          background: linear-gradient(\n            120deg,\n            transparent,\n            rgba(255, 255, 255, 0.7),\n            transparent\n          );\n          transform: skewX(-15deg);\n        }\n        .shiny-text::before {\n          animation: shiny-effect ").concat(speed, "s infinite;\n        }\n        @keyframes shiny-effect {\n          0% {\n            left: -100%;\n          }\n          100% {\n            left: 100%;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
+  var shinyTextStyle = {
+    position: "relative",
+    display: "inline-block",
+    color: "".concat(color),
+    backgroundColor: backgroundColor,
+    fontWeight: "bold",
+    backgroundClip: "text",
+    WebkitBackgroundClip: "text",
+    overflow: "hidden"
+  };
+  var shinyEffectStyle = {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: "-100%",
+    height: "100%",
+    width: "100%",
+    background: "linear-gradient(120deg, transparent, ".concat(shinyColor, ", transparent)"),
+    transform: "skewX(-15deg)",
+    animation: "shiny-effect ".concat(speed, "s infinite")
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
     onClick: onClickFun,
-    style: _objectSpread({}, edit),
+    style: _objectSpread(_objectSpread({}, shinyTextStyle), edit),
     id: RoseId,
-    className: "shiny-text ".concat(RoseName)
-  }, children));
+    className: RoseName
+  }, children, /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, shinyEffectStyle), {}, {
+      position: "absolute"
+    })
+  }));
 }
 function ShinyButton(_ref11) {
   var children = _ref11.children,
@@ -631,9 +666,7 @@ function WaveText(_ref12) {
     _ref12$delay = _ref12.delay,
     delay = _ref12$delay === void 0 ? 0.05 : _ref12$delay,
     _ref12$amplitude = _ref12.amplitude,
-    amplitude = _ref12$amplitude === void 0 ? 10 : _ref12$amplitude,
-    _ref12$frequency = _ref12.frequency,
-    frequency = _ref12$frequency === void 0 ? 0.5 : _ref12$frequency;
+    amplitude = _ref12$amplitude === void 0 ? 10 : _ref12$amplitude;
   var _useState13 = (0, _react.useState)(initialWaveType),
     _useState14 = _slicedToArray(_useState13, 2),
     waveType = _useState14[0],
@@ -890,8 +923,6 @@ function Notification(_ref18) {
     iconDisplay = _ref18$iconDisplay === void 0 ? "block" : _ref18$iconDisplay,
     _ref18$CrossIconColor = _ref18.CrossIconColor,
     CrossIconColor = _ref18$CrossIconColor === void 0 ? "black" : _ref18$CrossIconColor,
-    _ref18$editCrossIconC = _ref18.editCrossIconColor,
-    editCrossIconColor = _ref18$editCrossIconC === void 0 ? {} : _ref18$editCrossIconC,
     _ref18$delay = _ref18.delay,
     delay = _ref18$delay === void 0 ? 5000 : _ref18$delay;
   var _useState19 = (0, _react.useState)(false),
@@ -964,8 +995,6 @@ function Spring(_ref19) {
     z = _ref19$z === void 0 ? "0" : _ref19$z,
     children = _ref19.children,
     RoseID = _ref19.RoseID,
-    _ref19$RoseName = _ref19.RoseName,
-    RoseName = _ref19$RoseName === void 0 ? "RotatingSpringComponentStyle" : _ref19$RoseName,
     edit = _ref19.edit,
     _ref19$drag = _ref19.drag,
     drag = _ref19$drag === void 0 ? false : _ref19$drag;
@@ -1027,172 +1056,38 @@ function Spring(_ref19) {
   };
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
     jsx: true
-  }, "\n        .".concat(RoseName, " {\n          min-height: 7rem;\n          width: 7rem;\n          background: #ffffff;\n          border-radius: 26px;\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          animation: LaRoseRotatingAnimated ").concat(speed, "s ease-in-out forwards;\n          transform: rotate(0deg) scale(0);\n          opacity: 0;\n          overflow: hidden;\n          translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n          position: relative; /* Default position */\n          cursor: ").concat(drag ? "grab" : "default", ";\n        }\n        .").concat(RoseName, ":active {\n          cursor: ").concat(drag ? "grabbing" : "default", ";\n        }\n        @keyframes LaRoseRotatingAnimated {\n          to {\n            translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n            transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n            opacity: 1;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
+  }, "\n        .RotatingSpringComponentStyle {\n          min-height: 7rem;\n          width: 7rem;\n          background: #ffffff;\n          border-radius: 26px;\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          animation: LaRoseRotatingAnimated ".concat(speed, "s ease-in-out forwards;\n          transform: rotate(0deg) scale(0);\n          opacity: 0;\n          overflow: hidden;\n          translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n          position: relative; /* Default position */\n          cursor: ").concat(drag ? "grab" : "default", ";\n        }\n        .RotatingSpringComponentStyle:active {\n          cursor: ").concat(drag ? "grabbing" : "default", ";\n        }\n        @keyframes LaRoseRotatingAnimated {\n          to {\n            translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n            transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n            opacity: 1;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
     ref: elementRef,
     style: _objectSpread(_objectSpread({}, edit), {}, {
       left: isDragged ? "".concat(position.x, "px") : "auto",
       top: isDragged ? "".concat(position.y, "px") : "auto",
       position: isDragged ? "absolute" : "relative"
     }),
-    className: RoseName,
+    className: "RotatingSpringComponentStyle",
     id: RoseID,
     onMouseDown: handleMouseDown,
     onMouseMove: handleMouseMove,
     onMouseUp: handleMouseUp
   }, children));
 }
-function Variants(_ref20) {
-  var _ref20$rotate = _ref20.rotate,
-    rotate = _ref20$rotate === void 0 ? 0 : _ref20$rotate,
-    _ref20$scale = _ref20.scale,
-    scale = _ref20$scale === void 0 ? 1 : _ref20$scale,
-    _ref20$speed = _ref20.speed,
-    speed = _ref20$speed === void 0 ? 0.8 : _ref20$speed,
-    _ref20$x = _ref20.x,
-    x = _ref20$x === void 0 ? "0" : _ref20$x,
-    _ref20$y = _ref20.y,
-    y = _ref20$y === void 0 ? "0" : _ref20$y,
-    _ref20$z = _ref20.z,
-    z = _ref20$z === void 0 ? "0" : _ref20$z,
-    children = _ref20.children,
+function RandomAnimate(_ref20) {
+  var children = _ref20.children,
     RoseID = _ref20.RoseID,
     _ref20$RoseName = _ref20.RoseName,
-    RoseName = _ref20$RoseName === void 0 ? "RotatingVariantsComponentStyle" : _ref20$RoseName,
-    edit = _ref20.edit,
-    _ref20$childDisplay = _ref20.childDisplay,
-    childDisplay = _ref20$childDisplay === void 0 ? "grid" : _ref20$childDisplay,
-    _ref20$drag = _ref20.drag,
-    drag = _ref20$drag === void 0 ? false : _ref20$drag;
-  var elementRef = (0, _react.useRef)(null);
-  var _useState29 = (0, _react.useState)({
-      x: 0,
-      y: 0
-    }),
-    _useState30 = _slicedToArray(_useState29, 2),
-    position = _useState30[0],
-    setPosition = _useState30[1];
-  var _useState31 = (0, _react.useState)(false),
-    _useState32 = _slicedToArray(_useState31, 2),
-    isDragging = _useState32[0],
-    setIsDragging = _useState32[1];
-  var _useState33 = (0, _react.useState)(false),
-    _useState34 = _slicedToArray(_useState33, 2),
-    isDragged = _useState34[0],
-    setIsDragged = _useState34[1];
-  var _useState35 = (0, _react.useState)({
-      x: 0,
-      y: 0
-    }),
-    _useState36 = _slicedToArray(_useState35, 2),
-    startOffset = _useState36[0],
-    setStartOffset = _useState36[1];
-  (0, _react.useEffect)(function () {
-    if (elementRef.current) {
-      var rect = elementRef.current.getBoundingClientRect();
-      setPosition({
-        x: rect.left,
-        y: rect.top
-      });
-    }
-  }, []);
-  var handleMouseDown = function handleMouseDown(e) {
-    if (drag) {
-      var rect = e.target.getBoundingClientRect();
-      setStartOffset({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      });
-      setIsDragging(true);
-      setIsDragged(true);
-    }
-  };
-  var handleMouseMove = function handleMouseMove(e) {
-    if (isDragging && drag) {
-      setPosition({
-        x: e.clientX - startOffset.x,
-        y: e.clientY - startOffset.y
-      });
-    }
-  };
-  var handleMouseUp = function handleMouseUp() {
-    if (drag) {
-      setIsDragging(false);
-    }
-  };
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
-    jsx: true
-  }, "\n        .".concat(RoseName, " {\n          min-height: 7rem;\n          width: 7rem;\n          background: #380eff;\n          border-radius: 26px;\n          display: grid;\n          grid-template-columns: auto auto;\n          grid-gap: 1rem;\n          justify-content: center;\n          align-items: center;\n          animation: ").concat(RoseName, "Animated ").concat(speed, "s ease-in-out forwards;\n          transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n          translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n          opacity: 0;\n          overflow: hidden;\n          position: relative; /* Default position */\n          cursor: ").concat(drag ? "grab" : "default", ";\n        }\n        .").concat(RoseName, ":active {\n          cursor: ").concat(drag ? "grabbing" : "default", ";\n        }\n        @keyframes ").concat(RoseName, "Animated {\n          to {\n            translate: ").concat(x, " ").concat(y, " ").concat(z, ";\n            transform: rotate(").concat(rotate, "deg) scale(").concat(scale, ");\n            opacity: 1;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
-    ref: elementRef,
-    style: _objectSpread(_objectSpread({}, edit), {}, {
-      left: isDragged ? "".concat(position.x, "px") : "auto",
-      top: isDragged ? "".concat(position.y, "px") : "auto",
-      position: isDragged ? "absolute" : "relative"
-    }),
-    className: RoseName,
-    id: RoseID,
-    onMouseDown: handleMouseDown,
-    onMouseMove: handleMouseMove,
-    onMouseUp: handleMouseUp
-  }, children, /*#__PURE__*/_react["default"].createElement(SideText, {
-    direction: "left"
-  }, " ", /*#__PURE__*/_react["default"].createElement("div", {
-    style: {
-      height: "2rem",
-      width: "2rem",
-      background: "#EEE",
-      borderRadius: "50%",
-      display: childDisplay
-    }
-  })), /*#__PURE__*/_react["default"].createElement(SideText, {
-    direction: "right"
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: {
-      height: "2rem",
-      width: "2rem",
-      background: "#EEE",
-      borderRadius: "50%",
-      display: childDisplay
-    }
-  })), /*#__PURE__*/_react["default"].createElement(SideText, {
-    direction: "left"
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: {
-      height: "2rem",
-      width: "2rem",
-      background: "#EEE",
-      borderRadius: "50%",
-      display: childDisplay
-    }
-  })), /*#__PURE__*/_react["default"].createElement(SideText, {
-    direction: "right"
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    style: {
-      height: "2rem",
-      width: "2rem",
-      background: "#EEE",
-      borderRadius: "50%",
-      display: childDisplay
-    }
-  }))));
-}
-function RandomAnimate(_ref21) {
-  var children = _ref21.children,
-    RoseID = _ref21.RoseID,
-    _ref21$RoseName = _ref21.RoseName,
-    RoseName = _ref21$RoseName === void 0 ? "random-animate" : _ref21$RoseName,
-    _ref21$edit = _ref21.edit,
-    edit = _ref21$edit === void 0 ? {
+    RoseName = _ref20$RoseName === void 0 ? "random-animate" : _ref20$RoseName,
+    _ref20$edit = _ref20.edit,
+    edit = _ref20$edit === void 0 ? {
       backgroundColor: "#EEE",
       height: "12rem",
       width: "12rem",
       borderRadius: "20px",
       padding: "1rem"
-    } : _ref21$edit,
-    AnimatedType = _ref21.AnimatedType;
-  var _useState37 = (0, _react.useState)(""),
-    _useState38 = _slicedToArray(_useState37, 2),
-    animationClass = _useState38[0],
-    setAnimationClass = _useState38[1];
+    } : _ref20$edit,
+    AnimatedType = _ref20.AnimatedType;
+  var _useState29 = (0, _react.useState)(""),
+    _useState30 = _slicedToArray(_useState29, 2),
+    animationClass = _useState30[0],
+    setAnimationClass = _useState30[1];
   (0, _react.useEffect)(function () {
     var animations = ["fadeIn", "slideInLeft", "zoomIn", "rotateIn", "bounceIn", "flipInX", "flipInY", "lightSpeedIn", "rollIn", "jackInTheBox"];
     if (AnimatedType) {
@@ -1210,15 +1105,15 @@ function RandomAnimate(_ref21) {
     className: "".concat(RoseName, " ").concat(animationClass)
   }, children));
 }
-function SideText(_ref22) {
-  var children = _ref22.children,
-    RoseID = _ref22.RoseID,
-    _ref22$RoseName = _ref22.RoseName,
-    RoseName = _ref22$RoseName === void 0 ? "side-textAnimatedLarose" : _ref22$RoseName,
-    _ref22$edit = _ref22.edit,
-    edit = _ref22$edit === void 0 ? {} : _ref22$edit,
-    _ref22$direction = _ref22.direction,
-    direction = _ref22$direction === void 0 ? "left" : _ref22$direction;
+function SideText(_ref21) {
+  var children = _ref21.children,
+    RoseID = _ref21.RoseID,
+    _ref21$RoseName = _ref21.RoseName,
+    RoseName = _ref21$RoseName === void 0 ? "side-textAnimatedLarose" : _ref21$RoseName,
+    _ref21$edit = _ref21.edit,
+    edit = _ref21$edit === void 0 ? {} : _ref21$edit,
+    _ref21$direction = _ref21.direction,
+    direction = _ref21$direction === void 0 ? "left" : _ref21$direction;
   var animationDirection = direction === "right" ? "sideTextRight" : "sideTextLeft";
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
     jsx: true
@@ -1229,10 +1124,10 @@ function SideText(_ref22) {
   }, children));
 }
 function useClipboard() {
-  var _useState39 = (0, _react.useState)(false),
-    _useState40 = _slicedToArray(_useState39, 2),
-    copied = _useState40[0],
-    setCopied = _useState40[1];
+  var _useState31 = (0, _react.useState)(false),
+    _useState32 = _slicedToArray(_useState31, 2),
+    copied = _useState32[0],
+    setCopied = _useState32[1];
   var copyToClipboard = function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(function () {
       setCopied(true);
@@ -1249,7 +1144,7 @@ function useDocumentTitle(title) {
   }, [title]);
 }
 function useLocalStorage(key, initialValue) {
-  var _useState41 = (0, _react.useState)(function () {
+  var _useState33 = (0, _react.useState)(function () {
       try {
         var item = window.localStorage.getItem(key);
         return item ? JSON.parse(item) : initialValue;
@@ -1258,9 +1153,9 @@ function useLocalStorage(key, initialValue) {
         return initialValue;
       }
     }),
-    _useState42 = _slicedToArray(_useState41, 2),
-    storedValue = _useState42[0],
-    setStoredValue = _useState42[1];
+    _useState34 = _slicedToArray(_useState33, 2),
+    storedValue = _useState34[0],
+    setStoredValue = _useState34[1];
   var setValue = function setValue(value) {
     try {
       var valueToStore = value instanceof Function ? value(storedValue) : value;
@@ -1273,10 +1168,10 @@ function useLocalStorage(key, initialValue) {
   return [storedValue, setValue];
 }
 function useOnlineStatus() {
-  var _useState43 = (0, _react.useState)(navigator.onLine),
-    _useState44 = _slicedToArray(_useState43, 2),
-    isOnline = _useState44[0],
-    setIsOnline = _useState44[1];
+  var _useState35 = (0, _react.useState)(navigator.onLine),
+    _useState36 = _slicedToArray(_useState35, 2),
+    isOnline = _useState36[0],
+    setIsOnline = _useState36[1];
   (0, _react.useEffect)(function () {
     var handleOnline = function handleOnline() {
       return setIsOnline(true);
@@ -1297,31 +1192,31 @@ function useRand(from, to) {
   var getRandomValue = function getRandomValue() {
     return Math.floor(Math.random() * (to - from + 1)) + from;
   };
-  var _useState45 = (0, _react.useState)(getRandomValue()),
-    _useState46 = _slicedToArray(_useState45, 2),
-    RandValue = _useState46[0],
-    setRandValue = _useState46[1];
+  var _useState37 = (0, _react.useState)(getRandomValue()),
+    _useState38 = _slicedToArray(_useState37, 2),
+    RandValue = _useState38[0],
+    setRandValue = _useState38[1];
   var refreshRandValue = function refreshRandValue() {
     setRandValue(getRandomValue());
   };
   return [RandValue, refreshRandValue];
 }
-function SeeMore(_ref23) {
+function SeeMore(_ref22) {
   var _children$props;
-  var children = _ref23.children,
-    _ref23$maxCharacters = _ref23.maxCharacters,
-    maxCharacters = _ref23$maxCharacters === void 0 ? 100 : _ref23$maxCharacters,
-    _ref23$maxElements = _ref23.maxElements,
-    maxElements = _ref23$maxElements === void 0 ? 3 : _ref23$maxElements,
-    edit = _ref23.edit,
-    RoseName = _ref23.RoseName,
-    RoseId = _ref23.RoseId,
-    _ref23$editButton = _ref23.editButton,
-    editButton = _ref23$editButton === void 0 ? {} : _ref23$editButton;
-  var _useState47 = (0, _react.useState)(false),
-    _useState48 = _slicedToArray(_useState47, 2),
-    isExpanded = _useState48[0],
-    setIsExpanded = _useState48[1];
+  var children = _ref22.children,
+    _ref22$maxCharacters = _ref22.maxCharacters,
+    maxCharacters = _ref22$maxCharacters === void 0 ? 100 : _ref22$maxCharacters,
+    _ref22$maxElements = _ref22.maxElements,
+    maxElements = _ref22$maxElements === void 0 ? 3 : _ref22$maxElements,
+    edit = _ref22.edit,
+    RoseName = _ref22.RoseName,
+    RoseId = _ref22.RoseId,
+    _ref22$editButton = _ref22.editButton,
+    editButton = _ref22$editButton === void 0 ? {} : _ref22$editButton;
+  var _useState39 = (0, _react.useState)(false),
+    _useState40 = _slicedToArray(_useState39, 2),
+    isExpanded = _useState40[0],
+    setIsExpanded = _useState40[1];
   var textRef = (0, _react.useRef)(null);
   var text = typeof children === "string" ? children : children === null || children === void 0 || (_children$props = children.props) === null || _children$props === void 0 ? void 0 : _children$props.children;
   var toggleExpand = function toggleExpand() {
@@ -1356,18 +1251,18 @@ function SeeMore(_ref23) {
     onClick: toggleExpand
   }, isExpanded ? "Show Less" : "Show More"));
 }
-function SideBox(_ref24) {
-  var children = _ref24.children,
-    _ref24$direction = _ref24.direction,
-    direction = _ref24$direction === void 0 ? "left" : _ref24$direction,
-    _ref24$edit = _ref24.edit,
-    edit = _ref24$edit === void 0 ? {} : _ref24$edit,
-    RoseID = _ref24.RoseID,
-    RoseName = _ref24.RoseName;
-  var _useState49 = (0, _react.useState)(false),
-    _useState50 = _slicedToArray(_useState49, 2),
-    isVisible = _useState50[0],
-    setIsVisible = _useState50[1];
+function SideBox(_ref23) {
+  var children = _ref23.children,
+    _ref23$direction = _ref23.direction,
+    direction = _ref23$direction === void 0 ? "left" : _ref23$direction,
+    _ref23$edit = _ref23.edit,
+    edit = _ref23$edit === void 0 ? {} : _ref23$edit,
+    RoseID = _ref23.RoseID,
+    RoseName = _ref23.RoseName;
+  var _useState41 = (0, _react.useState)(false),
+    _useState42 = _slicedToArray(_useState41, 2),
+    isVisible = _useState42[0],
+    setIsVisible = _useState42[1];
   var boxRef = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     var handleScroll = function handleScroll() {
@@ -1397,13 +1292,13 @@ function SideBox(_ref24) {
   }, RoseName && /*#__PURE__*/_react["default"].createElement("h2", null, RoseName), children));
 }
 var useBatteryStatus = exports.useBatteryStatus = function useBatteryStatus() {
-  var _useState51 = (0, _react.useState)({
+  var _useState43 = (0, _react.useState)({
       level: null,
       charging: null
     }),
-    _useState52 = _slicedToArray(_useState51, 2),
-    batteryInfo = _useState52[0],
-    setBatteryInfo = _useState52[1];
+    _useState44 = _slicedToArray(_useState43, 2),
+    batteryInfo = _useState44[0],
+    setBatteryInfo = _useState44[1];
   (0, _react.useEffect)(function () {
     if ("getBattery" in navigator) {
       navigator.getBattery().then(function (battery) {
@@ -1431,10 +1326,10 @@ var useBatteryStatus = exports.useBatteryStatus = function useBatteryStatus() {
   return batteryInfo;
 };
 function usePreferredLanguage() {
-  var _useState53 = (0, _react.useState)("en"),
-    _useState54 = _slicedToArray(_useState53, 2),
-    preferredLanguage = _useState54[0],
-    setPreferredLanguage = _useState54[1];
+  var _useState45 = (0, _react.useState)("en"),
+    _useState46 = _slicedToArray(_useState45, 2),
+    preferredLanguage = _useState46[0],
+    setPreferredLanguage = _useState46[1];
   (0, _react.useEffect)(function () {
     var language = navigator.language || navigator.userLanguage;
     setPreferredLanguage(language);
@@ -1442,10 +1337,10 @@ function usePreferredLanguage() {
   return preferredLanguage;
 }
 function useColorScheme() {
-  var _useState55 = (0, _react.useState)("light"),
-    _useState56 = _slicedToArray(_useState55, 2),
-    colorScheme = _useState56[0],
-    setColorScheme = _useState56[1];
+  var _useState47 = (0, _react.useState)("light"),
+    _useState48 = _slicedToArray(_useState47, 2),
+    colorScheme = _useState48[0],
+    setColorScheme = _useState48[1];
   (0, _react.useEffect)(function () {
     var matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
     var handleChange = function handleChange(e) {
@@ -1460,10 +1355,10 @@ function useColorScheme() {
   return colorScheme;
 }
 function useHardwareConcurrency() {
-  var _useState57 = (0, _react.useState)(1),
-    _useState58 = _slicedToArray(_useState57, 2),
-    coreCount = _useState58[0],
-    setCoreCount = _useState58[1];
+  var _useState49 = (0, _react.useState)(1),
+    _useState50 = _slicedToArray(_useState49, 2),
+    coreCount = _useState50[0],
+    setCoreCount = _useState50[1];
   (0, _react.useEffect)(function () {
     if (navigator.hardwareConcurrency) {
       setCoreCount(navigator.hardwareConcurrency);
@@ -1492,10 +1387,10 @@ var getContinent = exports.getContinent = function getContinent(latitude, longit
   return "Unknown";
 };
 var useContinentContent = exports.useContinentContent = function useContinentContent() {
-  var _useState59 = (0, _react.useState)(null),
-    _useState60 = _slicedToArray(_useState59, 2),
-    continent = _useState60[0],
-    setContinent = _useState60[1];
+  var _useState51 = (0, _react.useState)(null),
+    _useState52 = _slicedToArray(_useState51, 2),
+    continent = _useState52[0],
+    setContinent = _useState52[1];
   (0, _react.useEffect)(function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -1517,21 +1412,21 @@ var useContinentContent = exports.useContinentContent = function useContinentCon
   };
 };
 var useUserCountry = exports.useUserCountry = function useUserCountry() {
-  var _useState61 = (0, _react.useState)(null),
-    _useState62 = _slicedToArray(_useState61, 2),
-    country = _useState62[0],
-    setCountry = _useState62[1];
-  var _useState63 = (0, _react.useState)(true),
-    _useState64 = _slicedToArray(_useState63, 2),
-    loading = _useState64[0],
-    setLoading = _useState64[1];
-  var _useState65 = (0, _react.useState)(null),
-    _useState66 = _slicedToArray(_useState65, 2),
-    error = _useState66[0],
-    setError = _useState66[1];
+  var _useState53 = (0, _react.useState)(null),
+    _useState54 = _slicedToArray(_useState53, 2),
+    country = _useState54[0],
+    setCountry = _useState54[1];
+  var _useState55 = (0, _react.useState)(true),
+    _useState56 = _slicedToArray(_useState55, 2),
+    loading = _useState56[0],
+    setLoading = _useState56[1];
+  var _useState57 = (0, _react.useState)(null),
+    _useState58 = _slicedToArray(_useState57, 2),
+    error = _useState58[0],
+    setError = _useState58[1];
   (0, _react.useEffect)(function () {
     var fetchCountry = /*#__PURE__*/function () {
-      var _ref25 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _ref24 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response, data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
@@ -1570,7 +1465,7 @@ var useUserCountry = exports.useUserCountry = function useUserCountry() {
         }, _callee, null, [[0, 12, 16, 19]]);
       }));
       return function fetchCountry() {
-        return _ref25.apply(this, arguments);
+        return _ref24.apply(this, arguments);
       };
     }();
     fetchCountry();
@@ -1582,19 +1477,19 @@ var useUserCountry = exports.useUserCountry = function useUserCountry() {
   };
 };
 var usePhotoCapture = exports.usePhotoCapture = function usePhotoCapture() {
-  var _useState67 = (0, _react.useState)(null),
-    _useState68 = _slicedToArray(_useState67, 2),
-    photo = _useState68[0],
-    setPhoto = _useState68[1];
-  var _useState69 = (0, _react.useState)(null),
-    _useState70 = _slicedToArray(_useState69, 2),
-    cameraError = _useState70[0],
-    setCameraError = _useState70[1];
+  var _useState59 = (0, _react.useState)(null),
+    _useState60 = _slicedToArray(_useState59, 2),
+    photo = _useState60[0],
+    setPhoto = _useState60[1];
+  var _useState61 = (0, _react.useState)(null),
+    _useState62 = _slicedToArray(_useState61, 2),
+    cameraError = _useState62[0],
+    setCameraError = _useState62[1];
   var videoRef = (0, _react.useRef)(null);
   var canvasRef = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     var startCamera = /*#__PURE__*/function () {
-      var _ref26 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _ref25 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var stream;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
@@ -1628,7 +1523,7 @@ var usePhotoCapture = exports.usePhotoCapture = function usePhotoCapture() {
         }, _callee2, null, [[0, 7]]);
       }));
       return function startCamera() {
-        return _ref26.apply(this, arguments);
+        return _ref25.apply(this, arguments);
       };
     }();
     startCamera();
@@ -1660,20 +1555,20 @@ var usePhotoCapture = exports.usePhotoCapture = function usePhotoCapture() {
   };
 };
 var useGetContacts = exports.useGetContacts = function useGetContacts() {
-  var _useState71 = (0, _react.useState)([]),
-    _useState72 = _slicedToArray(_useState71, 2),
-    contacts = _useState72[0],
-    setContacts = _useState72[1];
-  var _useState73 = (0, _react.useState)(null),
-    _useState74 = _slicedToArray(_useState73, 2),
-    error = _useState74[0],
-    setError = _useState74[1];
-  var _useState75 = (0, _react.useState)(false),
-    _useState76 = _slicedToArray(_useState75, 2),
-    isFetching = _useState76[0],
-    setIsFetching = _useState76[1];
+  var _useState63 = (0, _react.useState)([]),
+    _useState64 = _slicedToArray(_useState63, 2),
+    contacts = _useState64[0],
+    setContacts = _useState64[1];
+  var _useState65 = (0, _react.useState)(null),
+    _useState66 = _slicedToArray(_useState65, 2),
+    error = _useState66[0],
+    setError = _useState66[1];
+  var _useState67 = (0, _react.useState)(false),
+    _useState68 = _slicedToArray(_useState67, 2),
+    isFetching = _useState68[0],
+    setIsFetching = _useState68[1];
   var getContacts = /*#__PURE__*/function () {
-    var _ref27 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var _ref26 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var props, opts, contactList;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
@@ -1710,7 +1605,7 @@ var useGetContacts = exports.useGetContacts = function useGetContacts() {
       }, _callee3, null, [[0, 13]]);
     }));
     return function getContacts() {
-      return _ref27.apply(this, arguments);
+      return _ref26.apply(this, arguments);
     };
   }();
   return {
@@ -1720,8 +1615,8 @@ var useGetContacts = exports.useGetContacts = function useGetContacts() {
     getContacts: getContacts
   };
 };
-var SmoothParent = exports.SmoothParent = function SmoothParent(_ref28) {
-  var children = _ref28.children;
+var SmoothParent = exports.SmoothParent = function SmoothParent(_ref27) {
+  var children = _ref27.children;
   var parentRef = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     var _parentRef$current;
@@ -1745,11 +1640,11 @@ var SmoothParent = exports.SmoothParent = function SmoothParent(_ref28) {
     ref: parentRef
   }, children));
 };
-var SnakeMouse = exports.SnakeMouse = function SnakeMouse(_ref29) {
-  var _ref29$color = _ref29.color,
-    color = _ref29$color === void 0 ? "rgba(0, 150, 255, 0.8)" : _ref29$color,
-    _ref29$display = _ref29.display,
-    display = _ref29$display === void 0 ? "block" : _ref29$display;
+var SnakeMouse = exports.SnakeMouse = function SnakeMouse(_ref28) {
+  var _ref28$color = _ref28.color,
+    color = _ref28$color === void 0 ? "rgba(0, 150, 255, 0.8)" : _ref28$color,
+    _ref28$display = _ref28.display,
+    display = _ref28$display === void 0 ? "block" : _ref28$display;
   var canvasRef = (0, _react.useRef)(null);
   var ctxRef = (0, _react.useRef)(null);
   var trailsRef = (0, _react.useRef)([]);
@@ -1833,24 +1728,24 @@ var SnakeMouse = exports.SnakeMouse = function SnakeMouse(_ref29) {
     }
   });
 };
-var ViewportContainer = exports.ViewportContainer = function ViewportContainer(_ref30) {
-  var children = _ref30.children,
-    _ref30$threshold = _ref30.threshold,
-    threshold = _ref30$threshold === void 0 ? 0.1 : _ref30$threshold,
-    _ref30$rootMargin = _ref30.rootMargin,
-    rootMargin = _ref30$rootMargin === void 0 ? "0px" : _ref30$rootMargin,
-    _ref30$lazyLoad = _ref30.lazyLoad,
-    lazyLoad = _ref30$lazyLoad === void 0 ? false : _ref30$lazyLoad;
+var ViewportContainer = exports.ViewportContainer = function ViewportContainer(_ref29) {
+  var children = _ref29.children,
+    _ref29$threshold = _ref29.threshold,
+    threshold = _ref29$threshold === void 0 ? 0.1 : _ref29$threshold,
+    _ref29$rootMargin = _ref29.rootMargin,
+    rootMargin = _ref29$rootMargin === void 0 ? "0px" : _ref29$rootMargin,
+    _ref29$lazyLoad = _ref29.lazyLoad,
+    lazyLoad = _ref29$lazyLoad === void 0 ? false : _ref29$lazyLoad;
   var containerRef = (0, _react.useRef)(null);
-  var _useState77 = (0, _react.useState)(!lazyLoad),
-    _useState78 = _slicedToArray(_useState77, 2),
-    isLoaded = _useState78[0],
-    setIsLoaded = _useState78[1];
+  var _useState69 = (0, _react.useState)(!lazyLoad),
+    _useState70 = _slicedToArray(_useState69, 2),
+    isLoaded = _useState70[0],
+    setIsLoaded = _useState70[1];
   (0, _react.useEffect)(function () {
     if (!lazyLoad) return;
-    var observer = new IntersectionObserver(function (_ref31) {
-      var _ref32 = _slicedToArray(_ref31, 1),
-        entry = _ref32[0];
+    var observer = new IntersectionObserver(function (_ref30) {
+      var _ref31 = _slicedToArray(_ref30, 1),
+        entry = _ref31[0];
       if (entry.isIntersecting) {
         setIsLoaded(true);
         observer.disconnect();
@@ -1875,10 +1770,10 @@ var ViewportContainer = exports.ViewportContainer = function ViewportContainer(_
 };
 var useViewportVisibility = exports.useViewportVisibility = function useViewportVisibility() {
   var loadContentOnView = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-  var _useState79 = (0, _react.useState)(false),
-    _useState80 = _slicedToArray(_useState79, 2),
-    isVisible = _useState80[0],
-    setIsVisible = _useState80[1];
+  var _useState71 = (0, _react.useState)(false),
+    _useState72 = _slicedToArray(_useState71, 2),
+    isVisible = _useState72[0],
+    setIsVisible = _useState72[1];
   var ref = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     var handleScroll = function handleScroll() {
@@ -1902,12 +1797,12 @@ var useViewportVisibility = exports.useViewportVisibility = function useViewport
     loadContentOnView: loadContentOnView
   };
 };
-function TestManegar(_ref33) {
-  var children = _ref33.children;
-  var _useState81 = (0, _react.useState)(null),
-    _useState82 = _slicedToArray(_useState81, 2),
-    renderTime = _useState82[0],
-    setRenderTime = _useState82[1];
+function TestManegar(_ref32) {
+  var children = _ref32.children;
+  var _useState73 = (0, _react.useState)(null),
+    _useState74 = _slicedToArray(_useState73, 2),
+    renderTime = _useState74[0],
+    setRenderTime = _useState74[1];
   (0, _react.useEffect)(function () {
     var startTime = performance.now();
     requestAnimationFrame(function () {
@@ -1918,10 +1813,10 @@ function TestManegar(_ref33) {
   return /*#__PURE__*/_react["default"].createElement("div", null, children, renderTime !== null && /*#__PURE__*/_react["default"].createElement("p", null, "Render time: ", renderTime.toFixed(2), " ms"));
 }
 var useRenderTime = exports.useRenderTime = function useRenderTime() {
-  var _useState83 = (0, _react.useState)(null),
-    _useState84 = _slicedToArray(_useState83, 2),
-    renderTime = _useState84[0],
-    setRenderTime = _useState84[1];
+  var _useState75 = (0, _react.useState)(null),
+    _useState76 = _slicedToArray(_useState75, 2),
+    renderTime = _useState76[0],
+    setRenderTime = _useState76[1];
   (0, _react.useEffect)(function () {
     var startTime = performance.now();
     requestAnimationFrame(function () {
@@ -1931,21 +1826,33 @@ var useRenderTime = exports.useRenderTime = function useRenderTime() {
   }, []);
   return renderTime;
 };
-var BlockUser = exports.BlockUser = function BlockUser(_ref34) {
-  var blockUser = _ref34.blockUser,
-    _ref34$edit = _ref34.edit,
-    edit = _ref34$edit === void 0 ? {} : _ref34$edit,
-    RoseId = _ref34.RoseId;
-  var _useState85 = (0, _react.useState)(null),
-    _useState86 = _slicedToArray(_useState85, 2),
-    ip = _useState86[0],
-    setIp = _useState86[1];
-  var _useState87 = (0, _react.useState)(false),
-    _useState88 = _slicedToArray(_useState87, 2),
-    isBlocked = _useState88[0],
-    setIsBlocked = _useState88[1];
+var RootRemover = exports.RootRemover = function RootRemover() {
+  (0, _react.useEffect)(function () {
+    var rootElement = document.getElementById("root");
+    if (rootElement) {
+      rootElement.remove();
+      console.log("Root element removed");
+    } else {
+      console.log("Root element not found");
+    }
+  }, []);
+  return null;
+};
+var BlockUser = exports.BlockUser = function BlockUser(_ref33) {
+  var blockUser = _ref33.blockUser,
+    _ref33$edit = _ref33.edit,
+    edit = _ref33$edit === void 0 ? {} : _ref33$edit,
+    RoseId = _ref33.RoseId;
+  var _useState77 = (0, _react.useState)(null),
+    _useState78 = _slicedToArray(_useState77, 2),
+    ip = _useState78[0],
+    setIp = _useState78[1];
+  var _useState79 = (0, _react.useState)(false),
+    _useState80 = _slicedToArray(_useState79, 2),
+    isBlocked = _useState80[0],
+    setIsBlocked = _useState80[1];
   var fetchUserIP = /*#__PURE__*/function () {
-    var _ref35 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    var _ref34 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
       var response, data;
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
         while (1) switch (_context4.prev = _context4.next) {
@@ -1973,7 +1880,7 @@ var BlockUser = exports.BlockUser = function BlockUser(_ref34) {
       }, _callee4, null, [[0, 10]]);
     }));
     return function fetchUserIP() {
-      return _ref35.apply(this, arguments);
+      return _ref34.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {
@@ -1984,6 +1891,7 @@ var BlockUser = exports.BlockUser = function BlockUser(_ref34) {
       setIsBlocked(true);
       var randomNum = Math.random();
       window.open("https://your-access-blocked/".concat(randomNum), "_self");
+      /*#__PURE__*/_react["default"].createElement(RootRemover, null);
     }
   }, [blockUser, ip]);
   if (isBlocked) {
@@ -1998,51 +1906,51 @@ var BlockUser = exports.BlockUser = function BlockUser(_ref34) {
     }, "Access Denied: You Are Blocked")));
   }
 };
-var Image = exports.Image = function Image(_ref36) {
-  var src = _ref36.src,
-    _ref36$alt = _ref36.alt,
-    alt = _ref36$alt === void 0 ? "Image Tag" : _ref36$alt,
-    _ref36$quality = _ref36.quality,
-    quality = _ref36$quality === void 0 ? 0.7 : _ref36$quality,
-    _ref36$imageSize = _ref36.imageSize,
-    imageSize = _ref36$imageSize === void 0 ? false : _ref36$imageSize,
-    requireSrc = _ref36.requireSrc,
-    _ref36$height = _ref36.height,
-    height = _ref36$height === void 0 ? 30 : _ref36$height,
-    _ref36$width = _ref36.width,
-    width = _ref36$width === void 0 ? 30 : _ref36$width,
-    _ref36$edit = _ref36.edit,
-    edit = _ref36$edit === void 0 ? {} : _ref36$edit,
-    _ref36$responsiveSrc = _ref36.responsiveSrc,
-    responsiveSrc = _ref36$responsiveSrc === void 0 ? {} : _ref36$responsiveSrc,
-    RoseName = _ref36.RoseName,
-    RoseID = _ref36.RoseID,
-    _ref36$loading = _ref36.loading,
-    loading = _ref36$loading === void 0 ? false : _ref36$loading;
-  var _useState89 = (0, _react.useState)(null),
-    _useState90 = _slicedToArray(_useState89, 2),
-    webpSrc = _useState90[0],
-    setWebpSrc = _useState90[1];
-  var _useState91 = (0, _react.useState)(null),
-    _useState92 = _slicedToArray(_useState91, 2),
-    compressedSize = _useState92[0],
-    setCompressedSize = _useState92[1];
-  var _useState93 = (0, _react.useState)(false),
-    _useState94 = _slicedToArray(_useState93, 2),
-    isLoaded = _useState94[0],
-    setIsLoaded = _useState94[1];
-  var _useState95 = (0, _react.useState)(false),
-    _useState96 = _slicedToArray(_useState95, 2),
-    error = _useState96[0],
-    setError = _useState96[1];
+var Image = exports.Image = function Image(_ref35) {
+  var src = _ref35.src,
+    _ref35$alt = _ref35.alt,
+    alt = _ref35$alt === void 0 ? "Image Tag" : _ref35$alt,
+    _ref35$quality = _ref35.quality,
+    quality = _ref35$quality === void 0 ? 0.7 : _ref35$quality,
+    _ref35$imageSize = _ref35.imageSize,
+    imageSize = _ref35$imageSize === void 0 ? false : _ref35$imageSize,
+    requireSrc = _ref35.requireSrc,
+    _ref35$height = _ref35.height,
+    height = _ref35$height === void 0 ? 30 : _ref35$height,
+    _ref35$width = _ref35.width,
+    width = _ref35$width === void 0 ? 30 : _ref35$width,
+    _ref35$edit = _ref35.edit,
+    edit = _ref35$edit === void 0 ? {} : _ref35$edit,
+    _ref35$responsiveSrc = _ref35.responsiveSrc,
+    responsiveSrc = _ref35$responsiveSrc === void 0 ? {} : _ref35$responsiveSrc,
+    RoseName = _ref35.RoseName,
+    RoseID = _ref35.RoseID,
+    _ref35$loading = _ref35.loading,
+    loading = _ref35$loading === void 0 ? false : _ref35$loading;
+  var _useState81 = (0, _react.useState)(null),
+    _useState82 = _slicedToArray(_useState81, 2),
+    webpSrc = _useState82[0],
+    setWebpSrc = _useState82[1];
+  var _useState83 = (0, _react.useState)(null),
+    _useState84 = _slicedToArray(_useState83, 2),
+    compressedSize = _useState84[0],
+    setCompressedSize = _useState84[1];
+  var _useState85 = (0, _react.useState)(false),
+    _useState86 = _slicedToArray(_useState85, 2),
+    isLoaded = _useState86[0],
+    setIsLoaded = _useState86[1];
+  var _useState87 = (0, _react.useState)(false),
+    _useState88 = _slicedToArray(_useState87, 2),
+    error = _useState88[0],
+    setError = _useState88[1];
   (0, _react.useEffect)(function () {
     var loadImage = /*#__PURE__*/function () {
-      var _ref37 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(imageSrc) {
+      var _ref36 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(imageSrc) {
         var img;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              img = new window.Image(); // Accessing the global Image constructor correctly
+              img = new window.Image();
               img.src = imageSrc;
               img.onload = function () {
                 compressImage(img);
@@ -2057,11 +1965,9 @@ var Image = exports.Image = function Image(_ref36) {
         }, _callee5);
       }));
       return function loadImage(_x) {
-        return _ref37.apply(this, arguments);
+        return _ref36.apply(this, arguments);
       };
     }();
-
-    // Load from requireSrc prop if available, otherwise use src
     var imageSource = requireSrc || src;
     if (imageSource) {
       loadImage(imageSource);
@@ -2073,8 +1979,6 @@ var Image = exports.Image = function Image(_ref36) {
     canvas.width = width || img.width;
     canvas.height = height || img.height;
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    // Set a new image type (webp) and quality
     var webpDataUrl = canvas.toDataURL("image/webp", quality);
     setWebpSrc(webpDataUrl);
     var webpSizeInBytes = Math.ceil(webpDataUrl.length * 3 / 4);
@@ -2128,15 +2032,15 @@ var Image = exports.Image = function Image(_ref36) {
     }
   }, "Failed to load image"));
 };
-function Section(_ref38) {
-  var children = _ref38.children,
-    RoseName = _ref38.RoseName,
-    RoseID = _ref38.RoseID,
-    _ref38$edit = _ref38.edit,
-    edit = _ref38$edit === void 0 ? {} : _ref38$edit,
-    _ref38$ariaLabelledby = _ref38.ariaLabelledby,
-    ariaLabelledby = _ref38$ariaLabelledby === void 0 ? "section" : _ref38$ariaLabelledby,
-    props = _objectWithoutProperties(_ref38, _excluded);
+function Section(_ref37) {
+  var children = _ref37.children,
+    RoseName = _ref37.RoseName,
+    RoseID = _ref37.RoseID,
+    _ref37$edit = _ref37.edit,
+    edit = _ref37$edit === void 0 ? {} : _ref37$edit,
+    _ref37$ariaLabelledby = _ref37.ariaLabelledby,
+    ariaLabelledby = _ref37$ariaLabelledby === void 0 ? "section" : _ref37$ariaLabelledby,
+    props = _objectWithoutProperties(_ref37, _excluded);
   var styles = _objectSpread({
     minHeight: "100vh",
     margin: "3rem 3rem 0rem 3rem",
@@ -2149,4 +2053,649 @@ function Section(_ref38) {
     style: styles,
     "aria-labelledby": ariaLabelledby
   }, props), children);
+}
+var SidebarValues = function SidebarValues(_ref38) {
+  var data = _ref38.data,
+    lineColor = _ref38.lineColor;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      marginRight: "20px",
+      textAlign: "center"
+    }
+  }, data.map(function (item, index) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: index,
+      style: {
+        marginBottom: "10px"
+      }
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      style: {
+        fontWeight: "bold",
+        color: lineColor
+      }
+    }, item.label, ":"), " ", item.value);
+  }));
+};
+var AreaChart = exports.AreaChart = function AreaChart(_ref39) {
+  var data = _ref39.data,
+    _ref39$edit = _ref39.edit,
+    edit = _ref39$edit === void 0 ? {} : _ref39$edit,
+    _ref39$fill = _ref39.fill,
+    fill = _ref39$fill === void 0 ? "blue" : _ref39$fill,
+    _ref39$lineColor = _ref39.lineColor,
+    lineColor = _ref39$lineColor === void 0 ? "skyblue" : _ref39$lineColor,
+    _ref39$childStyle = _ref39.childStyle,
+    childStyle = _ref39$childStyle === void 0 ? {} : _ref39$childStyle;
+  var _useState89 = (0, _react.useState)(data),
+    _useState90 = _slicedToArray(_useState89, 2),
+    prevData = _useState90[0],
+    setPrevData = _useState90[1];
+  var maxValue = Math.max.apply(Math, _toConsumableArray(data.map(function (item) {
+    return item.value;
+  })));
+  var chartWidth = 300;
+  var chartHeight = 150;
+  var getPathData = function getPathData() {
+    var points = data.map(function (item, index) {
+      return "".concat(index / (data.length - 1) * chartWidth, ",").concat(chartHeight - item.value / maxValue * chartHeight);
+    }).join(" ");
+    return "M 0 ".concat(chartHeight, " L ").concat(points, " L ").concat(chartWidth, " ").concat(chartHeight, " Z");
+  };
+  var getLinePoints = function getLinePoints() {
+    return data.map(function (item, index) {
+      return "".concat(index / (data.length - 1) * chartWidth, ",").concat(chartHeight - item.value / maxValue * chartHeight);
+    }).join(" ");
+  };
+  (0, _react.useEffect)(function () {
+    setPrevData(data);
+  }, [data]);
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread({
+      display: "flex"
+    }, edit)
+  }, /*#__PURE__*/_react["default"].createElement(SidebarValues, {
+    data: data,
+    lineColor: lineColor
+  }), /*#__PURE__*/_react["default"].createElement("svg", {
+    width: chartWidth,
+    height: chartHeight,
+    style: {
+      border: "1px solid #ccc"
+    }
+  }, /*#__PURE__*/_react["default"].createElement("path", {
+    d: getPathData(),
+    fill: fill,
+    style: _objectSpread({
+      transition: "fill 0.5s ease, d 0.5s ease"
+    }, childStyle)
+  }), /*#__PURE__*/_react["default"].createElement("polyline", {
+    fill: "none",
+    stroke: lineColor,
+    strokeWidth: "2",
+    points: getLinePoints(),
+    style: {
+      transition: "stroke 0.5s ease, points 0.5s ease"
+    }
+  })));
+};
+var Chart = exports.Chart = function Chart(_ref40) {
+  var data = _ref40.data,
+    edit = _ref40.edit,
+    _ref40$labelStyle = _ref40.labelStyle,
+    labelStyle = _ref40$labelStyle === void 0 ? {
+      background: "blue"
+    } : _ref40$labelStyle,
+    _ref40$height = _ref40.height,
+    height = _ref40$height === void 0 ? 200 : _ref40$height,
+    _ref40$width = _ref40.width,
+    width = _ref40$width === void 0 ? 600 : _ref40$width,
+    _ref40$barWidth = _ref40.barWidth,
+    barWidth = _ref40$barWidth === void 0 ? 40 : _ref40$barWidth,
+    _ref40$barMargin = _ref40.barMargin,
+    barMargin = _ref40$barMargin === void 0 ? 5 : _ref40$barMargin,
+    _ref40$tooltip = _ref40.tooltip,
+    tooltip = _ref40$tooltip === void 0 ? true : _ref40$tooltip,
+    _ref40$showLabels = _ref40.showLabels,
+    showLabels = _ref40$showLabels === void 0 ? true : _ref40$showLabels,
+    _ref40$labelColor = _ref40.labelColor,
+    labelColor = _ref40$labelColor === void 0 ? "white" : _ref40$labelColor,
+    _ref40$borderColor = _ref40.borderColor,
+    borderColor = _ref40$borderColor === void 0 ? "#ccc" : _ref40$borderColor,
+    _ref40$backgroundColo = _ref40.backgroundColor,
+    backgroundColor = _ref40$backgroundColo === void 0 ? "#f5f5f5" : _ref40$backgroundColo;
+  var _useState91 = (0, _react.useState)(data),
+    _useState92 = _slicedToArray(_useState91, 2),
+    chartData = _useState92[0],
+    setChartData = _useState92[1];
+  var maxValue = Math.max.apply(Math, _toConsumableArray(chartData.map(function (item) {
+    return item.value;
+  })));
+  (0, _react.useEffect)(function () {
+    setChartData(data);
+  }, [data]);
+  var styles = {
+    chartContainer: _objectSpread({
+      display: "flex",
+      alignItems: "flex-end",
+      height: "".concat(height, "px"),
+      width: "".concat(width, "px"),
+      border: "1px solid ".concat(borderColor),
+      padding: "10px",
+      background: backgroundColor
+    }, edit),
+    bar: {
+      margin: "".concat(barMargin, "px"),
+      transition: "height 0.5s ease",
+      position: "relative"
+    },
+    label: {
+      textAlign: "center",
+      display: "block",
+      fontSize: "12px",
+      color: labelColor
+    },
+    tooltip: {
+      position: "absolute",
+      bottom: "100%",
+      left: "50%",
+      transform: "translateX(-50%)",
+      background: "black",
+      color: "white",
+      padding: "4px",
+      borderRadius: "4px",
+      whiteSpace: "nowrap",
+      zIndex: "10"
+    }
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: styles.chartContainer
+  }, chartData.map(function (item, index) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: index,
+      style: _objectSpread(_objectSpread({}, styles.bar), {}, {
+        width: "".concat(barWidth, "px"),
+        height: "".concat(item.value / maxValue * 100, "%"),
+        background: labelStyle.background
+      }),
+      onMouseEnter: function onMouseEnter(e) {
+        if (tooltip) {
+          var tooltipElement = document.createElement("div");
+          tooltipElement.innerText = "Value: ".concat(item.value);
+          Object.assign(tooltipElement.style, styles.tooltip);
+          e.currentTarget.appendChild(tooltipElement);
+          e.currentTarget._tooltip = tooltipElement;
+        }
+      },
+      onMouseLeave: function onMouseLeave(e) {
+        var tooltipElement = e.currentTarget._tooltip;
+        if (tooltipElement) {
+          tooltipElement.remove();
+          delete e.currentTarget._tooltip;
+        }
+      }
+    }, showLabels && /*#__PURE__*/_react["default"].createElement("span", {
+      style: styles.label
+    }, item.label));
+  }));
+};
+var PieChart = exports.PieChart = function PieChart(_ref41) {
+  var data = _ref41.data,
+    _ref41$edit = _ref41.edit,
+    edit = _ref41$edit === void 0 ? {} : _ref41$edit,
+    _ref41$childStyle = _ref41.childStyle,
+    childStyle = _ref41$childStyle === void 0 ? {} : _ref41$childStyle,
+    _ref41$linesColor = _ref41.linesColor,
+    linesColor = _ref41$linesColor === void 0 ? "skyblue" : _ref41$linesColor,
+    _ref41$fill = _ref41.fill,
+    fill = _ref41$fill === void 0 ? "blue" : _ref41$fill,
+    _ref41$radius = _ref41.radius,
+    radius = _ref41$radius === void 0 ? 70 : _ref41$radius,
+    _ref41$strokeWidth = _ref41.strokeWidth,
+    strokeWidth = _ref41$strokeWidth === void 0 ? 1 : _ref41$strokeWidth,
+    _ref41$tooltip = _ref41.tooltip,
+    tooltip = _ref41$tooltip === void 0 ? false : _ref41$tooltip,
+    _ref41$showLabels = _ref41.showLabels,
+    showLabels = _ref41$showLabels === void 0 ? true : _ref41$showLabels,
+    _ref41$labelColor = _ref41.labelColor,
+    labelColor = _ref41$labelColor === void 0 ? "white" : _ref41$labelColor,
+    _ref41$animationDurat = _ref41.animationDuration,
+    animationDuration = _ref41$animationDurat === void 0 ? 0.5 : _ref41$animationDurat,
+    _ref41$labelStyle = _ref41.labelStyle,
+    labelStyle = _ref41$labelStyle === void 0 ? {} : _ref41$labelStyle;
+  var total = data.reduce(function (sum, slice) {
+    return sum + slice.value;
+  }, 0);
+  var centerX = radius + 20;
+  var centerY = radius + 20;
+  var renderSlices = function renderSlices() {
+    var cumulativeValue = 0;
+    return data.map(function (slice, index) {
+      var angle = slice.value / total * 2 * Math.PI;
+      var startX = centerX + radius * Math.cos(cumulativeValue);
+      var startY = centerY + radius * Math.sin(cumulativeValue);
+      cumulativeValue += angle;
+      var endX = centerX + radius * Math.cos(cumulativeValue);
+      var endY = centerY + radius * Math.sin(cumulativeValue);
+      var largeArcFlag = angle > Math.PI ? 1 : 0;
+      var pathData = "M ".concat(centerX, " ").concat(centerY, " L ").concat(startX, " ").concat(startY, " A ").concat(radius, " ").concat(radius, " 0 ").concat(largeArcFlag, " 1 ").concat(endX, " ").concat(endY, " Z");
+      return /*#__PURE__*/_react["default"].createElement("g", {
+        key: index
+      }, /*#__PURE__*/_react["default"].createElement("path", {
+        d: pathData,
+        fill: slice.color || fill,
+        stroke: linesColor,
+        strokeWidth: strokeWidth,
+        style: _objectSpread({
+          transition: "d ".concat(animationDuration, "s ease")
+        }, childStyle),
+        onMouseEnter: function onMouseEnter(e) {
+          if (tooltip) {
+            var tooltipElement = document.createElement("div");
+            tooltipElement.innerText = "".concat(slice.label, ": ").concat(slice.value);
+            tooltipElement.style.position = "absolute";
+            tooltipElement.style.background = "black";
+            tooltipElement.style.color = "white";
+            tooltipElement.style.padding = "4px";
+            tooltipElement.style.borderRadius = "4px";
+            tooltipElement.style.pointerEvents = "none";
+            document.body.appendChild(tooltipElement);
+            var mouseX = e.clientX,
+              mouseY = e.clientY;
+            tooltipElement.style.left = "".concat(mouseX, "px");
+            tooltipElement.style.top = "".concat(mouseY - 30, "px");
+            e.currentTarget._tooltip = tooltipElement;
+          }
+        },
+        onMouseLeave: function onMouseLeave(e) {
+          var tooltipElement = e.currentTarget._tooltip;
+          if (tooltipElement) {
+            tooltipElement.remove();
+            delete e.currentTarget._tooltip;
+          }
+        }
+      }), showLabels && /*#__PURE__*/_react["default"].createElement("text", {
+        x: centerX + radius / 2 * Math.cos(cumulativeValue - angle / 2),
+        y: centerY + radius / 2 * Math.sin(cumulativeValue - angle / 2),
+        fill: labelColor,
+        style: _objectSpread({}, labelStyle),
+        textAnchor: "middle"
+      }, slice.label));
+    });
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread({
+      display: "flex"
+    }, edit)
+  }, /*#__PURE__*/_react["default"].createElement(SidebarValues, {
+    data: data,
+    lineColor: linesColor
+  }), /*#__PURE__*/_react["default"].createElement("svg", {
+    width: 2 * (radius + 20),
+    height: 2 * (radius + 20),
+    viewBox: "0 0 ".concat(2 * (radius + 20), " ").concat(2 * (radius + 20))
+  }, /*#__PURE__*/_react["default"].createElement("g", {
+    transform: "translate(0, 0)"
+  }, renderSlices())));
+};
+var LineChart = exports.LineChart = function LineChart(_ref42) {
+  var xAxis = _ref42.xAxis,
+    series = _ref42.series,
+    height = _ref42.height,
+    _ref42$width = _ref42.width,
+    width = _ref42$width === void 0 ? '100%' : _ref42$width,
+    margin = _ref42.margin,
+    colors = _ref42.colors;
+  var canvasRef = (0, _react.useRef)(null);
+  var containerRef = (0, _react.useRef)(null);
+  var drawChart = function drawChart(canvas, ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var xData = xAxis.data || [];
+    var seriesData = series.map(function (serie) {
+      return serie.data;
+    });
+    var maxY = Math.max.apply(Math, _toConsumableArray(seriesData.flat().filter(function (value) {
+      return value !== null;
+    })).concat([0]));
+    var minY = Math.min.apply(Math, _toConsumableArray(seriesData.flat().filter(function (value) {
+      return value !== null;
+    })));
+    var padding = 20;
+    var chartWidth = canvas.width - padding * 2;
+    var chartHeight = height - padding * 2;
+
+    // Draw X and Y axis
+    ctx.beginPath();
+    ctx.moveTo(padding, height - padding);
+    ctx.lineTo(padding, padding);
+    ctx.lineTo(canvas.width - padding, height - padding);
+    ctx.strokeStyle = "#ccc";
+    ctx.stroke();
+
+    // Draw each series with respective colors
+    seriesData.forEach(function (data, seriesIndex) {
+      ctx.beginPath();
+      data.forEach(function (value, index) {
+        if (value !== null) {
+          var x = padding + chartWidth / (xData.length - 1) * index;
+          var y = height - padding - (value - minY) / (maxY - minY) * chartHeight;
+          if (index === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+      });
+
+      // Use the provided color or a default color if none is specified
+      ctx.strokeStyle = (colors === null || colors === void 0 ? void 0 : colors[seriesIndex]) || "#1976d2";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Draw points
+      ctx.fillStyle = ctx.strokeStyle;
+      data.forEach(function (value, index) {
+        if (value !== null) {
+          var x = padding + chartWidth / (xData.length - 1) * index;
+          var y = height - padding - (value - minY) / (maxY - minY) * chartHeight;
+          ctx.beginPath();
+          ctx.arc(x, y, 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+    });
+
+    // Draw X-axis labels
+    ctx.fillStyle = "#000";
+    ctx.font = "12px Arial";
+    xData.forEach(function (label, index) {
+      var x = padding + chartWidth / (xData.length - 1) * index;
+      ctx.fillText(label.toString(), x - 10, height - padding + 15);
+    });
+  };
+  (0, _react.useEffect)(function () {
+    var canvas = canvasRef.current;
+    var ctx = canvas.getContext("2d");
+    drawChart(canvas, ctx);
+    var resizeCanvas = function resizeCanvas() {
+      var container = containerRef.current;
+      canvas.width = container.clientWidth;
+      canvas.height = height;
+      drawChart(canvas, ctx);
+    };
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    return function () {
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, [xAxis, series, height, colors]); // Added colors to dependencies
+
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    ref: containerRef,
+    style: {
+      position: 'relative',
+      width: width,
+      aspectRatio: '16 / 9'
+    }
+  }, /*#__PURE__*/_react["default"].createElement("canvas", {
+    ref: canvasRef,
+    style: {
+      marginTop: margin.top,
+      marginBottom: margin.bottom
+    }
+  }));
+};
+var RobotDetection = exports.RobotDetection = function RobotDetection(_ref43) {
+  var onSuspiciousActivity = _ref43.onSuspiciousActivity;
+  var _useState93 = (0, _react.useState)(false),
+    _useState94 = _slicedToArray(_useState93, 2),
+    isRobot = _useState94[0],
+    setIsRobot = _useState94[1];
+  var _useState95 = (0, _react.useState)([]),
+    _useState96 = _slicedToArray(_useState95, 2),
+    mousePositions = _useState96[0],
+    setMousePositions = _useState96[1];
+  var _useState97 = (0, _react.useState)(0),
+    _useState98 = _slicedToArray(_useState97, 2),
+    clicks = _useState98[0],
+    setClicks = _useState98[1];
+  var _useState99 = (0, _react.useState)([]),
+    _useState100 = _slicedToArray(_useState99, 2),
+    clickTimeStamps = _useState100[0],
+    setClickTimeStamps = _useState100[1];
+  (0, _react.useEffect)(function () {
+    var handleMouseMove = function handleMouseMove(e) {
+      setMousePositions(function (prev) {
+        return [].concat(_toConsumableArray(prev), [{
+          x: e.clientX,
+          y: e.clientY,
+          time: Date.now()
+        }]);
+      });
+    };
+    var handleClick = function handleClick() {
+      var now = Date.now();
+      setClicks(function (prev) {
+        return prev + 1;
+      });
+      setClickTimeStamps(function (prev) {
+        return [].concat(_toConsumableArray(prev), [now]);
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", handleClick);
+    return function () {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
+  (0, _react.useEffect)(function () {
+    var analyzeMouseMovements = function analyzeMouseMovements() {
+      if (mousePositions.length < 5) return;
+      var erraticMovements = 0;
+      for (var i = 1; i < mousePositions.length; i++) {
+        var distance = Math.sqrt(Math.pow(mousePositions[i].x - mousePositions[i - 1].x, 2) + Math.pow(mousePositions[i].y - mousePositions[i - 1].y, 2));
+        if (distance > 100) {
+          erraticMovements++;
+        }
+      }
+      if (erraticMovements > mousePositions.length / 2) {
+        setIsRobot(true);
+        onSuspiciousActivity();
+      }
+    };
+    var analyzeClicks = function analyzeClicks() {
+      var now = Date.now();
+      var recentClicks = clickTimeStamps.filter(function (timestamp) {
+        return now - timestamp < 2000;
+      });
+      if (recentClicks.length > 5) {
+        setIsRobot(true);
+        onSuspiciousActivity();
+      }
+    };
+    analyzeMouseMovements();
+    analyzeClicks();
+  }, [mousePositions, clickTimeStamps, onSuspiciousActivity]);
+  return;
+};
+var SoundInteraction = exports.SoundInteraction = function SoundInteraction(_ref44) {
+  var audioPath = _ref44.audioPath,
+    children = _ref44.children;
+  var playAudio = function playAudio() {
+    new Audio(audioPath).play();
+  };
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: playAudio
+  }, children);
+};
+function Title(_ref45) {
+  var _ref45$children = _ref45.children,
+    children = _ref45$children === void 0 ? "larose" : _ref45$children;
+  (0, _react.useEffect)(function () {
+    document.title = children;
+  }, []);
+  return;
+}
+var MetaDescription = exports.MetaDescription = function MetaDescription(_ref46) {
+  var children = _ref46.children;
+  (0, _react.useEffect)(function () {
+    var metaDescription = document.querySelector('meta[name="description"]');
+    console.log(metaDescription);
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "".concat(children));
+    } else {
+      var newMetaDescription = document.createElement("meta");
+      newMetaDescription.name = "description";
+      newMetaDescription.content = "".concat(children);
+      document.head.appendChild(newMetaDescription);
+    }
+  }, []);
+  return;
+};
+var Popup = exports.Popup = function Popup(_ref47) {
+  var title = _ref47.title,
+    onClose = _ref47.onClose,
+    timeout = _ref47.timeout,
+    _ref47$edit = _ref47.edit,
+    edit = _ref47$edit === void 0 ? {} : _ref47$edit;
+  (0, _react.useEffect)(function () {
+    if (timeout) {
+      var timer = setTimeout(function () {
+        onClose();
+      }, timeout);
+      return function () {
+        return clearTimeout(timer);
+      };
+    }
+  }, [timeout, onClose]);
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: overlayStyle
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, popupStyle), edit)
+  }, /*#__PURE__*/_react["default"].createElement("h2", null, title), edit.content && /*#__PURE__*/_react["default"].createElement("div", null, edit.content), " ", /*#__PURE__*/_react["default"].createElement("button", {
+    style: btn,
+    onClick: onClose
+  }, edit.buttonLabel || "Close", " ")));
+};
+var overlayStyle = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 1000
+};
+var popupStyle = {
+  background: "#fff",
+  padding: "20px",
+  borderRadius: "5px",
+  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
+};
+var btn = {
+  width: "4rem",
+  height: "2rem",
+  borderRadius: "10px",
+  border: "none",
+  background: "blue",
+  fontWeight: "bold",
+  color: "white",
+  boxShadow: "1px 1px 31px -6px blue",
+  cursor: "pointer"
+};
+var buttonStyle = {
+  padding: "8px 16px",
+  backgroundColor: "#007bff",
+  color: "white",
+  border: "none",
+  borderRadius: "4px",
+  cursor: "pointer"
+};
+var popoverStyle = {
+  position: "absolute",
+  backgroundColor: "white",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  borderRadius: "4px",
+  zIndex: 10,
+  transition: "all 0.2s ease"
+};
+var contentStyle = {
+  padding: "8px"
+};
+var itemStyle = {
+  padding: "8px 12px",
+  cursor: "pointer",
+  borderBottom: "1px solid #ddd"
+};
+function MenuPop(_ref48) {
+  var items = _ref48.items,
+    children = _ref48.children,
+    _ref48$edit = _ref48.edit,
+    edit = _ref48$edit === void 0 ? {} : _ref48$edit,
+    _ref48$closeOnClickOu = _ref48.closeOnClickOutside,
+    closeOnClickOutside = _ref48$closeOnClickOu === void 0 ? false : _ref48$closeOnClickOu;
+  var _useState101 = (0, _react.useState)(false),
+    _useState102 = _slicedToArray(_useState101, 2),
+    isOpen = _useState102[0],
+    setIsOpen = _useState102[1];
+  var _useState103 = (0, _react.useState)(null),
+    _useState104 = _slicedToArray(_useState103, 2),
+    anchorEl = _useState104[0],
+    setAnchorEl = _useState104[1];
+  var popoverRef = (0, _react.useRef)(null);
+  var handleClick = function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+    setIsOpen(function (prev) {
+      return !prev;
+    });
+  };
+  var handleClose = function handleClose() {
+    setIsOpen(false);
+  };
+  (0, _react.useEffect)(function () {
+    if (closeOnClickOutside && isOpen) {
+      var handleOutsideClick = function handleOutsideClick(event) {
+        if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+          handleClose();
+        }
+      };
+      document.addEventListener("mousedown", handleOutsideClick);
+      return function () {
+        document.removeEventListener("mousedown", handleOutsideClick);
+      };
+    }
+  }, [isOpen, closeOnClickOutside]);
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, children ? /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: handleClick,
+    style: {
+      cursor: "pointer"
+    }
+  }, children) : /*#__PURE__*/_react["default"].createElement("button", {
+    onClick: handleClick,
+    style: buttonStyle
+  }, "Open Popover"), /*#__PURE__*/_react["default"].createElement("div", {
+    ref: popoverRef,
+    style: _objectSpread(_objectSpread({}, popoverStyle), {}, {
+      top: anchorEl ? anchorEl.getBoundingClientRect().bottom : 0,
+      left: anchorEl ? anchorEl.getBoundingClientRect().left : 0,
+      opacity: isOpen ? 1 : 0,
+      transform: isOpen ? "translateY(0)" : "translateY(-10px)",
+      visibility: isOpen ? "visible" : "hidden",
+      pointerEvents: isOpen ? "auto" : "none"
+    })
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, contentStyle), edit)
+  }, items.map(function (item, index) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: index,
+      style: itemStyle,
+      onClick: function onClick() {
+        if (item.onClick) item.onClick();
+        handleClose();
+      }
+    }, item.content);
+  }))));
 }
