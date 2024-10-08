@@ -11,9 +11,7 @@ exports.Button = Button;
 exports.Chart = void 0;
 exports.CounterDown = CounterDown;
 exports.CounterUp = CounterUp;
-exports.Image = void 0;
-exports.LaRoseText = LaRoseText;
-exports.LineChart = void 0;
+exports.LineChart = exports.Image = void 0;
 exports.Loader = Loader;
 exports.MenuPop = MenuPop;
 exports.MetaDescription = void 0;
@@ -23,14 +21,14 @@ exports.Popup = exports.PieChart = void 0;
 exports.RandomAnimate = RandomAnimate;
 exports.RootRemover = exports.RobotDetection = void 0;
 exports.RoseBox = RoseBox;
-exports.Route = exports.RoseRouter = exports.RoseParent = void 0;
+exports.Route = exports.RoseRouter = void 0;
 exports.Section = Section;
 exports.SeeMore = SeeMore;
 exports.ShinyButton = ShinyButton;
 exports.ShinyText = ShinyText;
 exports.SideBox = SideBox;
 exports.SideText = SideText;
-exports.SoundInteraction = exports.SnakeMouse = exports.SmoothParent = void 0;
+exports.SoundInteraction = void 0;
 exports.SplitText = SplitText;
 exports.Spring = Spring;
 exports.SwitchCase = SwitchCase;
@@ -400,61 +398,43 @@ function Loader() {
     className: "e8 color"
   }))));
 }
-function LaRoseText(_ref7) {
-  var _ref7$edit = _ref7.edit,
+function RoseBox(_ref7) {
+  var children = _ref7.children,
+    _ref7$edit = _ref7.edit,
     edit = _ref7$edit === void 0 ? {} : _ref7$edit,
-    children = _ref7.children,
-    _ref7$fontSize = _ref7.fontSize,
-    fontSize = _ref7$fontSize === void 0 ? 2 : _ref7$fontSize,
-    _ref7$fontWeight = _ref7.fontWeight,
-    fontWeight = _ref7$fontWeight === void 0 ? 600 : _ref7$fontWeight,
-    _ref7$gradientText = _ref7.gradientText,
-    gradientText = _ref7$gradientText === void 0 ? "linear-gradient(45deg, #ff007f, #ff00ff, #ff1493, #ff69b4, #ff69b4, #ff1493, #ff00ff, #ff007f)" : _ref7$gradientText;
-  var LaRoseText = _objectSpread({}, edit);
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
-    jsx: true
-  }, "\n        .title {\n          font-size: ".concat(fontSize, "rem;\n          font-weight: ").concat(fontWeight, ";\n          background: ").concat(gradientText, ";\n          -webkit-background-clip: text;\n          -webkit-text-fill-color: transparent;\n          background-clip: text;\n          text-fill-color: transparent;\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
-    style: LaRoseText,
-    className: "title"
-  }, children));
-}
-function RoseBox(_ref8) {
-  var children = _ref8.children,
-    _ref8$edit = _ref8.edit,
-    edit = _ref8$edit === void 0 ? {} : _ref8$edit,
-    _ref8$background = _ref8.background,
-    background = _ref8$background === void 0 ? "" : _ref8$background,
-    _ref8$RoseName = _ref8.RoseName,
-    RoseName = _ref8$RoseName === void 0 ? "" : _ref8$RoseName,
-    _ref8$RoseID = _ref8.RoseID,
-    RoseID = _ref8$RoseID === void 0 ? "" : _ref8$RoseID,
-    _ref8$autoLayout = _ref8.autoLayout,
-    autoLayout = _ref8$autoLayout === void 0 ? false : _ref8$autoLayout,
-    _ref8$shadow = _ref8.shadow,
-    shadow = _ref8$shadow === void 0 ? false : _ref8$shadow,
-    _ref8$shadowColor = _ref8.shadowColor,
-    shadowColor = _ref8$shadowColor === void 0 ? "black" : _ref8$shadowColor,
-    _ref8$aspectRatio = _ref8.aspectRatio,
-    aspectRatio = _ref8$aspectRatio === void 0 ? null : _ref8$aspectRatio,
-    _ref8$atHover = _ref8.atHover,
-    atHover = _ref8$atHover === void 0 ? false : _ref8$atHover,
-    _ref8$grid = _ref8.grid,
-    grid = _ref8$grid === void 0 ? false : _ref8$grid,
-    _ref8$flex = _ref8.flex,
-    flex = _ref8$flex === void 0 ? false : _ref8$flex,
-    _ref8$scaleAnimate = _ref8.scaleAnimate,
-    scaleAnimate = _ref8$scaleAnimate === void 0 ? false : _ref8$scaleAnimate,
-    _ref8$childrenVisible = _ref8.childrenVisible,
-    childrenVisible = _ref8$childrenVisible === void 0 ? true : _ref8$childrenVisible,
-    onClick = _ref8.onClick,
-    ariaLabel = _ref8.ariaLabel,
-    role = _ref8.role,
-    _ref8$lazy = _ref8.lazy,
-    lazy = _ref8$lazy === void 0 ? false : _ref8$lazy,
-    _ref8$AutoHandling = _ref8.AutoHandling,
-    AutoHandling = _ref8$AutoHandling === void 0 ? false : _ref8$AutoHandling,
-    _ref8$outlineOffset = _ref8.outlineOffset,
-    outlineOffset = _ref8$outlineOffset === void 0 ? 0 : _ref8$outlineOffset;
+    _ref7$background = _ref7.background,
+    background = _ref7$background === void 0 ? "" : _ref7$background,
+    _ref7$RoseName = _ref7.RoseName,
+    RoseName = _ref7$RoseName === void 0 ? "" : _ref7$RoseName,
+    _ref7$RoseID = _ref7.RoseID,
+    RoseID = _ref7$RoseID === void 0 ? "" : _ref7$RoseID,
+    _ref7$autoLayout = _ref7.autoLayout,
+    autoLayout = _ref7$autoLayout === void 0 ? false : _ref7$autoLayout,
+    _ref7$shadow = _ref7.shadow,
+    shadow = _ref7$shadow === void 0 ? false : _ref7$shadow,
+    _ref7$shadowColor = _ref7.shadowColor,
+    shadowColor = _ref7$shadowColor === void 0 ? "black" : _ref7$shadowColor,
+    _ref7$aspectRatio = _ref7.aspectRatio,
+    aspectRatio = _ref7$aspectRatio === void 0 ? null : _ref7$aspectRatio,
+    _ref7$atHover = _ref7.atHover,
+    atHover = _ref7$atHover === void 0 ? false : _ref7$atHover,
+    _ref7$grid = _ref7.grid,
+    grid = _ref7$grid === void 0 ? false : _ref7$grid,
+    _ref7$flex = _ref7.flex,
+    flex = _ref7$flex === void 0 ? false : _ref7$flex,
+    _ref7$scaleAnimate = _ref7.scaleAnimate,
+    scaleAnimate = _ref7$scaleAnimate === void 0 ? false : _ref7$scaleAnimate,
+    _ref7$childrenVisible = _ref7.childrenVisible,
+    childrenVisible = _ref7$childrenVisible === void 0 ? true : _ref7$childrenVisible,
+    onClick = _ref7.onClick,
+    ariaLabel = _ref7.ariaLabel,
+    role = _ref7.role,
+    _ref7$lazy = _ref7.lazy,
+    lazy = _ref7$lazy === void 0 ? false : _ref7$lazy,
+    _ref7$AutoHandling = _ref7.AutoHandling,
+    AutoHandling = _ref7$AutoHandling === void 0 ? false : _ref7$AutoHandling,
+    _ref7$outlineOffset = _ref7.outlineOffset,
+    outlineOffset = _ref7$outlineOffset === void 0 ? 0 : _ref7$outlineOffset;
   var _useState9 = (0, _react.useState)(!lazy),
     _useState10 = _slicedToArray(_useState9, 2),
     isLoaded = _useState10[0],
@@ -525,18 +505,18 @@ function RoseBox(_ref8) {
     style: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, edit), layoutStyle), shadowStyle), aspectStyle), displayLayoutStyle), backgroundStyle), autoHandleStyle)
   }, isLoaded ? children : /*#__PURE__*/_react["default"].createElement("div", null, "Loading...")));
 }
-function SplitText(_ref9) {
-  var children = _ref9.children,
-    RoseName = _ref9.RoseName,
-    RoseId = _ref9.RoseId,
-    _ref9$initialAnimateT = _ref9.initialAnimateTypeStyle,
-    initialAnimateTypeStyle = _ref9$initialAnimateT === void 0 ? "character" : _ref9$initialAnimateT,
-    _ref9$edit = _ref9.edit,
-    edit = _ref9$edit === void 0 ? {} : _ref9$edit,
-    _ref9$speed = _ref9.speed,
-    speed = _ref9$speed === void 0 ? 0.5 : _ref9$speed,
-    _ref9$delay = _ref9.delay,
-    delay = _ref9$delay === void 0 ? 0.05 : _ref9$delay;
+function SplitText(_ref8) {
+  var children = _ref8.children,
+    RoseName = _ref8.RoseName,
+    RoseId = _ref8.RoseId,
+    _ref8$initialAnimateT = _ref8.initialAnimateTypeStyle,
+    initialAnimateTypeStyle = _ref8$initialAnimateT === void 0 ? "character" : _ref8$initialAnimateT,
+    _ref8$edit = _ref8.edit,
+    edit = _ref8$edit === void 0 ? {} : _ref8$edit,
+    _ref8$speed = _ref8.speed,
+    speed = _ref8$speed === void 0 ? 0.5 : _ref8$speed,
+    _ref8$delay = _ref8.delay,
+    delay = _ref8$delay === void 0 ? 0.05 : _ref8$delay;
   var _useState11 = (0, _react.useState)(initialAnimateTypeStyle),
     _useState12 = _slicedToArray(_useState11, 2),
     animateTypeStyle = _useState12[0],
@@ -568,21 +548,21 @@ function SplitText(_ref9) {
     className: RoseName
   }, animatedText));
 }
-function ShinyText(_ref10) {
-  var children = _ref10.children,
-    RoseName = _ref10.RoseName,
-    RoseId = _ref10.RoseId,
-    _ref10$edit = _ref10.edit,
-    edit = _ref10$edit === void 0 ? {} : _ref10$edit,
-    _ref10$speed = _ref10.speed,
-    speed = _ref10$speed === void 0 ? 2 : _ref10$speed,
-    _ref10$color = _ref10.color,
-    color = _ref10$color === void 0 ? "#fff" : _ref10$color,
-    _ref10$backgroundColo = _ref10.backgroundColor,
-    backgroundColor = _ref10$backgroundColo === void 0 ? "#000" : _ref10$backgroundColo,
-    _ref10$shinyColor = _ref10.shinyColor,
-    shinyColor = _ref10$shinyColor === void 0 ? "rgba(255, 255, 255, 0.7)" : _ref10$shinyColor,
-    onClick = _ref10.onClick;
+function ShinyText(_ref9) {
+  var children = _ref9.children,
+    RoseName = _ref9.RoseName,
+    RoseId = _ref9.RoseId,
+    _ref9$edit = _ref9.edit,
+    edit = _ref9$edit === void 0 ? {} : _ref9$edit,
+    _ref9$speed = _ref9.speed,
+    speed = _ref9$speed === void 0 ? 2 : _ref9$speed,
+    _ref9$color = _ref9.color,
+    color = _ref9$color === void 0 ? "#fff" : _ref9$color,
+    _ref9$backgroundColor = _ref9.backgroundColor,
+    backgroundColor = _ref9$backgroundColor === void 0 ? "#000" : _ref9$backgroundColor,
+    _ref9$shinyColor = _ref9.shinyColor,
+    shinyColor = _ref9$shinyColor === void 0 ? "rgba(255, 255, 255, 0.7)" : _ref9$shinyColor,
+    onClick = _ref9.onClick;
   var onClickFun = function onClickFun() {
     if (typeof onClick === "function") {
       onClick();
@@ -620,23 +600,23 @@ function ShinyText(_ref10) {
     })
   }));
 }
-function ShinyButton(_ref11) {
-  var children = _ref11.children,
-    RoseName = _ref11.RoseName,
-    RoseId = _ref11.RoseId,
-    _ref11$edit = _ref11.edit,
-    edit = _ref11$edit === void 0 ? {} : _ref11$edit,
-    _ref11$speed = _ref11.speed,
-    speed = _ref11$speed === void 0 ? 2 : _ref11$speed,
-    _ref11$color = _ref11.color,
-    color = _ref11$color === void 0 ? "#fff" : _ref11$color,
-    _ref11$backgroundColo = _ref11.backgroundColor,
-    backgroundColor = _ref11$backgroundColo === void 0 ? "#111" : _ref11$backgroundColo,
-    _ref11$padding = _ref11.padding,
-    padding = _ref11$padding === void 0 ? "10px 20px" : _ref11$padding,
-    _ref11$borderRadius = _ref11.borderRadius,
-    borderRadius = _ref11$borderRadius === void 0 ? "5px" : _ref11$borderRadius,
-    onClick = _ref11.onClick;
+function ShinyButton(_ref10) {
+  var children = _ref10.children,
+    RoseName = _ref10.RoseName,
+    RoseId = _ref10.RoseId,
+    _ref10$edit = _ref10.edit,
+    edit = _ref10$edit === void 0 ? {} : _ref10$edit,
+    _ref10$speed = _ref10.speed,
+    speed = _ref10$speed === void 0 ? 2 : _ref10$speed,
+    _ref10$color = _ref10.color,
+    color = _ref10$color === void 0 ? "#fff" : _ref10$color,
+    _ref10$backgroundColo = _ref10.backgroundColor,
+    backgroundColor = _ref10$backgroundColo === void 0 ? "#111" : _ref10$backgroundColo,
+    _ref10$padding = _ref10.padding,
+    padding = _ref10$padding === void 0 ? "10px 20px" : _ref10$padding,
+    _ref10$borderRadius = _ref10.borderRadius,
+    borderRadius = _ref10$borderRadius === void 0 ? "5px" : _ref10$borderRadius,
+    onClick = _ref10.onClick;
   var onClickFun = function onClickFun() {
     if (typeof onClick === "function") {
       onClick();
@@ -653,20 +633,20 @@ function ShinyButton(_ref11) {
     className: "shiny-button ".concat(RoseName)
   }, children));
 }
-function WaveText(_ref12) {
-  var children = _ref12.children,
-    RoseName = _ref12.RoseName,
-    RoseId = _ref12.RoseId,
-    _ref12$initialWaveTyp = _ref12.initialWaveType,
-    initialWaveType = _ref12$initialWaveTyp === void 0 ? "character" : _ref12$initialWaveTyp,
-    _ref12$edit = _ref12.edit,
-    edit = _ref12$edit === void 0 ? {} : _ref12$edit,
-    _ref12$speed = _ref12.speed,
-    speed = _ref12$speed === void 0 ? 0.5 : _ref12$speed,
-    _ref12$delay = _ref12.delay,
-    delay = _ref12$delay === void 0 ? 0.05 : _ref12$delay,
-    _ref12$amplitude = _ref12.amplitude,
-    amplitude = _ref12$amplitude === void 0 ? 10 : _ref12$amplitude;
+function WaveText(_ref11) {
+  var children = _ref11.children,
+    RoseName = _ref11.RoseName,
+    RoseId = _ref11.RoseId,
+    _ref11$initialWaveTyp = _ref11.initialWaveType,
+    initialWaveType = _ref11$initialWaveTyp === void 0 ? "character" : _ref11$initialWaveTyp,
+    _ref11$edit = _ref11.edit,
+    edit = _ref11$edit === void 0 ? {} : _ref11$edit,
+    _ref11$speed = _ref11.speed,
+    speed = _ref11$speed === void 0 ? 0.5 : _ref11$speed,
+    _ref11$delay = _ref11.delay,
+    delay = _ref11$delay === void 0 ? 0.05 : _ref11$delay,
+    _ref11$amplitude = _ref11.amplitude,
+    amplitude = _ref11$amplitude === void 0 ? 10 : _ref11$amplitude;
   var _useState13 = (0, _react.useState)(initialWaveType),
     _useState14 = _slicedToArray(_useState13, 2),
     waveType = _useState14[0],
@@ -698,20 +678,20 @@ function WaveText(_ref12) {
     className: RoseName
   }, waveText));
 }
-function AnimatedText(_ref13) {
-  var children = _ref13.children,
-    RoseName = _ref13.RoseName,
-    RoseId = _ref13.RoseId,
-    _ref13$edit = _ref13.edit,
-    edit = _ref13$edit === void 0 ? {} : _ref13$edit,
-    _ref13$speed = _ref13.speed,
-    speed = _ref13$speed === void 0 ? 0.5 : _ref13$speed,
-    _ref13$delay = _ref13.delay,
-    delay = _ref13$delay === void 0 ? 0.05 : _ref13$delay,
-    _ref13$animationType = _ref13.animationType,
-    animationType = _ref13$animationType === void 0 ? "blur" : _ref13$animationType,
-    _ref13$initialAnimate = _ref13.initialAnimateTypeStyle,
-    initialAnimateTypeStyle = _ref13$initialAnimate === void 0 ? "character" : _ref13$initialAnimate;
+function AnimatedText(_ref12) {
+  var children = _ref12.children,
+    RoseName = _ref12.RoseName,
+    RoseId = _ref12.RoseId,
+    _ref12$edit = _ref12.edit,
+    edit = _ref12$edit === void 0 ? {} : _ref12$edit,
+    _ref12$speed = _ref12.speed,
+    speed = _ref12$speed === void 0 ? 0.5 : _ref12$speed,
+    _ref12$delay = _ref12.delay,
+    delay = _ref12$delay === void 0 ? 0.05 : _ref12$delay,
+    _ref12$animationType = _ref12.animationType,
+    animationType = _ref12$animationType === void 0 ? "blur" : _ref12$animationType,
+    _ref12$initialAnimate = _ref12.initialAnimateTypeStyle,
+    initialAnimateTypeStyle = _ref12$initialAnimate === void 0 ? "character" : _ref12$initialAnimate;
   var _useState15 = (0, _react.useState)(initialAnimateTypeStyle),
     _useState16 = _slicedToArray(_useState15, 2),
     animateTypeStyle = _useState16[0],
@@ -754,10 +734,10 @@ var RouterContext = /*#__PURE__*/(0, _react.createContext)();
 var useRouter = exports.useRouter = function useRouter() {
   return (0, _react.useContext)(RouterContext);
 };
-var RoseRouter = exports.RoseRouter = function RoseRouter(_ref14) {
-  var children = _ref14.children,
-    _ref14$customStyles = _ref14.customStyles,
-    customStyles = _ref14$customStyles === void 0 ? "" : _ref14$customStyles;
+var RoseRouter = exports.RoseRouter = function RoseRouter(_ref13) {
+  var children = _ref13.children,
+    _ref13$customStyles = _ref13.customStyles,
+    customStyles = _ref13$customStyles === void 0 ? "" : _ref13$customStyles;
   var _useState17 = (0, _react.useState)(window.location.pathname),
     _useState18 = _slicedToArray(_useState17, 2),
     route = _useState18[0],
@@ -786,91 +766,21 @@ var RoseRouter = exports.RoseRouter = function RoseRouter(_ref14) {
     }
   }, children));
 };
-var Route = exports.Route = function Route(_ref15) {
-  var path = _ref15.path,
-    element = _ref15.element;
+var Route = exports.Route = function Route(_ref14) {
+  var path = _ref14.path,
+    element = _ref14.element;
   var _useRouter = useRouter(),
     route = _useRouter.route;
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: "route ".concat(route === path ? "route-active" : "")
   }, route === path ? element : null);
 };
-var RoseParent = exports.RoseParent = function RoseParent(_ref16) {
-  var children = _ref16.children,
-    edit = _ref16.edit,
-    RoseID = _ref16.RoseID,
-    RoseName = _ref16.RoseName,
-    _ref16$display = _ref16.display,
-    display = _ref16$display === void 0 ? "flex" : _ref16$display,
-    _ref16$flexDirection = _ref16.flexDirection,
-    flexDirection = _ref16$flexDirection === void 0 ? "row" : _ref16$flexDirection,
-    _ref16$flexDirectionM = _ref16.flexDirectionMobile,
-    flexDirectionMobile = _ref16$flexDirectionM === void 0 ? "column" : _ref16$flexDirectionM,
-    _ref16$justifyContent = _ref16.justifyContent,
-    justifyContent = _ref16$justifyContent === void 0 ? "space-around" : _ref16$justifyContent,
-    _ref16$alignItems = _ref16.alignItems,
-    alignItems = _ref16$alignItems === void 0 ? "center" : _ref16$alignItems,
-    _ref16$alignContent = _ref16.alignContent,
-    alignContent = _ref16$alignContent === void 0 ? "center" : _ref16$alignContent,
-    _ref16$flexWrap = _ref16.flexWrap,
-    flexWrap = _ref16$flexWrap === void 0 ? "wrap" : _ref16$flexWrap,
-    _ref16$gap = _ref16.gap,
-    gap = _ref16$gap === void 0 ? "1rem" : _ref16$gap,
-    _ref16$padding = _ref16.padding,
-    padding = _ref16$padding === void 0 ? "1rem" : _ref16$padding,
-    _ref16$minHeight = _ref16.minHeight,
-    minHeight = _ref16$minHeight === void 0 ? "100vh" : _ref16$minHeight,
-    _ref16$width = _ref16.width,
-    width = _ref16$width === void 0 ? "100%" : _ref16$width,
-    _ref16$flexBasis = _ref16.flexBasis,
-    flexBasis = _ref16$flexBasis === void 0 ? "auto" : _ref16$flexBasis,
-    _ref16$flexGrow = _ref16.flexGrow,
-    flexGrow = _ref16$flexGrow === void 0 ? "1" : _ref16$flexGrow,
-    _ref16$flexShrink = _ref16.flexShrink,
-    flexShrink = _ref16$flexShrink === void 0 ? "1" : _ref16$flexShrink,
-    _ref16$gridTemplateCo = _ref16.gridTemplateColumns,
-    gridTemplateColumns = _ref16$gridTemplateCo === void 0 ? "" : _ref16$gridTemplateCo,
-    _ref16$gridTemplateRo = _ref16.gridTemplateRows,
-    gridTemplateRows = _ref16$gridTemplateRo === void 0 ? "" : _ref16$gridTemplateRo,
-    _ref16$gridColumnGap = _ref16.gridColumnGap,
-    gridColumnGap = _ref16$gridColumnGap === void 0 ? "" : _ref16$gridColumnGap,
-    _ref16$gridRowGap = _ref16.gridRowGap,
-    gridRowGap = _ref16$gridRowGap === void 0 ? "" : _ref16$gridRowGap,
-    _ref16$placeItems = _ref16.placeItems,
-    placeItems = _ref16$placeItems === void 0 ? "center" : _ref16$placeItems,
-    _ref16$alignContentGr = _ref16.alignContentGrid,
-    alignContentGrid = _ref16$alignContentGr === void 0 ? "" : _ref16$alignContentGr,
-    _ref16$justifyItems = _ref16.justifyItems,
-    justifyItems = _ref16$justifyItems === void 0 ? "" : _ref16$justifyItems,
-    _ref16$gridAutoFlow = _ref16.gridAutoFlow,
-    gridAutoFlow = _ref16$gridAutoFlow === void 0 ? "" : _ref16$gridAutoFlow,
-    _ref16$gridAutoColumn = _ref16.gridAutoColumns,
-    gridAutoColumns = _ref16$gridAutoColumn === void 0 ? "" : _ref16$gridAutoColumn,
-    _ref16$gridAutoRows = _ref16.gridAutoRows,
-    gridAutoRows = _ref16$gridAutoRows === void 0 ? "" : _ref16$gridAutoRows,
-    _ref16$gridTemplateAr = _ref16.gridTemplateAreas,
-    gridTemplateAreas = _ref16$gridTemplateAr === void 0 ? "" : _ref16$gridTemplateAr,
-    _ref16$alignSelf = _ref16.alignSelf,
-    alignSelf = _ref16$alignSelf === void 0 ? "" : _ref16$alignSelf,
-    _ref16$justifySelf = _ref16.justifySelf,
-    justifySelf = _ref16$justifySelf === void 0 ? "" : _ref16$justifySelf,
-    _ref16$gridArea = _ref16.gridArea,
-    gridArea = _ref16$gridArea === void 0 ? "" : _ref16$gridArea;
-  var isGrid = display === "grid";
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
-    jsx: true
-  }, "\n        .rose-parent {\n          display: ".concat(display, ";\n          ").concat(isGrid ? "\n                        grid-template-columns: ".concat(gridTemplateColumns, ";\n                        grid-template-rows: ").concat(gridTemplateRows, ";\n                        grid-column-gap: ").concat(gridColumnGap, ";\n                        grid-row-gap: ").concat(gridRowGap, ";\n                        place-items: ").concat(placeItems, ";\n                        align-content: ").concat(alignContentGrid, ";\n                        justify-items: ").concat(justifyItems, ";\n                        grid-auto-flow: ").concat(gridAutoFlow, ";\n                        grid-auto-columns: ").concat(gridAutoColumns, ";\n                        grid-auto-rows: ").concat(gridAutoRows, ";\n                        grid-template-areas: ").concat(gridTemplateAreas, ";\n                    ") : "\n                        flex-direction: ".concat(flexDirection, ";\n                        justify-content: ").concat(justifyContent, ";\n                        align-items: ").concat(alignItems, ";\n                        align-content: ").concat(alignContent, ";\n                        flex-wrap: ").concat(flexWrap, ";\n                        gap: ").concat(gap, ";\n                    "), "\n          padding: ").concat(padding, ";\n          box-sizing: border-box;\n          width: ").concat(width, ";\n          min-height: ").concat(minHeight, ";\n        }\n        .rose-parent > * {\n          flex-basis: ").concat(flexBasis, ";\n          flex-grow: ").concat(flexGrow, ";\n          flex-shrink: ").concat(flexShrink, ";\n          align-self: ").concat(alignSelf, ";\n          justify-self: ").concat(justifySelf, ";\n          grid-area: ").concat(gridArea, ";\n        }\n        @media (min-width: 768px) {\n          .rose-parent {\n            flex-direction: row;\n            justify-content: space-between;\n          }\n        }\n        @media (max-width: 767px) {\n          .rose-parent {\n            flex-direction: ").concat(flexDirectionMobile, ";\n            align-items: center;\n          }\n        }\n      ")), /*#__PURE__*/_react["default"].createElement("div", {
-    id: RoseID,
-    className: "rose-parent ".concat(RoseName),
-    style: edit
-  }, children));
-};
-var Table = exports.Table = function Table(_ref17) {
-  var data = _ref17.data,
-    columns = _ref17.columns,
-    edit = _ref17.edit,
-    RoseID = _ref17.RoseID,
-    RoseName = _ref17.RoseName;
+var Table = exports.Table = function Table(_ref15) {
+  var data = _ref15.data,
+    columns = _ref15.columns,
+    edit = _ref15.edit,
+    RoseID = _ref15.RoseID,
+    RoseName = _ref15.RoseName;
   return /*#__PURE__*/_react["default"].createElement("table", {
     style: edit,
     className: RoseName,
@@ -889,13 +799,13 @@ var Table = exports.Table = function Table(_ref17) {
     }));
   })));
 };
-function Notification(_ref18) {
-  var children = _ref18.children,
-    _ref18$edit = _ref18.edit,
-    edit = _ref18$edit === void 0 ? {} : _ref18$edit,
-    RoseID = _ref18.RoseID,
-    _ref18$icon = _ref18.icon,
-    icon = _ref18$icon === void 0 ? /*#__PURE__*/_react["default"].createElement("svg", {
+function Notification(_ref16) {
+  var children = _ref16.children,
+    _ref16$edit = _ref16.edit,
+    edit = _ref16$edit === void 0 ? {} : _ref16$edit,
+    RoseID = _ref16.RoseID,
+    _ref16$icon = _ref16.icon,
+    icon = _ref16$icon === void 0 ? /*#__PURE__*/_react["default"].createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       viewBox: "0 0 512 512",
       strokeWidth: 0,
@@ -904,27 +814,27 @@ function Notification(_ref18) {
       className: "icon"
     }, /*#__PURE__*/_react["default"].createElement("path", {
       d: "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"
-    })) : _ref18$icon,
-    _ref18$RoseName = _ref18.RoseName,
-    RoseName = _ref18$RoseName === void 0 ? "card" : _ref18$RoseName,
-    _ref18$Message = _ref18.Message,
-    Message = _ref18$Message === void 0 ? "Hello LaRose Devs" : _ref18$Message,
-    _ref18$MessageColor = _ref18.MessageColor,
-    MessageColor = _ref18$MessageColor === void 0 ? "white" : _ref18$MessageColor,
-    _ref18$DesMessage = _ref18.DesMessage,
-    DesMessage = _ref18$DesMessage === void 0 ? "success" : _ref18$DesMessage,
-    _ref18$DesMessageColo = _ref18.DesMessageColor,
-    DesMessageColor = _ref18$DesMessageColo === void 0 ? "white" : _ref18$DesMessageColo,
-    _ref18$editCrossIconH = _ref18.editCrossIconHeight,
-    editCrossIconHeight = _ref18$editCrossIconH === void 0 ? 1.5 : _ref18$editCrossIconH,
-    _ref18$editCrossIconW = _ref18.editCrossIconWidth,
-    editCrossIconWidth = _ref18$editCrossIconW === void 0 ? 1.5 : _ref18$editCrossIconW,
-    _ref18$iconDisplay = _ref18.iconDisplay,
-    iconDisplay = _ref18$iconDisplay === void 0 ? "block" : _ref18$iconDisplay,
-    _ref18$CrossIconColor = _ref18.CrossIconColor,
-    CrossIconColor = _ref18$CrossIconColor === void 0 ? "black" : _ref18$CrossIconColor,
-    _ref18$delay = _ref18.delay,
-    delay = _ref18$delay === void 0 ? 5000 : _ref18$delay;
+    })) : _ref16$icon,
+    _ref16$RoseName = _ref16.RoseName,
+    RoseName = _ref16$RoseName === void 0 ? "card" : _ref16$RoseName,
+    _ref16$Message = _ref16.Message,
+    Message = _ref16$Message === void 0 ? "Hello LaRose Devs" : _ref16$Message,
+    _ref16$MessageColor = _ref16.MessageColor,
+    MessageColor = _ref16$MessageColor === void 0 ? "white" : _ref16$MessageColor,
+    _ref16$DesMessage = _ref16.DesMessage,
+    DesMessage = _ref16$DesMessage === void 0 ? "success" : _ref16$DesMessage,
+    _ref16$DesMessageColo = _ref16.DesMessageColor,
+    DesMessageColor = _ref16$DesMessageColo === void 0 ? "white" : _ref16$DesMessageColo,
+    _ref16$editCrossIconH = _ref16.editCrossIconHeight,
+    editCrossIconHeight = _ref16$editCrossIconH === void 0 ? 1.5 : _ref16$editCrossIconH,
+    _ref16$editCrossIconW = _ref16.editCrossIconWidth,
+    editCrossIconWidth = _ref16$editCrossIconW === void 0 ? 1.5 : _ref16$editCrossIconW,
+    _ref16$iconDisplay = _ref16.iconDisplay,
+    iconDisplay = _ref16$iconDisplay === void 0 ? "block" : _ref16$iconDisplay,
+    _ref16$CrossIconColor = _ref16.CrossIconColor,
+    CrossIconColor = _ref16$CrossIconColor === void 0 ? "black" : _ref16$CrossIconColor,
+    _ref16$delay = _ref16.delay,
+    delay = _ref16$delay === void 0 ? 5000 : _ref16$delay;
   var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
     valueState = _useState20[0],
@@ -980,24 +890,24 @@ function Notification(_ref18) {
     fillRule: "evenodd"
   })), children));
 }
-function Spring(_ref19) {
-  var _ref19$rotate = _ref19.rotate,
-    rotate = _ref19$rotate === void 0 ? 360 : _ref19$rotate,
-    _ref19$scale = _ref19.scale,
-    scale = _ref19$scale === void 0 ? 1 : _ref19$scale,
-    _ref19$speed = _ref19.speed,
-    speed = _ref19$speed === void 0 ? 0.8 : _ref19$speed,
-    _ref19$x = _ref19.x,
-    x = _ref19$x === void 0 ? "0" : _ref19$x,
-    _ref19$y = _ref19.y,
-    y = _ref19$y === void 0 ? "0" : _ref19$y,
-    _ref19$z = _ref19.z,
-    z = _ref19$z === void 0 ? "0" : _ref19$z,
-    children = _ref19.children,
-    RoseID = _ref19.RoseID,
-    edit = _ref19.edit,
-    _ref19$drag = _ref19.drag,
-    drag = _ref19$drag === void 0 ? false : _ref19$drag;
+function Spring(_ref17) {
+  var _ref17$rotate = _ref17.rotate,
+    rotate = _ref17$rotate === void 0 ? 360 : _ref17$rotate,
+    _ref17$scale = _ref17.scale,
+    scale = _ref17$scale === void 0 ? 1 : _ref17$scale,
+    _ref17$speed = _ref17.speed,
+    speed = _ref17$speed === void 0 ? 0.8 : _ref17$speed,
+    _ref17$x = _ref17.x,
+    x = _ref17$x === void 0 ? "0" : _ref17$x,
+    _ref17$y = _ref17.y,
+    y = _ref17$y === void 0 ? "0" : _ref17$y,
+    _ref17$z = _ref17.z,
+    z = _ref17$z === void 0 ? "0" : _ref17$z,
+    children = _ref17.children,
+    RoseID = _ref17.RoseID,
+    edit = _ref17.edit,
+    _ref17$drag = _ref17.drag,
+    drag = _ref17$drag === void 0 ? false : _ref17$drag;
   var elementRef = (0, _react.useRef)(null);
   var _useState21 = (0, _react.useState)({
       x: 0,
@@ -1070,20 +980,20 @@ function Spring(_ref19) {
     onMouseUp: handleMouseUp
   }, children));
 }
-function RandomAnimate(_ref20) {
-  var children = _ref20.children,
-    RoseID = _ref20.RoseID,
-    _ref20$RoseName = _ref20.RoseName,
-    RoseName = _ref20$RoseName === void 0 ? "random-animate" : _ref20$RoseName,
-    _ref20$edit = _ref20.edit,
-    edit = _ref20$edit === void 0 ? {
+function RandomAnimate(_ref18) {
+  var children = _ref18.children,
+    RoseID = _ref18.RoseID,
+    _ref18$RoseName = _ref18.RoseName,
+    RoseName = _ref18$RoseName === void 0 ? "random-animate" : _ref18$RoseName,
+    _ref18$edit = _ref18.edit,
+    edit = _ref18$edit === void 0 ? {
       backgroundColor: "#EEE",
       height: "12rem",
       width: "12rem",
       borderRadius: "20px",
       padding: "1rem"
-    } : _ref20$edit,
-    AnimatedType = _ref20.AnimatedType;
+    } : _ref18$edit,
+    AnimatedType = _ref18.AnimatedType;
   var _useState29 = (0, _react.useState)(""),
     _useState30 = _slicedToArray(_useState29, 2),
     animationClass = _useState30[0],
@@ -1105,15 +1015,15 @@ function RandomAnimate(_ref20) {
     className: "".concat(RoseName, " ").concat(animationClass)
   }, children));
 }
-function SideText(_ref21) {
-  var children = _ref21.children,
-    RoseID = _ref21.RoseID,
-    _ref21$RoseName = _ref21.RoseName,
-    RoseName = _ref21$RoseName === void 0 ? "side-textAnimatedLarose" : _ref21$RoseName,
-    _ref21$edit = _ref21.edit,
-    edit = _ref21$edit === void 0 ? {} : _ref21$edit,
-    _ref21$direction = _ref21.direction,
-    direction = _ref21$direction === void 0 ? "left" : _ref21$direction;
+function SideText(_ref19) {
+  var children = _ref19.children,
+    RoseID = _ref19.RoseID,
+    _ref19$RoseName = _ref19.RoseName,
+    RoseName = _ref19$RoseName === void 0 ? "side-textAnimatedLarose" : _ref19$RoseName,
+    _ref19$edit = _ref19.edit,
+    edit = _ref19$edit === void 0 ? {} : _ref19$edit,
+    _ref19$direction = _ref19.direction,
+    direction = _ref19$direction === void 0 ? "left" : _ref19$direction;
   var animationDirection = direction === "right" ? "sideTextRight" : "sideTextLeft";
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
     jsx: true
@@ -1201,18 +1111,18 @@ function useRand(from, to) {
   };
   return [RandValue, refreshRandValue];
 }
-function SeeMore(_ref22) {
+function SeeMore(_ref20) {
   var _children$props;
-  var children = _ref22.children,
-    _ref22$maxCharacters = _ref22.maxCharacters,
-    maxCharacters = _ref22$maxCharacters === void 0 ? 100 : _ref22$maxCharacters,
-    _ref22$maxElements = _ref22.maxElements,
-    maxElements = _ref22$maxElements === void 0 ? 3 : _ref22$maxElements,
-    edit = _ref22.edit,
-    RoseName = _ref22.RoseName,
-    RoseId = _ref22.RoseId,
-    _ref22$editButton = _ref22.editButton,
-    editButton = _ref22$editButton === void 0 ? {} : _ref22$editButton;
+  var children = _ref20.children,
+    _ref20$maxCharacters = _ref20.maxCharacters,
+    maxCharacters = _ref20$maxCharacters === void 0 ? 100 : _ref20$maxCharacters,
+    _ref20$maxElements = _ref20.maxElements,
+    maxElements = _ref20$maxElements === void 0 ? 3 : _ref20$maxElements,
+    edit = _ref20.edit,
+    RoseName = _ref20.RoseName,
+    RoseId = _ref20.RoseId,
+    _ref20$editButton = _ref20.editButton,
+    editButton = _ref20$editButton === void 0 ? {} : _ref20$editButton;
   var _useState39 = (0, _react.useState)(false),
     _useState40 = _slicedToArray(_useState39, 2),
     isExpanded = _useState40[0],
@@ -1251,14 +1161,14 @@ function SeeMore(_ref22) {
     onClick: toggleExpand
   }, isExpanded ? "Show Less" : "Show More"));
 }
-function SideBox(_ref23) {
-  var children = _ref23.children,
-    _ref23$direction = _ref23.direction,
-    direction = _ref23$direction === void 0 ? "left" : _ref23$direction,
-    _ref23$edit = _ref23.edit,
-    edit = _ref23$edit === void 0 ? {} : _ref23$edit,
-    RoseID = _ref23.RoseID,
-    RoseName = _ref23.RoseName;
+function SideBox(_ref21) {
+  var children = _ref21.children,
+    _ref21$direction = _ref21.direction,
+    direction = _ref21$direction === void 0 ? "left" : _ref21$direction,
+    _ref21$edit = _ref21.edit,
+    edit = _ref21$edit === void 0 ? {} : _ref21$edit,
+    RoseID = _ref21.RoseID,
+    RoseName = _ref21.RoseName;
   var _useState41 = (0, _react.useState)(false),
     _useState42 = _slicedToArray(_useState41, 2),
     isVisible = _useState42[0],
@@ -1426,7 +1336,7 @@ var useUserCountry = exports.useUserCountry = function useUserCountry() {
     setError = _useState58[1];
   (0, _react.useEffect)(function () {
     var fetchCountry = /*#__PURE__*/function () {
-      var _ref24 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _ref22 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response, data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
@@ -1465,7 +1375,7 @@ var useUserCountry = exports.useUserCountry = function useUserCountry() {
         }, _callee, null, [[0, 12, 16, 19]]);
       }));
       return function fetchCountry() {
-        return _ref24.apply(this, arguments);
+        return _ref22.apply(this, arguments);
       };
     }();
     fetchCountry();
@@ -1489,7 +1399,7 @@ var usePhotoCapture = exports.usePhotoCapture = function usePhotoCapture() {
   var canvasRef = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     var startCamera = /*#__PURE__*/function () {
-      var _ref25 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _ref23 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var stream;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
@@ -1523,7 +1433,7 @@ var usePhotoCapture = exports.usePhotoCapture = function usePhotoCapture() {
         }, _callee2, null, [[0, 7]]);
       }));
       return function startCamera() {
-        return _ref25.apply(this, arguments);
+        return _ref23.apply(this, arguments);
       };
     }();
     startCamera();
@@ -1568,7 +1478,7 @@ var useGetContacts = exports.useGetContacts = function useGetContacts() {
     isFetching = _useState68[0],
     setIsFetching = _useState68[1];
   var getContacts = /*#__PURE__*/function () {
-    var _ref26 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var _ref24 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var props, opts, contactList;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
@@ -1605,7 +1515,7 @@ var useGetContacts = exports.useGetContacts = function useGetContacts() {
       }, _callee3, null, [[0, 13]]);
     }));
     return function getContacts() {
-      return _ref26.apply(this, arguments);
+      return _ref24.apply(this, arguments);
     };
   }();
   return {
@@ -1615,127 +1525,14 @@ var useGetContacts = exports.useGetContacts = function useGetContacts() {
     getContacts: getContacts
   };
 };
-var SmoothParent = exports.SmoothParent = function SmoothParent(_ref27) {
-  var children = _ref27.children;
-  var parentRef = (0, _react.useRef)(null);
-  (0, _react.useEffect)(function () {
-    var _parentRef$current;
-    var childElements = (_parentRef$current = parentRef.current) === null || _parentRef$current === void 0 ? void 0 : _parentRef$current.children;
-    if (childElements) {
-      Array.from(childElements).forEach(function (child, index) {
-        child.style.opacity = 0;
-        child.style.transform = "translateY(20px)";
-        child.style.transition = "opacity 0.5s ease ".concat(index * 0.2, "s, transform 0.5s ease ").concat(index * 0.2, "s");
-        setTimeout(function () {
-          child.style.opacity = 1;
-          child.style.transform = "translateY(0)";
-        }, 50);
-      });
-    }
-  }, [children]);
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("style", {
-    jsx: true
-  }, "\n        .smooth-parent {\n          display: flex;\n          flex-direction: column;\n          gap: 20px; /* space between child elements */\n        }\n        .smooth-parent > * {\n          opacity: 0;\n          transform: translateY(20px);\n          transition: opacity 0.5s ease, transform 0.5s ease;\n        }\n      "), /*#__PURE__*/_react["default"].createElement("div", {
-    className: "smooth-parent",
-    ref: parentRef
-  }, children));
-};
-var SnakeMouse = exports.SnakeMouse = function SnakeMouse(_ref28) {
-  var _ref28$color = _ref28.color,
-    color = _ref28$color === void 0 ? "rgba(0, 150, 255, 0.8)" : _ref28$color,
-    _ref28$display = _ref28.display,
-    display = _ref28$display === void 0 ? "block" : _ref28$display;
-  var canvasRef = (0, _react.useRef)(null);
-  var ctxRef = (0, _react.useRef)(null);
-  var trailsRef = (0, _react.useRef)([]);
-  var maxTrailLength = 30;
-  var numOfTrails = 8;
-  var speedFactor = 0.35;
-  var animationFrameId = (0, _react.useRef)(null);
-  (0, _react.useEffect)(function () {
-    trailsRef.current = Array.from({
-      length: numOfTrails
-    }, function () {
-      return [];
-    });
-  }, []);
-  var handleMouseMove = function handleMouseMove(event) {
-    var canvas = canvasRef.current;
-    if (!canvas) return;
-    var rect = canvas.getBoundingClientRect();
-    var mousePosition = {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top
-    };
-    trailsRef.current.forEach(function (trail) {
-      var lastPosition = trail[trail.length - 1] || mousePosition;
-      var interpolatedPosition = {
-        x: lastPosition.x + (mousePosition.x - lastPosition.x) * speedFactor,
-        y: lastPosition.y + (mousePosition.y - lastPosition.y) * speedFactor
-      };
-      if (trail.length > maxTrailLength) {
-        trail.shift();
-      }
-      trail.push(interpolatedPosition);
-    });
-  };
-  var _draw = function draw() {
-    var canvas = canvasRef.current;
-    if (!canvas) return;
-    var ctx = ctxRef.current;
-    if (!ctx) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    trailsRef.current.forEach(function (trail, index) {
-      ctx.strokeStyle = "rgba(0, 150, 255, ".concat(0.8 - index * 0.1, ")");
-      ctx.lineWidth = 2.5 - index * 0.3;
-      if (trail.length > 1) {
-        ctx.beginPath();
-        ctx.moveTo(trail[0].x, trail[0].y);
-        for (var i = 1; i < trail.length; i++) {
-          ctx.lineTo(trail[i].x, trail[i].y);
-        }
-        ctx.stroke();
-      }
-    });
-    animationFrameId.current = requestAnimationFrame(_draw);
-  };
-  (0, _react.useEffect)(function () {
-    var canvas = canvasRef.current;
-    if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    var ctx = canvas.getContext("2d");
-    ctxRef.current = ctx;
-    _draw();
-    return function () {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-    };
-  }, []);
-  return /*#__PURE__*/_react["default"].createElement("canvas", {
-    ref: canvasRef,
-    onMouseMove: handleMouseMove,
-    style: {
-      display: display,
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100vw",
-      height: "100vh",
-      zIndex: -1,
-      backgroundColor: "transparent"
-    }
-  });
-};
-var ViewportContainer = exports.ViewportContainer = function ViewportContainer(_ref29) {
-  var children = _ref29.children,
-    _ref29$threshold = _ref29.threshold,
-    threshold = _ref29$threshold === void 0 ? 0.1 : _ref29$threshold,
-    _ref29$rootMargin = _ref29.rootMargin,
-    rootMargin = _ref29$rootMargin === void 0 ? "0px" : _ref29$rootMargin,
-    _ref29$lazyLoad = _ref29.lazyLoad,
-    lazyLoad = _ref29$lazyLoad === void 0 ? false : _ref29$lazyLoad;
+var ViewportContainer = exports.ViewportContainer = function ViewportContainer(_ref25) {
+  var children = _ref25.children,
+    _ref25$threshold = _ref25.threshold,
+    threshold = _ref25$threshold === void 0 ? 0.1 : _ref25$threshold,
+    _ref25$rootMargin = _ref25.rootMargin,
+    rootMargin = _ref25$rootMargin === void 0 ? "0px" : _ref25$rootMargin,
+    _ref25$lazyLoad = _ref25.lazyLoad,
+    lazyLoad = _ref25$lazyLoad === void 0 ? false : _ref25$lazyLoad;
   var containerRef = (0, _react.useRef)(null);
   var _useState69 = (0, _react.useState)(!lazyLoad),
     _useState70 = _slicedToArray(_useState69, 2),
@@ -1743,9 +1540,9 @@ var ViewportContainer = exports.ViewportContainer = function ViewportContainer(_
     setIsLoaded = _useState70[1];
   (0, _react.useEffect)(function () {
     if (!lazyLoad) return;
-    var observer = new IntersectionObserver(function (_ref30) {
-      var _ref31 = _slicedToArray(_ref30, 1),
-        entry = _ref31[0];
+    var observer = new IntersectionObserver(function (_ref26) {
+      var _ref27 = _slicedToArray(_ref26, 1),
+        entry = _ref27[0];
       if (entry.isIntersecting) {
         setIsLoaded(true);
         observer.disconnect();
@@ -1797,8 +1594,8 @@ var useViewportVisibility = exports.useViewportVisibility = function useViewport
     loadContentOnView: loadContentOnView
   };
 };
-function TestManegar(_ref32) {
-  var children = _ref32.children;
+function TestManegar(_ref28) {
+  var children = _ref28.children;
   var _useState73 = (0, _react.useState)(null),
     _useState74 = _slicedToArray(_useState73, 2),
     renderTime = _useState74[0],
@@ -1838,11 +1635,11 @@ var RootRemover = exports.RootRemover = function RootRemover() {
   }, []);
   return null;
 };
-var BlockUser = exports.BlockUser = function BlockUser(_ref33) {
-  var blockUser = _ref33.blockUser,
-    _ref33$edit = _ref33.edit,
-    edit = _ref33$edit === void 0 ? {} : _ref33$edit,
-    RoseId = _ref33.RoseId;
+var BlockUser = exports.BlockUser = function BlockUser(_ref29) {
+  var blockUser = _ref29.blockUser,
+    _ref29$edit = _ref29.edit,
+    edit = _ref29$edit === void 0 ? {} : _ref29$edit,
+    RoseId = _ref29.RoseId;
   var _useState77 = (0, _react.useState)(null),
     _useState78 = _slicedToArray(_useState77, 2),
     ip = _useState78[0],
@@ -1852,7 +1649,7 @@ var BlockUser = exports.BlockUser = function BlockUser(_ref33) {
     isBlocked = _useState80[0],
     setIsBlocked = _useState80[1];
   var fetchUserIP = /*#__PURE__*/function () {
-    var _ref34 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    var _ref30 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
       var response, data;
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
         while (1) switch (_context4.prev = _context4.next) {
@@ -1880,7 +1677,7 @@ var BlockUser = exports.BlockUser = function BlockUser(_ref33) {
       }, _callee4, null, [[0, 10]]);
     }));
     return function fetchUserIP() {
-      return _ref34.apply(this, arguments);
+      return _ref30.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {
@@ -1906,27 +1703,27 @@ var BlockUser = exports.BlockUser = function BlockUser(_ref33) {
     }, "Access Denied: You Are Blocked")));
   }
 };
-var Image = exports.Image = function Image(_ref35) {
-  var src = _ref35.src,
-    _ref35$alt = _ref35.alt,
-    alt = _ref35$alt === void 0 ? "Image Tag" : _ref35$alt,
-    _ref35$quality = _ref35.quality,
-    quality = _ref35$quality === void 0 ? 0.7 : _ref35$quality,
-    _ref35$imageSize = _ref35.imageSize,
-    imageSize = _ref35$imageSize === void 0 ? false : _ref35$imageSize,
-    requireSrc = _ref35.requireSrc,
-    _ref35$height = _ref35.height,
-    height = _ref35$height === void 0 ? 30 : _ref35$height,
-    _ref35$width = _ref35.width,
-    width = _ref35$width === void 0 ? 30 : _ref35$width,
-    _ref35$edit = _ref35.edit,
-    edit = _ref35$edit === void 0 ? {} : _ref35$edit,
-    _ref35$responsiveSrc = _ref35.responsiveSrc,
-    responsiveSrc = _ref35$responsiveSrc === void 0 ? {} : _ref35$responsiveSrc,
-    RoseName = _ref35.RoseName,
-    RoseID = _ref35.RoseID,
-    _ref35$loading = _ref35.loading,
-    loading = _ref35$loading === void 0 ? false : _ref35$loading;
+var Image = exports.Image = function Image(_ref31) {
+  var src = _ref31.src,
+    _ref31$alt = _ref31.alt,
+    alt = _ref31$alt === void 0 ? "Image Tag" : _ref31$alt,
+    _ref31$quality = _ref31.quality,
+    quality = _ref31$quality === void 0 ? 0.7 : _ref31$quality,
+    _ref31$imageSize = _ref31.imageSize,
+    imageSize = _ref31$imageSize === void 0 ? false : _ref31$imageSize,
+    requireSrc = _ref31.requireSrc,
+    _ref31$height = _ref31.height,
+    height = _ref31$height === void 0 ? 30 : _ref31$height,
+    _ref31$width = _ref31.width,
+    width = _ref31$width === void 0 ? 30 : _ref31$width,
+    _ref31$edit = _ref31.edit,
+    edit = _ref31$edit === void 0 ? {} : _ref31$edit,
+    _ref31$responsiveSrc = _ref31.responsiveSrc,
+    responsiveSrc = _ref31$responsiveSrc === void 0 ? {} : _ref31$responsiveSrc,
+    RoseName = _ref31.RoseName,
+    RoseID = _ref31.RoseID,
+    _ref31$loading = _ref31.loading,
+    loading = _ref31$loading === void 0 ? false : _ref31$loading;
   var _useState81 = (0, _react.useState)(null),
     _useState82 = _slicedToArray(_useState81, 2),
     webpSrc = _useState82[0],
@@ -1945,7 +1742,7 @@ var Image = exports.Image = function Image(_ref35) {
     setError = _useState88[1];
   (0, _react.useEffect)(function () {
     var loadImage = /*#__PURE__*/function () {
-      var _ref36 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(imageSrc) {
+      var _ref32 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(imageSrc) {
         var img;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
@@ -1965,7 +1762,7 @@ var Image = exports.Image = function Image(_ref35) {
         }, _callee5);
       }));
       return function loadImage(_x) {
-        return _ref36.apply(this, arguments);
+        return _ref32.apply(this, arguments);
       };
     }();
     var imageSource = requireSrc || src;
@@ -2032,15 +1829,15 @@ var Image = exports.Image = function Image(_ref35) {
     }
   }, "Failed to load image"));
 };
-function Section(_ref37) {
-  var children = _ref37.children,
-    RoseName = _ref37.RoseName,
-    RoseID = _ref37.RoseID,
-    _ref37$edit = _ref37.edit,
-    edit = _ref37$edit === void 0 ? {} : _ref37$edit,
-    _ref37$ariaLabelledby = _ref37.ariaLabelledby,
-    ariaLabelledby = _ref37$ariaLabelledby === void 0 ? "section" : _ref37$ariaLabelledby,
-    props = _objectWithoutProperties(_ref37, _excluded);
+function Section(_ref33) {
+  var children = _ref33.children,
+    RoseName = _ref33.RoseName,
+    RoseID = _ref33.RoseID,
+    _ref33$edit = _ref33.edit,
+    edit = _ref33$edit === void 0 ? {} : _ref33$edit,
+    _ref33$ariaLabelledby = _ref33.ariaLabelledby,
+    ariaLabelledby = _ref33$ariaLabelledby === void 0 ? "section" : _ref33$ariaLabelledby,
+    props = _objectWithoutProperties(_ref33, _excluded);
   var styles = _objectSpread({
     minHeight: "100vh",
     margin: "3rem 3rem 0rem 3rem",
@@ -2054,9 +1851,9 @@ function Section(_ref37) {
     "aria-labelledby": ariaLabelledby
   }, props), children);
 }
-var SidebarValues = function SidebarValues(_ref38) {
-  var data = _ref38.data,
-    lineColor = _ref38.lineColor;
+var SidebarValues = function SidebarValues(_ref34) {
+  var data = _ref34.data,
+    lineColor = _ref34.lineColor;
   return /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       marginRight: "20px",
@@ -2076,16 +1873,16 @@ var SidebarValues = function SidebarValues(_ref38) {
     }, item.label, ":"), " ", item.value);
   }));
 };
-var AreaChart = exports.AreaChart = function AreaChart(_ref39) {
-  var data = _ref39.data,
-    _ref39$edit = _ref39.edit,
-    edit = _ref39$edit === void 0 ? {} : _ref39$edit,
-    _ref39$fill = _ref39.fill,
-    fill = _ref39$fill === void 0 ? "blue" : _ref39$fill,
-    _ref39$lineColor = _ref39.lineColor,
-    lineColor = _ref39$lineColor === void 0 ? "skyblue" : _ref39$lineColor,
-    _ref39$childStyle = _ref39.childStyle,
-    childStyle = _ref39$childStyle === void 0 ? {} : _ref39$childStyle;
+var AreaChart = exports.AreaChart = function AreaChart(_ref35) {
+  var data = _ref35.data,
+    _ref35$edit = _ref35.edit,
+    edit = _ref35$edit === void 0 ? {} : _ref35$edit,
+    _ref35$fill = _ref35.fill,
+    fill = _ref35$fill === void 0 ? "blue" : _ref35$fill,
+    _ref35$lineColor = _ref35.lineColor,
+    lineColor = _ref35$lineColor === void 0 ? "skyblue" : _ref35$lineColor,
+    _ref35$childStyle = _ref35.childStyle,
+    childStyle = _ref35$childStyle === void 0 ? {} : _ref35$childStyle;
   var _useState89 = (0, _react.useState)(data),
     _useState90 = _slicedToArray(_useState89, 2),
     prevData = _useState90[0],
@@ -2138,31 +1935,31 @@ var AreaChart = exports.AreaChart = function AreaChart(_ref39) {
     }
   })));
 };
-var Chart = exports.Chart = function Chart(_ref40) {
-  var data = _ref40.data,
-    edit = _ref40.edit,
-    _ref40$labelStyle = _ref40.labelStyle,
-    labelStyle = _ref40$labelStyle === void 0 ? {
+var Chart = exports.Chart = function Chart(_ref36) {
+  var data = _ref36.data,
+    edit = _ref36.edit,
+    _ref36$labelStyle = _ref36.labelStyle,
+    labelStyle = _ref36$labelStyle === void 0 ? {
       background: "blue"
-    } : _ref40$labelStyle,
-    _ref40$height = _ref40.height,
-    height = _ref40$height === void 0 ? 200 : _ref40$height,
-    _ref40$width = _ref40.width,
-    width = _ref40$width === void 0 ? 600 : _ref40$width,
-    _ref40$barWidth = _ref40.barWidth,
-    barWidth = _ref40$barWidth === void 0 ? 40 : _ref40$barWidth,
-    _ref40$barMargin = _ref40.barMargin,
-    barMargin = _ref40$barMargin === void 0 ? 5 : _ref40$barMargin,
-    _ref40$tooltip = _ref40.tooltip,
-    tooltip = _ref40$tooltip === void 0 ? true : _ref40$tooltip,
-    _ref40$showLabels = _ref40.showLabels,
-    showLabels = _ref40$showLabels === void 0 ? true : _ref40$showLabels,
-    _ref40$labelColor = _ref40.labelColor,
-    labelColor = _ref40$labelColor === void 0 ? "white" : _ref40$labelColor,
-    _ref40$borderColor = _ref40.borderColor,
-    borderColor = _ref40$borderColor === void 0 ? "#ccc" : _ref40$borderColor,
-    _ref40$backgroundColo = _ref40.backgroundColor,
-    backgroundColor = _ref40$backgroundColo === void 0 ? "#f5f5f5" : _ref40$backgroundColo;
+    } : _ref36$labelStyle,
+    _ref36$height = _ref36.height,
+    height = _ref36$height === void 0 ? 200 : _ref36$height,
+    _ref36$width = _ref36.width,
+    width = _ref36$width === void 0 ? 600 : _ref36$width,
+    _ref36$barWidth = _ref36.barWidth,
+    barWidth = _ref36$barWidth === void 0 ? 40 : _ref36$barWidth,
+    _ref36$barMargin = _ref36.barMargin,
+    barMargin = _ref36$barMargin === void 0 ? 5 : _ref36$barMargin,
+    _ref36$tooltip = _ref36.tooltip,
+    tooltip = _ref36$tooltip === void 0 ? true : _ref36$tooltip,
+    _ref36$showLabels = _ref36.showLabels,
+    showLabels = _ref36$showLabels === void 0 ? true : _ref36$showLabels,
+    _ref36$labelColor = _ref36.labelColor,
+    labelColor = _ref36$labelColor === void 0 ? "white" : _ref36$labelColor,
+    _ref36$borderColor = _ref36.borderColor,
+    borderColor = _ref36$borderColor === void 0 ? "#ccc" : _ref36$borderColor,
+    _ref36$backgroundColo = _ref36.backgroundColor,
+    backgroundColor = _ref36$backgroundColo === void 0 ? "#f5f5f5" : _ref36$backgroundColo;
   var _useState91 = (0, _react.useState)(data),
     _useState92 = _slicedToArray(_useState91, 2),
     chartData = _useState92[0],
@@ -2238,30 +2035,30 @@ var Chart = exports.Chart = function Chart(_ref40) {
     }, item.label));
   }));
 };
-var PieChart = exports.PieChart = function PieChart(_ref41) {
-  var data = _ref41.data,
-    _ref41$edit = _ref41.edit,
-    edit = _ref41$edit === void 0 ? {} : _ref41$edit,
-    _ref41$childStyle = _ref41.childStyle,
-    childStyle = _ref41$childStyle === void 0 ? {} : _ref41$childStyle,
-    _ref41$linesColor = _ref41.linesColor,
-    linesColor = _ref41$linesColor === void 0 ? "skyblue" : _ref41$linesColor,
-    _ref41$fill = _ref41.fill,
-    fill = _ref41$fill === void 0 ? "blue" : _ref41$fill,
-    _ref41$radius = _ref41.radius,
-    radius = _ref41$radius === void 0 ? 70 : _ref41$radius,
-    _ref41$strokeWidth = _ref41.strokeWidth,
-    strokeWidth = _ref41$strokeWidth === void 0 ? 1 : _ref41$strokeWidth,
-    _ref41$tooltip = _ref41.tooltip,
-    tooltip = _ref41$tooltip === void 0 ? false : _ref41$tooltip,
-    _ref41$showLabels = _ref41.showLabels,
-    showLabels = _ref41$showLabels === void 0 ? true : _ref41$showLabels,
-    _ref41$labelColor = _ref41.labelColor,
-    labelColor = _ref41$labelColor === void 0 ? "white" : _ref41$labelColor,
-    _ref41$animationDurat = _ref41.animationDuration,
-    animationDuration = _ref41$animationDurat === void 0 ? 0.5 : _ref41$animationDurat,
-    _ref41$labelStyle = _ref41.labelStyle,
-    labelStyle = _ref41$labelStyle === void 0 ? {} : _ref41$labelStyle;
+var PieChart = exports.PieChart = function PieChart(_ref37) {
+  var data = _ref37.data,
+    _ref37$edit = _ref37.edit,
+    edit = _ref37$edit === void 0 ? {} : _ref37$edit,
+    _ref37$childStyle = _ref37.childStyle,
+    childStyle = _ref37$childStyle === void 0 ? {} : _ref37$childStyle,
+    _ref37$linesColor = _ref37.linesColor,
+    linesColor = _ref37$linesColor === void 0 ? "skyblue" : _ref37$linesColor,
+    _ref37$fill = _ref37.fill,
+    fill = _ref37$fill === void 0 ? "blue" : _ref37$fill,
+    _ref37$radius = _ref37.radius,
+    radius = _ref37$radius === void 0 ? 70 : _ref37$radius,
+    _ref37$strokeWidth = _ref37.strokeWidth,
+    strokeWidth = _ref37$strokeWidth === void 0 ? 1 : _ref37$strokeWidth,
+    _ref37$tooltip = _ref37.tooltip,
+    tooltip = _ref37$tooltip === void 0 ? false : _ref37$tooltip,
+    _ref37$showLabels = _ref37.showLabels,
+    showLabels = _ref37$showLabels === void 0 ? true : _ref37$showLabels,
+    _ref37$labelColor = _ref37.labelColor,
+    labelColor = _ref37$labelColor === void 0 ? "white" : _ref37$labelColor,
+    _ref37$animationDurat = _ref37.animationDuration,
+    animationDuration = _ref37$animationDurat === void 0 ? 0.5 : _ref37$animationDurat,
+    _ref37$labelStyle = _ref37.labelStyle,
+    labelStyle = _ref37$labelStyle === void 0 ? {} : _ref37$labelStyle;
   var total = data.reduce(function (sum, slice) {
     return sum + slice.value;
   }, 0);
@@ -2337,14 +2134,14 @@ var PieChart = exports.PieChart = function PieChart(_ref41) {
     transform: "translate(0, 0)"
   }, renderSlices())));
 };
-var LineChart = exports.LineChart = function LineChart(_ref42) {
-  var xAxis = _ref42.xAxis,
-    series = _ref42.series,
-    height = _ref42.height,
-    _ref42$width = _ref42.width,
-    width = _ref42$width === void 0 ? '100%' : _ref42$width,
-    margin = _ref42.margin,
-    colors = _ref42.colors;
+var LineChart = exports.LineChart = function LineChart(_ref38) {
+  var xAxis = _ref38.xAxis,
+    series = _ref38.series,
+    height = _ref38.height,
+    _ref38$width = _ref38.width,
+    width = _ref38$width === void 0 ? '100%' : _ref38$width,
+    margin = _ref38.margin,
+    colors = _ref38.colors;
   var canvasRef = (0, _react.useRef)(null);
   var containerRef = (0, _react.useRef)(null);
   var drawChart = function drawChart(canvas, ctx) {
@@ -2444,8 +2241,8 @@ var LineChart = exports.LineChart = function LineChart(_ref42) {
     }
   }));
 };
-var RobotDetection = exports.RobotDetection = function RobotDetection(_ref43) {
-  var onSuspiciousActivity = _ref43.onSuspiciousActivity;
+var RobotDetection = exports.RobotDetection = function RobotDetection(_ref39) {
+  var onSuspiciousActivity = _ref39.onSuspiciousActivity;
   var _useState93 = (0, _react.useState)(false),
     _useState94 = _slicedToArray(_useState93, 2),
     isRobot = _useState94[0],
@@ -2518,9 +2315,9 @@ var RobotDetection = exports.RobotDetection = function RobotDetection(_ref43) {
   }, [mousePositions, clickTimeStamps, onSuspiciousActivity]);
   return;
 };
-var SoundInteraction = exports.SoundInteraction = function SoundInteraction(_ref44) {
-  var audioPath = _ref44.audioPath,
-    children = _ref44.children;
+var SoundInteraction = exports.SoundInteraction = function SoundInteraction(_ref40) {
+  var audioPath = _ref40.audioPath,
+    children = _ref40.children;
   var playAudio = function playAudio() {
     new Audio(audioPath).play();
   };
@@ -2528,16 +2325,16 @@ var SoundInteraction = exports.SoundInteraction = function SoundInteraction(_ref
     onClick: playAudio
   }, children);
 };
-function Title(_ref45) {
-  var _ref45$children = _ref45.children,
-    children = _ref45$children === void 0 ? "larose" : _ref45$children;
+function Title(_ref41) {
+  var _ref41$children = _ref41.children,
+    children = _ref41$children === void 0 ? "larose" : _ref41$children;
   (0, _react.useEffect)(function () {
     document.title = children;
   }, []);
   return;
 }
-var MetaDescription = exports.MetaDescription = function MetaDescription(_ref46) {
-  var children = _ref46.children;
+var MetaDescription = exports.MetaDescription = function MetaDescription(_ref42) {
+  var children = _ref42.children;
   (0, _react.useEffect)(function () {
     var metaDescription = document.querySelector('meta[name="description"]');
     console.log(metaDescription);
@@ -2552,12 +2349,12 @@ var MetaDescription = exports.MetaDescription = function MetaDescription(_ref46)
   }, []);
   return;
 };
-var Popup = exports.Popup = function Popup(_ref47) {
-  var title = _ref47.title,
-    onClose = _ref47.onClose,
-    timeout = _ref47.timeout,
-    _ref47$edit = _ref47.edit,
-    edit = _ref47$edit === void 0 ? {} : _ref47$edit;
+var Popup = exports.Popup = function Popup(_ref43) {
+  var title = _ref43.title,
+    onClose = _ref43.onClose,
+    timeout = _ref43.timeout,
+    _ref43$edit = _ref43.edit,
+    edit = _ref43$edit === void 0 ? {} : _ref43$edit;
   (0, _react.useEffect)(function () {
     if (timeout) {
       var timer = setTimeout(function () {
@@ -2630,13 +2427,13 @@ var itemStyle = {
   cursor: "pointer",
   borderBottom: "1px solid #ddd"
 };
-function MenuPop(_ref48) {
-  var items = _ref48.items,
-    children = _ref48.children,
-    _ref48$edit = _ref48.edit,
-    edit = _ref48$edit === void 0 ? {} : _ref48$edit,
-    _ref48$closeOnClickOu = _ref48.closeOnClickOutside,
-    closeOnClickOutside = _ref48$closeOnClickOu === void 0 ? false : _ref48$closeOnClickOu;
+function MenuPop(_ref44) {
+  var items = _ref44.items,
+    children = _ref44.children,
+    _ref44$edit = _ref44.edit,
+    edit = _ref44$edit === void 0 ? {} : _ref44$edit,
+    _ref44$closeOnClickOu = _ref44.closeOnClickOutside,
+    closeOnClickOutside = _ref44$closeOnClickOu === void 0 ? false : _ref44$closeOnClickOu;
   var _useState101 = (0, _react.useState)(false),
     _useState102 = _slicedToArray(_useState101, 2),
     isOpen = _useState102[0],

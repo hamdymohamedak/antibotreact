@@ -687,35 +687,6 @@ export function Loader() {
     </>
   );
 }
-export function LaRoseText({
-  edit = {},
-  children,
-  fontSize = 2,
-  fontWeight = 600,
-  gradientText = "linear-gradient(45deg, #ff007f, #ff00ff, #ff1493, #ff69b4, #ff69b4, #ff1493, #ff00ff, #ff007f)",
-}) {
-  let LaRoseText = {
-    ...edit,
-  };
-  return (
-    <>
-      <style jsx>{`
-        .title {
-          font-size: ${fontSize}rem;
-          font-weight: ${fontWeight};
-          background: ${gradientText};
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-fill-color: transparent;
-        }
-      `}</style>
-      <div style={LaRoseText} className="title">
-        {children}
-      </div>
-    </>
-  );
-}
 export function RoseBox({
   children,
   edit = {},
@@ -1233,100 +1204,6 @@ export const Route = ({ path, element }) => {
     <div className={`route ${route === path ? "route-active" : ""}`}>
       {route === path ? element : null}
     </div>
-  );
-};
-export const RoseParent = ({
-  children,
-  edit,
-  RoseID,
-  RoseName,
-  display = "flex",
-  flexDirection = "row",
-  flexDirectionMobile = "column",
-  justifyContent = "space-around",
-  alignItems = "center",
-  alignContent = "center",
-  flexWrap = "wrap",
-  gap = "1rem",
-  padding = "1rem",
-  minHeight = "100vh",
-  width = "100%",
-  flexBasis = "auto",
-  flexGrow = "1",
-  flexShrink = "1",
-  gridTemplateColumns = "",
-  gridTemplateRows = "",
-  gridColumnGap = "",
-  gridRowGap = "",
-  placeItems = "center",
-  alignContentGrid = "",
-  justifyItems = "",
-  gridAutoFlow = "",
-  gridAutoColumns = "",
-  gridAutoRows = "",
-  gridTemplateAreas = "",
-  alignSelf = "",
-  justifySelf = "",
-  gridArea = "",
-}) => {
-  const isGrid = display === "grid";
-  return (
-    <>
-      <style jsx>{`
-        .rose-parent {
-          display: ${display};
-          ${isGrid
-            ? `
-                        grid-template-columns: ${gridTemplateColumns};
-                        grid-template-rows: ${gridTemplateRows};
-                        grid-column-gap: ${gridColumnGap};
-                        grid-row-gap: ${gridRowGap};
-                        place-items: ${placeItems};
-                        align-content: ${alignContentGrid};
-                        justify-items: ${justifyItems};
-                        grid-auto-flow: ${gridAutoFlow};
-                        grid-auto-columns: ${gridAutoColumns};
-                        grid-auto-rows: ${gridAutoRows};
-                        grid-template-areas: ${gridTemplateAreas};
-                    `
-            : `
-                        flex-direction: ${flexDirection};
-                        justify-content: ${justifyContent};
-                        align-items: ${alignItems};
-                        align-content: ${alignContent};
-                        flex-wrap: ${flexWrap};
-                        gap: ${gap};
-                    `}
-          padding: ${padding};
-          box-sizing: border-box;
-          width: ${width};
-          min-height: ${minHeight};
-        }
-        .rose-parent > * {
-          flex-basis: ${flexBasis};
-          flex-grow: ${flexGrow};
-          flex-shrink: ${flexShrink};
-          align-self: ${alignSelf};
-          justify-self: ${justifySelf};
-          grid-area: ${gridArea};
-        }
-        @media (min-width: 768px) {
-          .rose-parent {
-            flex-direction: row;
-            justify-content: space-between;
-          }
-        }
-        @media (max-width: 767px) {
-          .rose-parent {
-            flex-direction: ${flexDirectionMobile};
-            align-items: center;
-          }
-        }
-      `}</style>
-      <div id={RoseID} className={`rose-parent ${RoseName}`} style={edit}>
-        {children}
-      </div>
-    </>
   );
 };
 export const Table = ({ data, columns, edit, RoseID, RoseName }) => (
@@ -2280,129 +2157,6 @@ export const useGetContacts = () => {
   };
   return { contacts, error, isFetching, getContacts };
 };
-export const SmoothParent = ({ children }) => {
-  const parentRef = useRef(null);
-  useEffect(() => {
-    const childElements = parentRef.current?.children;
-    if (childElements) {
-      Array.from(childElements).forEach((child, index) => {
-        child.style.opacity = 0;
-        child.style.transform = "translateY(20px)";
-        child.style.transition = `opacity 0.5s ease ${
-          index * 0.2
-        }s, transform 0.5s ease ${index * 0.2}s`;
-        setTimeout(() => {
-          child.style.opacity = 1;
-          child.style.transform = "translateY(0)";
-        }, 50);
-      });
-    }
-  }, [children]);
-  return (
-    <>
-      <style jsx>{`
-        .smooth-parent {
-          display: flex;
-          flex-direction: column;
-          gap: 20px; /* space between child elements */
-        }
-        .smooth-parent > * {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-      `}</style>
-      <div className="smooth-parent" ref={parentRef}>
-        {children}
-      </div>
-    </>
-  );
-};
-export const SnakeMouse = ({
-  color = "rgba(0, 150, 255, 0.8)",
-  display = "block",
-}) => {
-  const canvasRef = useRef(null);
-  const ctxRef = useRef(null);
-  const trailsRef = useRef([]);
-  const maxTrailLength = 30;
-  const numOfTrails = 8;
-  const speedFactor = 0.35;
-  let animationFrameId = useRef(null);
-  useEffect(() => {
-    trailsRef.current = Array.from({ length: numOfTrails }, () => []);
-  }, []);
-  const handleMouseMove = (event) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const mousePosition = {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top,
-    };
-    trailsRef.current.forEach((trail) => {
-      const lastPosition = trail[trail.length - 1] || mousePosition;
-      const interpolatedPosition = {
-        x: lastPosition.x + (mousePosition.x - lastPosition.x) * speedFactor,
-        y: lastPosition.y + (mousePosition.y - lastPosition.y) * speedFactor,
-      };
-      if (trail.length > maxTrailLength) {
-        trail.shift();
-      }
-      trail.push(interpolatedPosition);
-    });
-  };
-  const draw = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = ctxRef.current;
-    if (!ctx) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    trailsRef.current.forEach((trail, index) => {
-      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`;
-      ctx.lineWidth = 2.5 - index * 0.3;
-      if (trail.length > 1) {
-        ctx.beginPath();
-        ctx.moveTo(trail[0].x, trail[0].y);
-        for (let i = 1; i < trail.length; i++) {
-          ctx.lineTo(trail[i].x, trail[i].y);
-        }
-        ctx.stroke();
-      }
-    });
-    animationFrameId.current = requestAnimationFrame(draw);
-  };
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const ctx = canvas.getContext("2d");
-    ctxRef.current = ctx;
-    draw();
-    return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-    };
-  }, []);
-  return (
-    <canvas
-      ref={canvasRef}
-      onMouseMove={handleMouseMove}
-      style={{
-        display: display,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        zIndex: -1,
-        backgroundColor: "transparent",
-      }}
-    />
-  );
-};
 export const ViewportContainer = ({
   children,
   threshold = 0.1,
@@ -2485,7 +2239,6 @@ export const useRenderTime = () => {
   }, []);
   return renderTime;
 };
-
 export const RootRemover = () => {
   useEffect(() => {
     const rootElement = document.getElementById("root");
@@ -3255,8 +3008,6 @@ const btn = {
   boxShadow: "1px 1px 31px -6px blue",
   cursor: "pointer",
 };
- 
-
 
 const buttonStyle = {
   padding: "8px 16px",
@@ -3353,7 +3104,6 @@ export function MenuPop({
                 handleClose();
               }}
             >
-              {/* Allow for a fully customizable React element to be passed as item.content */}
               {item.content}
             </div>
           ))}
