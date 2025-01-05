@@ -28,7 +28,7 @@ exports.ShinyButton = ShinyButton;
 exports.ShinyText = ShinyText;
 exports.SideBox = SideBox;
 exports.SideText = SideText;
-exports.SoundInteraction = void 0;
+exports.SoundInteraction = exports.SmartBlock = void 0;
 exports.SplitText = SplitText;
 exports.Spring = Spring;
 exports.SwitchCase = SwitchCase;
@@ -2496,3 +2496,98 @@ function MenuPop(_ref44) {
     }, item.content);
   }))));
 }
+var SmartBlock = exports.SmartBlock = function SmartBlock() {
+  var _useState105 = (0, _react.useState)(false),
+    _useState106 = _slicedToArray(_useState105, 2),
+    warning = _useState106[0],
+    setWarning = _useState106[1];
+  (0, _react.useEffect)(function () {
+    var model = tf.sequential();
+    model.add(tf.layers.dense({
+      inputShape: [1],
+      units: 1,
+      activation: "sigmoid"
+    }));
+    model.compile({
+      optimizer: "sgd",
+      loss: "binaryCrossentropy",
+      metrics: ["accuracy"]
+    });
+    var userActivity = {
+      clicks: 0,
+      lastClickTime: 0
+    };
+    var handleUserClick = function handleUserClick() {
+      var now = Date.now();
+      userActivity.clicks += 1;
+      if (now - userActivity.lastClickTime < 200) {
+        setWarning(true);
+        analyzeBehavior(userActivity.clicks);
+      }
+      userActivity.lastClickTime = now;
+    };
+    var analyzeBehavior = /*#__PURE__*/function () {
+      var _ref45 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(clicks) {
+        var input, prediction, probability;
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
+            case 0:
+              input = tf.tensor2d([[clicks]]);
+              prediction = model.predict(input);
+              probability = prediction.dataSync()[0];
+              if (probability > 0.8) {
+                blockUser();
+              }
+            case 4:
+            case "end":
+              return _context6.stop();
+          }
+        }, _callee6);
+      }));
+      return function analyzeBehavior(_x2) {
+        return _ref45.apply(this, arguments);
+      };
+    }();
+    var blockUser = function blockUser() {
+      alert("Your Access Blocked");
+      return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(BlockUser, {
+        blockUser: true
+      }));
+    };
+    var trainModel = /*#__PURE__*/function () {
+      var _ref46 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+        var xs, ys;
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+          while (1) switch (_context7.prev = _context7.next) {
+            case 0:
+              xs = tf.tensor2d([[1], [5], [10]]);
+              ys = tf.tensor2d([[0], [0], [1]]);
+              _context7.next = 4;
+              return model.fit(xs, ys, {
+                epochs: 10
+              });
+            case 4:
+            case "end":
+              return _context7.stop();
+          }
+        }, _callee7);
+      }));
+      return function trainModel() {
+        return _ref46.apply(this, arguments);
+      };
+    }();
+    trainModel();
+    document.addEventListener("click", handleUserClick);
+    return function () {
+      document.removeEventListener("click", handleUserClick);
+    };
+  }, []);
+  return /*#__PURE__*/_react["default"].createElement("div", null, warning && /*#__PURE__*/_react["default"].createElement("p", {
+    style: {
+      color: "red",
+      fontWeight: "bold"
+    }
+  }, /*#__PURE__*/_react["default"].createElement(BlockUser, {
+    blockUser: true
+  })));
+};

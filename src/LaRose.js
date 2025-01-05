@@ -3112,3 +3112,84 @@ export function MenuPop({
     </>
   );
 }
+
+
+export const SmartBlock = () => {
+  const [warning, setWarning] = useState(false);
+
+  useEffect(() => {
+    const model = tf.sequential();
+    model.add(
+      tf.layers.dense({
+        inputShape: [1],
+        units: 1,
+        activation: "sigmoid",
+      })
+    );
+    model.compile({
+      optimizer: "sgd",
+      loss: "binaryCrossentropy",
+      metrics: ["accuracy"],
+    });
+
+    const userActivity = {
+      clicks: 0,
+      lastClickTime: 0,
+    };
+
+    const handleUserClick = () => {
+      const now = Date.now();
+      userActivity.clicks += 1;
+
+      if (now - userActivity.lastClickTime < 200) {
+        setWarning(true);
+        analyzeBehavior(userActivity.clicks);
+      }
+
+      userActivity.lastClickTime = now;
+    };
+
+    const analyzeBehavior = async (clicks) => {
+      const input = tf.tensor2d([[clicks]]);
+      const prediction = model.predict(input);
+      const probability = prediction.dataSync()[0];
+
+      if (probability > 0.8) {
+        blockUser();
+      }
+    };
+
+    const blockUser = () => {
+      alert("Your Access Blocked");
+      return (
+        <>
+          <BlockUser blockUser={true} />
+        </>
+      );
+    };
+
+    const trainModel = async () => {
+      const xs = tf.tensor2d([[1], [5], [10]]);
+      const ys = tf.tensor2d([[0], [0], [1]]);
+      await model.fit(xs, ys, { epochs: 10 });
+    };
+
+    trainModel();
+
+    document.addEventListener("click", handleUserClick);
+
+    return () => {
+      document.removeEventListener("click", handleUserClick);
+    };
+  }, []);
+
+  return (
+    <div>
+      {warning && (
+        <p style={{ color: "red", fontWeight: "bold" }}>
+          <BlockUser blockUser={true} />
+        </p>
+      )}
+    </div>
+  );
+};
